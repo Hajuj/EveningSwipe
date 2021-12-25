@@ -3,26 +3,23 @@ package com.example.eveningswipe.ui.filmswipe
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.Layout
+import android.view.*
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.eveningswipe.R
+import com.squareup.picasso.Picasso
 
 class SwipeFragment : Fragment() {
     private var layout: View? = null
-
+    private var imgURL: String? = null
     companion object {
         fun newInstance() = SwipeFragment()
     }
 
     private lateinit var swipeViewModel: SwipeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,46 +29,43 @@ class SwipeFragment : Fragment() {
             ViewModelProvider(this).get(SwipeViewModel::class.java)
         val root = inflater.inflate(R.layout.swipe_fragment, container, false)
         val textView: TextView = root.findViewById(R.id.text_swipe)
+        val movieTextView: TextView = root.findViewById(R.id.movie_text)
+        val imgView: ImageView = root.findViewById(R.id.img_swipe)
         layout = root.findViewById(R.id.swipe_layout)
-        swipeViewModel.text.observe(viewLifecycleOwner, Observer {
+        swipeViewModel.movieTitle.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        touchListener()
+        swipeViewModel.movieText.observe(viewLifecycleOwner, Observer {
+            movieTextView.text = it
+        })
+
+        //imgURL = swipeViewModel.getMovieData()
+        //Picasso.get().load(imgURL).into(imgView)
+        //touchListener(imgView)
+        swipeViewModel.nextMovie()
         return root
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun touchListener(){
+    fun touchListener(imgView: ImageView){
         layout?.setOnTouchListener(object : OnSwipeTouchListener(activity) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
-                Toast.makeText(activity, "Swipe Left gesture detected",
-                    Toast.LENGTH_SHORT)
+               // imgURL = swipeViewModel.getMovieData()
+               // Picasso.get().load(imgURL).into(imgView)
+                swipeViewModel.match()
+                Toast.makeText(activity, "no match", Toast.LENGTH_SHORT)
                     .show()
             }
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
-                Toast.makeText(
-                    activity,
-                    "Swipe Right gesture detected",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+                //imgURL = swipeViewModel.getMovieData()
+                //Picasso.get().load(imgURL).into(imgView)
 
-            override fun onSwipeUp() {
-                super.onSwipeUp()
-                Toast.makeText(activity, "Swipe up gesture detected", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-            override fun onSwipeDown() {
-                super.onSwipeDown()
-                Toast.makeText(activity, "Swipe down gesture detected", Toast.LENGTH_SHORT)
+                Toast.makeText(activity, "This is a match", Toast.LENGTH_SHORT)
                     .show()
             }
         })
     }
-
-
 }
