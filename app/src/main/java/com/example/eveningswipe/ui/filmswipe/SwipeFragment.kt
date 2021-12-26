@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.eveningswipe.R
-import com.squareup.picasso.Picasso
 
 class SwipeFragment : Fragment() {
     private var layout: View? = null
@@ -38,11 +37,11 @@ class SwipeFragment : Fragment() {
         swipeViewModel.movieText.observe(viewLifecycleOwner, Observer {
             movieTextView.text = it
         })
-
+        swipeViewModel.nextMovie(imgView)
         //imgURL = swipeViewModel.getMovieData()
         //Picasso.get().load(imgURL).into(imgView)
-        //touchListener(imgView)
-        swipeViewModel.nextMovie()
+        touchListener(imgView)
+
         return root
     }
 

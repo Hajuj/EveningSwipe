@@ -1,26 +1,16 @@
 package com.example.eveningswipe.ui.filmswipe
 
-import android.graphics.Insets.add
-import android.util.Log
-import androidx.core.graphics.Insets.add
+import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.eveningswipe.retrofit.getMovieDetailsById.MovieResult
-import com.example.eveningswipe.retrofit.getMovieDetailsById.MovieDetailsByIdInterface
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
-import com.example.eveningswipe.httpRequests.Todos
-import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.result.Result
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
-const val BASE_URL = "http://172.18.191.230:8080/api/movie/details/"
+const val BASE_URL = "http://192.168.178.35:8080/api/filter/byid/"
     //"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
     //instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
+var MovieById = ArrayList<FilterByGroupId>()
 var i: Int = 0
 
 class SwipeViewModel: ViewModel() {
@@ -30,14 +20,26 @@ class SwipeViewModel: ViewModel() {
     val movieText: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
-    val URL = "http://jsonplaceholder.typicode.com/todos"
-    var Aufgaben = ArrayList<Todos>()
-/*
-    // response data
-    private var responseBody: MovieResult? = null
 
-    // dummy array until response is an array and not object anymore --> wait for yannick
-    private var movieIds = arrayListOf<String>(
+    fun nextMovie(imgView: ImageView) {
+        var url = BASE_URL + "5"
+        // + element in list with movie Id
+        MovieById = HttpRequests.getMovieById(url)
+        movieTitle.value = MovieById.get(0).genre_1
+        //get(i).title
+        //var imgURL = IMG_BASE_URL + MovieById.poster_path
+        //Picasso.get().load(imgURL).into(imgView)
+        i+=1
+    }
+
+    fun match() {
+        // movie ranking +1
+        // endpoint rate movie
+    }
+}
+
+//dummy list
+var dummy = listOf(
     "tt0120667",
     "tt0120737",
     "tt0120755",
@@ -196,49 +198,5 @@ class SwipeViewModel: ViewModel() {
     "tt0280609",
     "tt0280990",
     "tt0281019",
-    "tt0281718")
-
-    //get data from server
-    fun getMovieData(): String? {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-            .create(MovieDetailsByIdInterface::class.java)
-
-        val retrofitData = retrofitBuilder.getMovieResults(id = movieIds[i])
-        var imgURL: String? = null
-
-        retrofitData.enqueue(object: Callback<MovieResult> {
-            override fun onResponse(
-                call: Call<MovieResult>,
-                response: Response<MovieResult>
-            ) {
-                responseBody = response.body()
-                movieTitle.value = responseBody?.original_title
-                movieText.value = responseBody?.overview
-                imgURL = IMG_BASE_URL + responseBody?.poster_path
-                i+=1
-
-            }
-            override fun onFailure(call: Call<MovieResult>, t: Throwable) {
-                Log.d("SwipeFragment", "onFailure: "+t.message)
-                movieTitle.value = "Fail to connect to server"
-            }
-        })
-        return imgURL
-    }
-*/
-
-    fun nextMovie(){
-  //  val data: String = HttpRequests.getRequests("https://jsonplaceholder.typicode.com/todos")
-        Aufgaben = HttpRequests.getRequests(URL)
-
-        movieTitle.value = Aufgaben.toString()
-    }
-
-    fun match() {
-        // movie ranking +1
-        // endpoint rate movie
-    }
-}
+    "tt0281718"
+)

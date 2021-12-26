@@ -1,24 +1,18 @@
 package com.example.eveningswipe.httpRequests
 
-import com.example.eveningswipe.httpRequests.Todos
 import com.github.kittinunf.fuel.httpGet
 
 object HttpRequests {
-    private var Aufgaben = ArrayList<Todos>()
+    private var Response = ArrayList<FilterByGroupId>()
 
-    fun getRequests(url: String): ArrayList<Todos> {
-        url.httpGet().responseObject(Todos.Deserializer()) { request, response, result ->
-            val (aufgaben, err) = result
+    fun getMovieById(url: String): ArrayList<FilterByGroupId> {
+        url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
+            val (item, err) = result
 
-            //Add to ArrayList
-            aufgaben?.forEach { todo ->
-                Aufgaben.add(todo)
+            item?.forEach { element ->
+                Response.add(element)
             }
-
-            println(Aufgaben)
         }
-
-        return Aufgaben
-
+        return Response
     }
 }
