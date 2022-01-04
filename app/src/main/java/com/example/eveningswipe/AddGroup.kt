@@ -36,7 +36,9 @@ class AddGroup : AppCompatActivity() {
     //TODO change value of id
     private val id: Int = 1
 
-
+    /**
+     * method to save a group in the database
+     */
     private fun saveGroupToDatabase() {
         var url = BASE_URL + "5"
 
