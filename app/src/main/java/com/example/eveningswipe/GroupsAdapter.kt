@@ -1,16 +1,17 @@
 package com.example.eveningswipe
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.databinding.ItemGrouprecyclerBinding
+import java.util.logging.Logger
 
-class GroupsAdapter (
-    var groups : List<GroupDataRecycle>
-        ) : RecyclerView.Adapter<GroupsAdapter.GroupViewHolder>() {
+class GroupsAdapter(
+        var groups: List<GroupDataRecycle>
+) : RecyclerView.Adapter<GroupsAdapter.GroupViewHolder>() {
 
     inner class GroupViewHolder(val binding: ItemGrouprecyclerBinding) : RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
 
@@ -23,6 +24,10 @@ class GroupsAdapter (
 
         holder.binding.apply {
             groupName.text = groups[position].name
+            groupName.setOnClickListener{
+                //TODO: send to another activity / save chosen class etc
+                Logger.getLogger(GroupsAdapter::class.java.name).warning("Hello..")
+            }
             memberNumber.text = groups[position].memberNumber.toString()
         }
 
