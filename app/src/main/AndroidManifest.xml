@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EveningSwipe">
-        <activity android:name=".FinishedSwipeActivity"></activity>
+        android:theme="@style/Theme.EveningSwipe"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".AddGroup"></activity>
+        <activity android:name=".FinishedSwipeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".NavigationDrawer"
@@ -23,5 +25,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
