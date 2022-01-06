@@ -7,11 +7,14 @@ import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
-const val BASE_URL = "http://192.168.178.21:8080/api/filter/byid/"
+const val BASE_URL_ById = "http://192.168.50.63:8080/api/filter/byid/"
     //"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
     //instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
+const val BASE_URL_MovieDetails = "http://192.168.50.63:8080/api/movie/details/"
+const val BASE_URL_RateMovie = "http://192.168.50.63:8080/api/filter/rate/"
 var MovieById = ArrayList<FilterByGroupId>()
 var i: Int = 0
+var currentId: Int = 0
 
 class SwipeViewModel: ViewModel() {
     val movieTitle: MutableLiveData<String> by lazy {
@@ -22,20 +25,24 @@ class SwipeViewModel: ViewModel() {
     }
 
     fun nextMovie(imgView: ImageView) {
-        var url = BASE_URL + "5"
+        var url = BASE_URL_ById + "5"
         // + element in list with movie Id
         MovieById = HttpRequests.getMovieById(url)
-        movieTitle.value = MovieById.get(0).genre_1
-        //for testing: movieTitle.value = dummy.get(0)
-        //get(i).title
+
+        val handler = android.os.Handler()
+        handler.postDelayed({
+            movieTitle.value = MovieById[1].selection[4]
+        }, 500)
+
+        //currentId = MovieById.id
         //var imgURL = IMG_BASE_URL + MovieById.poster_path
         //Picasso.get().load(imgURL).into(imgView)
         i+=1
     }
 
-    fun match() {
-        // movie ranking +1
-        // endpoint rate movie
+    fun rateMovie() {
+        var url = BASE_URL_RateMovie + dummy[i] + "/503"
+        HttpRequests.postRateMovie(url)
     }
 }
 

@@ -50,15 +50,18 @@ class SwipeFragment : Fragment() {
         layout?.setOnTouchListener(object : OnSwipeTouchListener(activity) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
+                swipeViewModel.nextMovie(imgView)
                // imgURL = swipeViewModel.getMovieData()
                // Picasso.get().load(imgURL).into(imgView)
-                swipeViewModel.match()
+
                 Toast.makeText(activity, "no match", Toast.LENGTH_SHORT)
                     .show()
             }
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
+                swipeViewModel.rateMovie()
+                swipeViewModel.nextMovie(imgView)
                 //imgURL = swipeViewModel.getMovieData()
                 //Picasso.get().load(imgURL).into(imgView)
 
