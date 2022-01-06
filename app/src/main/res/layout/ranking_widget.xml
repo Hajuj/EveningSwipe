@@ -2,7 +2,6 @@
     style="@style/Widget.EveningSwipe.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6200EE"
     android:theme="@style/Theme.EveningSwipe.AppWidgetContainer">
 
     <TextView
@@ -15,7 +14,7 @@
         android:layout_margin="8dp"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
-        android:textSize="16sp"
+        android:textSize="14dp"
         android:textStyle="bold|italic"
-        android:background="@null"/>
+        android:textColor="@color/white"/>
 </RelativeLayout>

@@ -12,7 +12,7 @@
     <string name="menu_profile">Profil</string>
     <string name="menu_groups">Gruppen</string>
     <string name="menu_swipe">Swipe</string>
-    <string name="appwidget_text">Group Voting: \n1. Movie \n2. Movie \n3. Movie</string>
+    <string name="appwidget_text">Last group name voting \n1. movie name \n2. movie name \n3. movie name</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
 </resources>
