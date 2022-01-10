@@ -11,8 +11,8 @@ import com.example.eveningswipe.httpRequests.CreateGroup
 import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.MovieById
-
-const val BASE_URL = "http://192.168.178.21:8080/api/filter/byid/"
+//192.168.178.21
+const val BASE_URL = "http://192.168.1.92:8080/api/filter/byid/"
 var createGroup = ArrayList<CreateGroup>()
 
 class AddGroup : AppCompatActivity() {
