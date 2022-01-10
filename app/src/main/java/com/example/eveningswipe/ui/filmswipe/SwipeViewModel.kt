@@ -25,15 +25,16 @@ class SwipeViewModel: ViewModel() {
     }
 
     fun nextMovie(imgView: ImageView) {
-        var url = BASE_URL_ById + "5"
+        val url = BASE_URL_ById + "5"
         // + element in list with movie Id
         MovieById = HttpRequests.getMovieById(url)
 
-        val handler = android.os.Handler()
+        movieTitle.value = MovieById.toString()
+       /* val handler = android.os.Handler()
         handler.postDelayed({
-            //movieTitle.value = MovieById.
-        }, 500)
-        movieTitle.value = "show movie "+"#"+i+" with poster and description"
+
+        }, 500)*/
+        //movieTitle.value = "show movie "+"#"+i+" with poster and description"
         //currentId = MovieById.id
         //var imgURL = IMG_BASE_URL + MovieById.poster_path
         //Picasso.get().load(imgURL).into(imgView)
@@ -41,8 +42,12 @@ class SwipeViewModel: ViewModel() {
     }
 
     fun rateMovie() {
-        var url = BASE_URL_RateMovie + dummy[i] + "/503"
-        HttpRequests.postRateMovie(url)
+        val url = BASE_URL_RateMovie
+        //+ dummy[i] + "/503"
+        val movieId = "tt0165929"
+        val filterId = 503
+        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
+        HttpRequests.postRateMovie(url, movieId, filterId, token)
     }
 }
 
