@@ -32,7 +32,7 @@ object HttpRequests {
         }
         return ResponseFilterRating
     }
-
+/* alte Funktion
     fun postCreatedGroup(url: String): ArrayList<CreateGroup> {
         url.httpPost().responseObject(CreateGroup.Deserializer()) { request, response, result ->
             val (item, err) = result
@@ -43,7 +43,7 @@ object HttpRequests {
         }
         return ResponseCreateGroup
     }
-
+*/
     fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),
@@ -83,22 +83,4 @@ object HttpRequests {
 
             }
     }
-        /*url.httpPost().responseObject(RateMovie.Deserializer()) { request, response, result ->
-            val (item, err) = result
-
-            item?.forEach { element ->
-                PostRateMovie.add(element)
-            }
-            PostRateMovie[0].rating.filterId = filterId
-            PostRateMovie[0].rating.movieId = movieId
-        }
-    }*/
-        /*   val post = Rating(filterId, movieId)
-
-        val (request, response, result)
-                = Fuel.post(url)
-            .header("Content-Type" to "application/json")
-            .body(Gson().toJson(post).toString())
-    }*/
-
 }
