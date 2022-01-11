@@ -1,9 +1,6 @@
 package com.example.eveningswipe.httpRequests
 
-import com.example.eveningswipe.httpRequests.rateMovie.RateMovie
-import com.example.eveningswipe.httpRequests.rateMovie.Rating
-import com.example.eveningswipe.httpRequests.rateMovie.Token
-import com.github.kittinunf.fuel.Fuel
+import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
@@ -13,7 +10,6 @@ object HttpRequests {
     private var ResponseFilterRating = ArrayList<FilterRating>()
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
-    private var PostRateMovie = ArrayList<Rating>()
 
     fun getMovieById(url: String): ArrayList<FilterByGroupId> {
         url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
@@ -47,6 +43,21 @@ object HttpRequests {
         }
         return ResponseCreateGroup
     }
+
+    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
+        val createGroup = CreateGroup2(
+            token = TokenCG(token = tok),
+            group = Group(name = nam, description = descript)
+        )
+
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(createGroup).toString())
+            .response() { req, res, result ->
+
+            }
+    }
+
     /*
     fun getMovieResult(url: String): ArrayList<MovieDetailsById>{
         url.httpGet().responseObject(MovieDetailsById.Deserializer()) { request, response, result ->

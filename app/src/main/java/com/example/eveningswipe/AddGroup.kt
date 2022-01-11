@@ -12,7 +12,7 @@ import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.MovieById
 //192.168.178.21
-const val BASE_URL = "http://192.168.1.92:8080/api/filter/byid/"
+const val BASE_URL = "http://192.168.1.92:8080/api/group/create/"
 var createGroup = ArrayList<CreateGroup>()
 
 class AddGroup : AppCompatActivity() {
@@ -40,8 +40,11 @@ class AddGroup : AppCompatActivity() {
      * method to save a group in the database
      */
     private fun saveGroupToDatabase() {
-        var url = BASE_URL + "5"
-
-        createGroup = HttpRequests.postCreatedGroup(url)
+        val url = BASE_URL
+        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
+        val name = "Test"
+        val description = "Beschreibung der Gruppe"
+        println("Hallo !!!!!")
+        HttpRequests.postCreatedGroup2(url, token, name, description)
     }
 }

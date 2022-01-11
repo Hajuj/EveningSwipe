@@ -1,4 +1,4 @@
-package com.example.eveningswipe.httpRequests.rateMovie
+package com.example.eveningswipe.httpRequests.postRequests
 
 import com.google.gson.annotations.SerializedName
 
