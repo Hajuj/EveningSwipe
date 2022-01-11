@@ -27,9 +27,9 @@ class AddGroup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_group)
 
-        name = findViewById<View>(R.id.email) as EditText
-        description = findViewById<View>(R.id.password) as EditText
-        saveGroup = findViewById<View>(R.id.signIn) as Button
+        name = findViewById<View>(R.id.fullName) as EditText
+        description = findViewById<View>(R.id.description) as EditText
+        saveGroup = findViewById<View>(R.id.saveGroup) as Button
         saveGroup!!.setOnClickListener(View.OnClickListener { saveGroupToDatabase() })
     }
 
