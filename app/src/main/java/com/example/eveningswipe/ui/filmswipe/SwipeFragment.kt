@@ -4,24 +4,32 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.eveningswipe.R
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.widget.Button
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
-import android.widget.RemoteViews
+import android.widget.*
+import com.example.eveningswipe.httpRequests.FilterByGroupId
+import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.rating.RatingResultFragment
+
+const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
+const val BASE_URL_ById = "http://192.168.1.92:8080/api/filter/byid/"
+//"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
+//instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
+const val BASE_URL_MovieDetails = "http://192.168.1.92:8080/api/movie/details/"
+const val BASE_URL_RateMovie = "http://192.168.1.92:8080/api/filter/rate/"
+var MovieById = ArrayList<FilterByGroupId>()
+var i: Int = 0
+var currentId: Int = 0
 
 class SwipeFragment : Fragment() {
     private var layout: View? = null
@@ -37,6 +45,7 @@ class SwipeFragment : Fragment() {
     private val channelId = "i.apps.notifications"
     private val description = "Result notification"
     private lateinit var swipeViewModel: SwipeViewModel
+    private var pgsBar: ProgressBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +58,7 @@ class SwipeFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.text_swipe)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
         val imgView: ImageView = root.findViewById(R.id.img_swipe)
+        pgsBar = root.findViewById(R.id.pBar1);
 
         notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         layout = root.findViewById(R.id.swipe_layout)
@@ -58,7 +68,7 @@ class SwipeFragment : Fragment() {
         swipeViewModel.movieText.observe(viewLifecycleOwner, Observer {
             movieTextView.text = it
         })
-        swipeViewModel.nextMovie(imgView)
+        nextMovie()
         //imgURL = swipeViewModel.getMovieData()
         //Picasso.get().load(imgURL).into(imgView)
         touchListener(imgView)
@@ -70,7 +80,7 @@ class SwipeFragment : Fragment() {
         layout?.setOnTouchListener(object : OnSwipeTouchListener(activity) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
-                swipeViewModel.nextMovie(imgView)
+                nextMovie()
                // imgURL = swipeViewModel.getMovieData()
                // Picasso.get().load(imgURL).into(imgView)
 
@@ -80,8 +90,8 @@ class SwipeFragment : Fragment() {
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
-                swipeViewModel.rateMovie()
-                swipeViewModel.nextMovie(imgView)
+                rateMovie()
+                nextMovie()
                 //imgURL = swipeViewModel.getMovieData()
                 //Picasso.get().load(imgURL).into(imgView)
 
@@ -95,6 +105,35 @@ class SwipeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    fun nextMovie() {
+        val url = BASE_URL_ById + "5"
+        // + element in list with group Id
+        MovieById = HttpRequests.getMovieById(url)
+
+        val handler = android.os.Handler()
+        pgsBar?.setVisibility(View.VISIBLE)
+        handler.postDelayed({
+            swipeViewModel.movieTitle.value = MovieById.toString()
+            pgsBar?.setVisibility(View.GONE)
+        }, 1000)
+
+        //movieTitle.value = "show movie "+"#"+i+" with poster and description"
+
+        //currentId = MovieById.id
+        //var imgURL = IMG_BASE_URL + MovieById.poster_path
+        //Picasso.get().load(imgURL).into(imgView)
+        i+=1
+    }
+
+    fun rateMovie() {
+        val url = BASE_URL_RateMovie
+        //+ dummy[i] + "/503"
+        val movieId = "tt0165929"
+        val filterId = 503
+        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
+        HttpRequests.postRateMovie(url, movieId, filterId, token)
     }
 
     // https://www.geeksforgeeks.org/notifications-in-kotlin/

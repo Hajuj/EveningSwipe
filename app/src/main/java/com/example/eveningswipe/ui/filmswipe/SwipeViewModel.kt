@@ -1,20 +1,7 @@
 package com.example.eveningswipe.ui.filmswipe
 
-import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.eveningswipe.httpRequests.FilterByGroupId
-import com.example.eveningswipe.httpRequests.HttpRequests
-
-const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
-const val BASE_URL_ById = "http://192.168.1.92:8080/api/filter/byid/"
-    //"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
-    //instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
-const val BASE_URL_MovieDetails = "http://192.168.1.92:8080/api/movie/details/"
-const val BASE_URL_RateMovie = "http://192.168.1.92:8080/api/filter/rate/"
-var MovieById = ArrayList<FilterByGroupId>()
-var i: Int = 0
-var currentId: Int = 0
 
 class SwipeViewModel: ViewModel() {
     val movieTitle: MutableLiveData<String> by lazy {
@@ -24,31 +11,6 @@ class SwipeViewModel: ViewModel() {
         MutableLiveData<String>()
     }
 
-    fun nextMovie(imgView: ImageView) {
-        val url = BASE_URL_ById + "5"
-        // + element in list with movie Id
-        MovieById = HttpRequests.getMovieById(url)
-
-        movieTitle.value = MovieById.toString()
-       /* val handler = android.os.Handler()
-        handler.postDelayed({
-
-        }, 500)*/
-        //movieTitle.value = "show movie "+"#"+i+" with poster and description"
-        //currentId = MovieById.id
-        //var imgURL = IMG_BASE_URL + MovieById.poster_path
-        //Picasso.get().load(imgURL).into(imgView)
-        i+=1
-    }
-
-    fun rateMovie() {
-        val url = BASE_URL_RateMovie
-        //+ dummy[i] + "/503"
-        val movieId = "tt0165929"
-        val filterId = 503
-        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
-        HttpRequests.postRateMovie(url, movieId, filterId, token)
-    }
 }
 
 //dummy list
