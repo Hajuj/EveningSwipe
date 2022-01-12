@@ -11,6 +11,22 @@ object HttpRequests {
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
 
+    fun postRegisterUser(url: String, nam: String, email: String, password: String) {
+        val registerUser = RegisterUser(
+                name = nam,
+                email = email,
+                password = password
+        )
+
+        url.httpPost()
+                .header("Content-Type" to "application/json")
+                .body(Gson().toJson(registerUser).toString())
+                .response() { req, res, result ->
+
+                }
+    }
+
+
     fun getMovieById(url: String): ArrayList<FilterByGroupId> {
         url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
             val (item, err) = result

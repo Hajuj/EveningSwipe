@@ -41,21 +41,10 @@
         android:layout_below="@+id/header_layout" />
 
     <EditText
-        android:id="@+id/age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fullName"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="Age"
-        android:inputType="number"
-        android:textSize="30dp" />
-
-    <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/age"
+        android:layout_below="@+id/fullName"
         android:layout_centerHorizontal="true"
         android:hint="Email"
         android:ems="10"
