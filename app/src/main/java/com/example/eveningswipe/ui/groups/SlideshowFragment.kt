@@ -23,8 +23,6 @@ class SlideshowFragment : Fragment() {
     private var newGroup: Button? = null
     private var grReView: RecyclerView? = null
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
