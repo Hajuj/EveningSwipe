@@ -23,13 +23,13 @@ class AddUserActivity : AppCompatActivity() {
         addUserReView = findViewById<RecyclerView>(R.id.addUserRecyclerView)
 
         //TODO: for testing, need to be replaced with groups of database
-        var userlist= mutableListOf(
+        var userList= mutableListOf(
             AddUserDataRecycle("anna"),
             AddUserDataRecycle("alex"),
             AddUserDataRecycle("tom")
         )
 
-        val adapter = AddUserAdapter(userlist)
+        val adapter = AddUserAdapter(userList)
         addUserReView!!.adapter = adapter
     }
 }

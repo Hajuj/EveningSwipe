@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AddUserToGroup(
     @SerializedName("token") val token: TokenAddUser,
-    @SerializedName("group") val add: Add
+    @SerializedName("add") val add: Add
 )
 data class TokenAddUser(
     @SerializedName("token") val token : String

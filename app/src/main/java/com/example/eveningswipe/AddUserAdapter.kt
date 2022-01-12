@@ -23,11 +23,19 @@ class AddUserAdapter(
 
     override fun onBindViewHolder(holder: AddUserViewHolder, position: Int) {
 
+        /**
+         * method to add user to a group
+         */
         holder.binding.apply {
-            userName.text = user[position].name.toString()
+            userName.text = user[position].name
             userName.setOnClickListener{
                 //TODO: send to another activity / save chosen class etc
-                addUserToGroup()
+                val url = BASE_URL_AddUser
+                val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
+                val groupId = 2
+                val userToAdd = user[position].name
+                println("Hallo addUserToGroup !!!!! " + userToAdd)
+                HttpRequests.postAddUserToGroup(url, token, groupId, userToAdd)
             }
         }
 
@@ -35,17 +43,5 @@ class AddUserAdapter(
 
     override fun getItemCount(): Int {
         return user.size
-    }
-
-    /**
-     * method to add user to a group
-     */
-    private fun addUserToGroup() {
-        val url = BASE_URL_AddUser
-        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
-        val groupId = 2
-        val userToAdd = "Anna"
-        println("Hallo addUserToGroup !!!!!")
-        HttpRequests.postAddUserToGroup(url, token, groupId, userToAdd)
     }
 }
