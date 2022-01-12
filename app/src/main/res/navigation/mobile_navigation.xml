@@ -28,4 +28,5 @@
         android:name="com.example.eveningswipe.ui.filmswipe.SwipeFragment"
         android:label="@string/menu_swipe"
         tools:layout="@layout/swipe_fragment" />
+
 </navigation>
