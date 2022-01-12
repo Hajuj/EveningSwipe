@@ -40,6 +40,20 @@ object HttpRequests {
                 }
     }
 
+    fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
+        val addUserToGroup = AddUserToGroup(
+            token = TokenAddUser(token = tok),
+            add = Add(groupId = groupId, toAdd = userToAdd)
+        )
+
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(addUserToGroup).toString())
+            .response() { req, res, result ->
+
+            }
+    }
+
 
     fun getMovieById(url: String): ArrayList<FilterByGroupId> {
         url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
