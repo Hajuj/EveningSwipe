@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 class RegisterActivity : AppCompatActivity() {
-
+    private val BASE_URL_Register = "http://192.168.178.30:8080/register"
     private var register: Button? = null
     private var login:TextView? = null
     private var editTextFullName: EditText? = null
@@ -36,11 +36,11 @@ class RegisterActivity : AppCompatActivity() {
      * method to handle registration of a user
      */
     private fun registerUser() {
-            val url = BASE_URL
+            val url = BASE_URL_Register
             val name = editTextFullName.toString()
             val email = editTextEmail.toString()
             val password = editTextPassword.toString()
-            println("Hallo !!!!!")
+            println("Hallo Register !!!!!")
             HttpRequests.postRegisterUser(url, name, email, password)
             startHomeActivity()
         //TODO: check if registration was successful

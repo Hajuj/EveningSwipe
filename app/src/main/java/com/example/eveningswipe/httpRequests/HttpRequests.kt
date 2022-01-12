@@ -26,6 +26,20 @@ object HttpRequests {
                 }
     }
 
+    fun postLoginUser(url: String, email: String, password: String) {
+        val loginUser = LoginUser(
+                email = email,
+                password = password
+        )
+
+        url.httpPost()
+                .header("Content-Type" to "application/json")
+                .body(Gson().toJson(loginUser).toString())
+                .response() { req, res, result ->
+
+                }
+    }
+
 
     fun getMovieById(url: String): ArrayList<FilterByGroupId> {
         url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
@@ -48,18 +62,7 @@ object HttpRequests {
         }
         return ResponseFilterRating
     }
-/* alte Funktion
-    fun postCreatedGroup(url: String): ArrayList<CreateGroup> {
-        url.httpPost().responseObject(CreateGroup.Deserializer()) { request, response, result ->
-            val (item, err) = result
 
-            item?.forEach { element ->
-                ResponseCreateGroup.add(element)
-            }
-        }
-        return ResponseCreateGroup
-    }
-*/
     fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),

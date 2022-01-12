@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.eveningswipe.httpRequests.HttpRequests
 
 class MainActivity : AppCompatActivity() {
+    private val BASE_URL_Login = "http://192.168.178.30:8080/login"
     private var register: TextView? = null
     private var signIn: Button? = null
     private var email: EditText? = null
@@ -31,6 +33,12 @@ class MainActivity : AppCompatActivity() {
      * method to handle login
      */
     private fun allowLogin() {
+        val url = BASE_URL_Login
+        val email = email.toString()
+        val password = password.toString()
+        println("Hallo Login !!!!!")
+        HttpRequests.postLoginUser(url, email, password)
+        //TODO: check if login was successful
         //if user is allowed to login:
         startHomeActivity()
     }
