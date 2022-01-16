@@ -9,22 +9,24 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.eveningswipe.httpRequests.HttpRequests
+import com.google.android.material.textfield.TextInputLayout
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     private val BASE_URL_Login = "http://192.168.178.30:8080/login"
     private var register: TextView? = null
     private var signIn: Button? = null
-    private var email: EditText? = null
-    private  var password: EditText? = null
+    private var email: TextInputLayout? = null
+    private  var password: TextInputLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        register = findViewById<View>(R.id.register) as TextView
+        register = findViewById<View>(R.id.register) as Button
         register!!.setOnClickListener(View.OnClickListener { startRegisterActivity() })
-        email = findViewById<View>(R.id.email) as EditText
-        password = findViewById<View>(R.id.password) as EditText
+        email = findViewById<View>(R.id.email) as TextInputLayout
+        password = findViewById<View>(R.id.password) as TextInputLayout
         signIn = findViewById<View>(R.id.signIn) as Button
         signIn!!.setOnClickListener(View.OnClickListener { allowLogin() })
     }
@@ -34,8 +36,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun allowLogin() {
         val url = BASE_URL_Login
-        val email = email.toString()
-        val password = password.toString()
+        val email = email?.getEditText()?.getText().toString().trim()
+        val password = password?.getEditText()?.getText().toString().trim()
         println("Hallo Login !!!!!")
         HttpRequests.postLoginUser(url, email, password)
         //TODO: check if login was successful
