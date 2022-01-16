@@ -1,7 +1,7 @@
 <resources>
 
     <style name="Widget.Theme.EveningSwipe.MyView" parent="">
-        <item name="android:background">@color/gray_400</item>
+        <item name="android:background">@color/Hot_Chocolate</item>
     </style>
 
     <style name="Widget.EveningSwipe.AppWidget.Container" parent="android:Widget">

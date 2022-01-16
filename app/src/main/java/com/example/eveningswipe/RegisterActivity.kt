@@ -8,14 +8,15 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eveningswipe.httpRequests.HttpRequests
+import com.google.android.material.textfield.TextInputLayout
 
 class RegisterActivity : AppCompatActivity() {
     private val BASE_URL_Register = "http://192.168.178.30:8080/register"
     private var register: Button? = null
     private var login:TextView? = null
-    private var editTextFullName: EditText? = null
-    private var editTextEmail:EditText? = null
-    private var editTextPassword:EditText? = null
+    private var editTextFullName: TextInputLayout? = null
+    private var editTextEmail:TextInputLayout? = null
+    private var editTextPassword:TextInputLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +25,12 @@ class RegisterActivity : AppCompatActivity() {
         register = findViewById<View>(R.id.registerUser) as Button
         (register as Button).setOnClickListener(View.OnClickListener { registerUser() })
 
-        login = findViewById<View>(R.id.login) as TextView
-        login!!.setOnClickListener(View.OnClickListener { startLoginActivity() })
+        login = findViewById<View>(R.id.login) as Button
+        (login as Button).setOnClickListener(View.OnClickListener { startLoginActivity() })
 
-        editTextFullName = findViewById<View>(R.id.fullName) as EditText
-        editTextEmail = findViewById<View>(R.id.email) as EditText
-        editTextPassword = findViewById<View>(R.id.password) as EditText
+        editTextFullName = findViewById<View>(R.id.fullName) as TextInputLayout
+        editTextEmail = findViewById<View>(R.id.email) as TextInputLayout
+        editTextPassword = findViewById<View>(R.id.password) as TextInputLayout
     }
 
     /**
@@ -37,9 +38,9 @@ class RegisterActivity : AppCompatActivity() {
      */
     private fun registerUser() {
             val url = BASE_URL_Register
-            val name = editTextFullName.toString()
-            val email = editTextEmail.toString()
-            val password = editTextPassword.toString()
+            val name = editTextFullName?.getEditText()?.getText().toString().trim()
+            val email = editTextEmail?.getEditText()?.getText().toString().trim()
+            val password = editTextPassword?.getEditText()?.getText().toString().trim()
             println("Hallo Register !!!!!")
             HttpRequests.postRegisterUser(url, name, email, password)
             startHomeActivity()

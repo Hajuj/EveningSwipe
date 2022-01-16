@@ -22,11 +22,11 @@ import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.rating.RatingResultFragment
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
-const val BASE_URL_ById = "http://192.168.1.92:8080/api/filter/byid/"
+const val BASE_URL_ById = "http://192.168.2.104:8080/api/filter/byid/"
 //"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
 //instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
-const val BASE_URL_MovieDetails = "http://192.168.1.92:8080/api/movie/details/"
-const val BASE_URL_RateMovie = "http://192.168.1.92:8080/api/filter/rate/"
+const val BASE_URL_MovieDetails = "http://192.168.2.104:8080/api/movie/details/"
+const val BASE_URL_RateMovie = "http://192.168.2.104:8080/api/filter/rate/"
 var MovieById = ArrayList<FilterByGroupId>()
 var i: Int = 0
 var currentId: Int = 0
