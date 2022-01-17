@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:id="@+id/text_swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:textColor="@color/Hot_Chocolate"
             android:textStyle="bold"/>
 
         <ImageView
@@ -27,14 +27,28 @@
             android:contentDescription="Movie Poster"
             android:layout_below="@+id/text_swipe" />
 
+
+        <TextView
+            android:id="@+id/title_description"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:text="Description"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/img_swipe"/>
+
         <TextView
             android:id="@+id/movie_text"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:breakStrategy="simple"
-            android:layout_below="@+id/img_swipe"/>
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/title_description"
+            android:justificationMode="inter_word"/>
 
         <ProgressBar
             android:id="@+id/pBar1"
@@ -44,5 +58,47 @@
             android:layout_gravity="center"
             android:visibility="gone"/>
 
+        <RelativeLayout
+            android:id="@+id/hint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="800dp"
+                android:background="@color/transparent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/gotIt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="430dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Got it!"
+                app:backgroundTint="@null" />
+
+            <TextView
+                android:id="@+id/leftHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Swipe left\nfor like"
+                android:textSize="28dp"
+                android:layout_marginTop="160dp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/rightHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Swipe right\nfor unlike"
+                android:textSize="28dp"
+                android:layout_marginTop="160dp"
+                android:gravity="right"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
     </RelativeLayout>
+
 </ScrollView>
