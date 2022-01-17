@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "org.springframework.web.filter.CommonsRequestLoggingFilter",
+      "type": "java.lang.String",
+      "description": "Description for org.springframework.web.filter.CommonsRequestLoggingFilter."
+  }
+] }
