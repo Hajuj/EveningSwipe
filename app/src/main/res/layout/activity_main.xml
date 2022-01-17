@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Cotton"
+    android:background="@color/Canteloupe"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/live_tv_chocolate" />
+            app:srcCompat="@mipmap/ic_widget" />
 
         <TextView
             android:id="@+id/banner"
@@ -74,16 +74,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="40dp"
-            android:text="Login"
-            android:background="@drawable/buttons"
-            app:backgroundTint="@null"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/buttons"
+                android:text="Login"
+                app:backgroundTint="@null" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register"

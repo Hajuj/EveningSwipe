@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/Cotton">
+    android:background="@color/Canteloupe">
 
     <LinearLayout
         android:id="@+id/header_layout"
@@ -15,15 +15,15 @@
         android:clipToPadding="false"
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:text="Evening-Swipe"
-            android:textSize="28dp"
+            android:textSize="38dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="40dp"
             android:textColor="@color/Hot_Chocolate" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,10 +90,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Register"
                 android:background="@drawable/buttons"
-                app:backgroundTint="@null"/>
+                android:text="Register"
+                app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login"

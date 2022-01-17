@@ -3,6 +3,7 @@ package com.example.eveningswipe
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.net.Uri
 import android.widget.RemoteViews
 
 /**

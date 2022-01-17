@@ -1,6 +1,7 @@
 package com.example.eveningswipe
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         password = findViewById<View>(R.id.password) as TextInputLayout
         signIn = findViewById<View>(R.id.signIn) as Button
         signIn!!.setOnClickListener(View.OnClickListener { allowLogin() })
+
+        // Set cut corner background for API 23+
+        var layout = findViewById(R.id.header_layout) as View
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
+        }
     }
 
     /**

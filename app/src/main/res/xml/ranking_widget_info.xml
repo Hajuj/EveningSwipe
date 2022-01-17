@@ -5,7 +5,7 @@
     android:initialLayout="@layout/ranking_widget"
     android:minWidth="110dp"
     android:minHeight="40dp"
-    android:previewImage="@drawable/widget"
+    android:previewImage="@mipmap/ic_widget"
     android:previewLayout="@layout/ranking_widget"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="2"

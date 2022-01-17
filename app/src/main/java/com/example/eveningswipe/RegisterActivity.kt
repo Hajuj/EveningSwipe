@@ -1,10 +1,11 @@
 package com.example.eveningswipe
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eveningswipe.httpRequests.HttpRequests
@@ -31,6 +32,11 @@ class RegisterActivity : AppCompatActivity() {
         editTextFullName = findViewById<View>(R.id.fullName) as TextInputLayout
         editTextEmail = findViewById<View>(R.id.email) as TextInputLayout
         editTextPassword = findViewById<View>(R.id.password) as TextInputLayout
+        // Set cut corner background for API 23+
+        var layout = findViewById(R.id.header_layout) as View
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
+        }
     }
 
     /**

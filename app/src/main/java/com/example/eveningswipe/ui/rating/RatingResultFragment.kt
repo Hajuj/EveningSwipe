@@ -1,5 +1,6 @@
 package com.example.eveningswipe.ui.rating
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,11 @@ class RatingResultFragment : Fragment() {
         ratingResultViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        // Set cut corner background for API 23+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
+        }
         return root
     }
 }
