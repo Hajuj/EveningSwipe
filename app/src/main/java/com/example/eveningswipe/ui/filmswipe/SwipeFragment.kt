@@ -1,5 +1,6 @@
 package com.example.eveningswipe.ui.filmswipe
 
+import android.R.attr
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -21,6 +22,15 @@ import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.rating.RatingResultFragment
 import com.squareup.picasso.Picasso
+import android.widget.Toast
+import android.widget.LinearLayout
+
+import android.widget.RelativeLayout
+
+import android.widget.TextView
+import android.R.attr.button
+import android.opengl.Visibility
+
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
 const val BASE_URL_ById = "http://192.168.2.104:8080/api/filter/byid/"
@@ -32,6 +42,7 @@ var MovieById = ArrayList<FilterByGroupId>()
 var i: Int = 0
 var currentId: Int = 0
 var posterTemp: Int = 0
+var hintAccept: Boolean = false
 
 class SwipeFragment : Fragment() {
     private var layout: View? = null
@@ -49,6 +60,7 @@ class SwipeFragment : Fragment() {
     private lateinit var swipeViewModel: SwipeViewModel
     private var pgsBar: ProgressBar? = null
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,6 +72,14 @@ class SwipeFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.text_swipe)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
         val imgView: ImageView = root.findViewById(R.id.img_swipe)
+        val hintLayout: RelativeLayout = root.findViewById(R.id.hint_layout)
+        val btnHint: Button = root.findViewById(R.id.gotIt)
+        btnHint.setOnClickListener(View.OnClickListener {
+            if (!hintAccept){
+                hintLayout.setVisibility(View.GONE)
+                hintAccept = true
+            }
+        })
 
         pgsBar = root.findViewById(R.id.pBar1);
         notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -181,7 +201,6 @@ class SwipeFragment : Fragment() {
             }
             this.notificationManager.notify(1234, builder.build())
         }
-
 }
 
 

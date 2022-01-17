@@ -36,9 +36,11 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_rating_result.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/layout_target.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/ranking_widget.xml" value="0.2907608695652174" />
-        <entry key="app/src/main/res/layout/swipe_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/swipe_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/swipe_hint_overlay.xml" value="0.175" />
         <entry key="app/src/main/res/menu-v26/activity_main_drawer.xml" value="0.3265625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.340625" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.2604166666666667" />
