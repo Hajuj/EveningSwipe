@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.filmswipe.SwipeFragment">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,8 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="Movie Poster"
-            android:layout_marginTop="-200dp"
-            android:layout_marginBottom="-160dp"/>
+            android:layout_below="@+id/text_swipe" />
 
         <TextView
             android:id="@+id/movie_text"
@@ -33,7 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:breakStrategy="simple" />
+            android:breakStrategy="simple"
+            android:layout_below="@+id/img_swipe"/>
 
         <ProgressBar
             android:id="@+id/pBar1"
@@ -43,5 +44,5 @@
             android:layout_gravity="center"
             android:visibility="gone"/>
 
-    </FrameLayout>
+    </RelativeLayout>
 </ScrollView>

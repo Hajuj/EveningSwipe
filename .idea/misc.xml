@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v21/app_widget_background.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.346875" />
+        <entry key="app/src/main/res/drawable-v21/shr_product_grid_background_shape.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/buttons.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.346875" />
@@ -16,11 +17,16 @@
         <entry key="app/src/main/res/drawable/ic_menu_profil.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_swipe.xml" value="0.2824074074074074" />
+        <entry key="app/src/main/res/drawable/ic_widget_background.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/movie_icon.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/outline_home_24.xml" value="0.346875" />
+        <entry key="app/src/main/res/drawable/outline_live_tv_24.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.26979166666666665" />
+        <entry key="app/src/main/res/layout/activity_add_group.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_after_notification.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_finished_swipe.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.31431159420289856" />
@@ -36,6 +42,10 @@
         <entry key="app/src/main/res/menu-v26/activity_main_drawer.xml" value="0.3265625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.340625" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3609375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_widget.xml" value="0.3609375" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_widget_round.xml" value="0.3609375" />
       </map>
     </option>
   </component>

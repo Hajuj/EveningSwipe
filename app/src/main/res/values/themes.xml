@@ -32,8 +32,4 @@
     </style>
 
     <style name="Theme.EveningSwipe.AppWidgetContainer" parent="Theme.EveningSwipe.AppWidgetContainerParent" />
-
-    <style name="Theme.EveningSwipe.AppWidgetMyCustomMenuTextAppearance" >
-        <item name="android:titleTextColor">@color/Hot_Chocolate</item>
-    </style>v
 </resources>

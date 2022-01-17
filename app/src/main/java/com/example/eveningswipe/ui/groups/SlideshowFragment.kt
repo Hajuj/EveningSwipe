@@ -1,6 +1,8 @@
 package com.example.eveningswipe.ui.groups
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ class SlideshowFragment : Fragment() {
     private var newGroup: Button? = null
     private var grReView: RecyclerView? = null
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +52,11 @@ class SlideshowFragment : Fragment() {
 
         newGroup = root.findViewById(R.id.newGroup) as Button
         newGroup!!.setOnClickListener(View.OnClickListener { createNewGroup() })
+
+        // Set cut corner background for API 23+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
+        }
         return root
 
     }

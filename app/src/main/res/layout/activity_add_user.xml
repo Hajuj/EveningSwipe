@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddUserActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/Canteloupe"
+    android:id="@+id/add_user_layout">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/addUserRecyclerView"
