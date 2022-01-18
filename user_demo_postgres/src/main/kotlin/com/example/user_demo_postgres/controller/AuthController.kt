@@ -20,14 +20,14 @@ class AuthController (
     private val jwtService: JwtService,
     private val regexService: RegexService
         ){
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     fun register(@RequestBody body: RegisterDTO): ResponseEntity<Any> {
         if (regexService.isEmailFormatValid(body.email) and regexService.isPasswordStrongEnough(body.password)) {
             val user = userService.mapRegisterTouser(body)
             return ResponseEntity.ok(this.userService.save(user))
         }
         throw ResponseStatusException(HttpStatus.BAD_REQUEST)
-    }
+    }*/
 
 
     @PostMapping("/login")

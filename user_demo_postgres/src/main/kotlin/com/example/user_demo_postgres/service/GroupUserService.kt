@@ -27,9 +27,9 @@ class GroupUserService(
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
-    fun getUsersByGroup(groupId: Int): List<Int>?{
+    fun getUsersByGroup(groupId: Int): List<Int>{
         val users = groupUserRepository.getGroupUserById(groupId)
-        return users?.map{it.userId}
+        return users.map{it.userId}
 
 
 

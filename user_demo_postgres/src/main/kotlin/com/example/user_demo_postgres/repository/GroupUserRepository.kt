@@ -11,8 +11,11 @@ import org.springframework.stereotype.Repository
 interface GroupUserRepository: JpaRepository<GroupUsers, Int> {
 
     @Query("Select * from group_users where group_id = ?1", nativeQuery = true)
-    fun getGroupUserById(idx: Int): List<GroupUsers>?
+    fun getGroupUserById(idx: Int): List<GroupUsers>
 
     @Query("Select group_id from group_users where user_id = ?1", nativeQuery = true)
     fun getGroupsByUser(userId: Int): List<Int>
+
+
+
 }

@@ -3,7 +3,11 @@ package com.example.user_demo_postgres.controller
 import com.example.user_demo_postgres.AuthDto.*
 import com.example.user_demo_postgres.dto.*
 import com.example.user_demo_postgres.entity.TmdbMovieInfo
+import com.example.user_demo_postgres.returnDto.GroupInfoDto
+import com.example.user_demo_postgres.returnDto.RetMovieDetailsDto
+import com.example.user_demo_postgres.returnDto.RetUserInfoDto
 import com.example.user_demo_postgres.service.*
+import com.example.user_demo_postgres.utils.mapper.MovieDetailMaper
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,7 +25,8 @@ class MovieEndpoints (
     private val jwtService: JwtService,
     private val groupUserService: GroupUserService,
     private val userService: UserService,
-    private val ratingUserService: RatingUserService
+    private val ratingUserService: RatingUserService,
+    private val tmdbDetails: MovieDetailMaper
     ){
 
 
@@ -39,9 +44,13 @@ class MovieEndpoints (
         ResponseEntity.ok(movieService.getRandBasicMovies())
 
     @GetMapping("/api/movie/details")
-    fun getMovieDetails(@RequestBody body: AuthMovieDetailsDto): ResponseEntity<TmdbMovieInfo> {
+    fun getMovieDetails(@RequestBody body: AuthMovieDetailsDto): ResponseEntity<RetMovieDetailsDto> {
         if (jwtService.validateToken(body.token.token)) {
-            return ResponseEntity.ok(tmdbService.getMovieResource(body.movieId))
+            val tmdb = tmdbService.getMovieResource(body.movieId)
+
+            tmdb?.let {
+                val movieResuts = tmdb.movie_results
+                return ResponseEntity.ok(tmdbDetails.parseDmtbDetails(tmdb.movie_results[0]))}
 
         }
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
@@ -173,6 +182,44 @@ class MovieEndpoints (
             }
         }
     }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+
+    }
+
+    @GetMapping("/api/group/info")
+    fun getGroupInformation(@RequestBody body:AuthGroupInfoDto): ResponseEntity<GroupInfoDto>{
+        if (jwtService.validateToken(body.token.token)) {
+            val id = jwtService.getIdFromToken(body.token.token)
+
+            id?.let {
+                if (groupUserService.isUserInGroup(body.groupId, id)){
+                    val users = groupUserService.getUsersByGroup(body.groupId)
+                    val filter = groupFilterService.getFilterByGroupId(body.groupId)
+                    val filterIds: List<Int> = filter.map { it.id }
+                    val group = groupService.getGroup(body.groupId)
+                    val groupInfo = GroupInfoDto(users, filterIds, group.name)
+                    return ResponseEntity.ok(groupInfo)
+                }
+            }
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+
+    }
+
+    @GetMapping("/api/user/info")
+    fun getUserInfo(@RequestBody body:AuthUserInfoDto): ResponseEntity<RetUserInfoDto>{
+        if (jwtService.validateToken(body.token.token)) {
+            val id = jwtService.getIdFromToken(body.token.token)
+
+            id?.let {
+                val user  = userService.getUserById(body.userId)
+                user?.let{
+                    return ResponseEntity.ok(RetUserInfoDto(user.name))
+                }
+
+
+                }
+            }
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
 
     }
