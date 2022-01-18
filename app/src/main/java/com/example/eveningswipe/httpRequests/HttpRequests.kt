@@ -4,11 +4,12 @@ import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import kotlin.reflect.typeOf
 
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
     private var ResponseFilterRating = ArrayList<FilterRating>()
-    private var ResponseUserInfo = ArrayList<GetUserInfo>()
+    lateinit  private var responseUserInfo: UserInfoDto
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
 
@@ -55,15 +56,26 @@ object HttpRequests {
             }
     }
 
-    fun getUserInformation(url: String): ArrayList<GetUserInfo> {
-        url.httpGet().responseObject(GetUserInfo.Deserializer()) { request, response, result ->
-            val (item, err) = result
+    fun getUserInformation(url: String, token: TokenDto): UserInfoDto {
+        val url2 = "http://10.0.2.2:8080/api/user"
+        val token2 = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjIiLCJpYXQiOjE2NDI1MDAzMDIsImV4cCI6MTY0MjU4NjcwMn0.9Coew80TwhOZ_9_q3jcb1of_WIxdO0BR-N8RgPkpAog")
+        url2.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(token2).toString())
+            .responseObject(UserInfoDto.Deserializer())
+            { req, res, result ->
 
-            item?.forEach { element ->
+            val (info, err) = result
+                info?.let { responseUserInfo = info }
+
+
+            /*item?.forEach { element ->
                 ResponseUserInfo.add(element)
-            }
+            }*/
+
         }
-        return ResponseUserInfo
+
+        return responseUserInfo
     }
 
 

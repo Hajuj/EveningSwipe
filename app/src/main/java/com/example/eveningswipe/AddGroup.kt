@@ -9,7 +9,7 @@ import android.widget.EditText
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 //192.168.178.21
-const val BASE_URL = "http://192.168.178.30:8080/api/group/create/"
+const val BASE_URL = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/group/create/"
 
 class AddGroup : AppCompatActivity() {
 
@@ -38,7 +38,7 @@ class AddGroup : AppCompatActivity() {
      */
     private fun saveGroupToDatabase() {
         val url = BASE_URL
-        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
+        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjIiLCJpYXQiOjE2NDI1MDAzMDIsImV4cCI6MTY0MjU4NjcwMn0.9Coew80TwhOZ_9_q3jcb1of_WIxdO0BR-N8RgPkpAog"
         val name = "Test"
         val description = "Beschreibung der Gruppe"
         println("Hallo !!!!!")
