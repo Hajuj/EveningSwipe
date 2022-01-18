@@ -72,16 +72,22 @@ class SwipeFragment : Fragment() {
         val textView: TextView = root.findViewById(R.id.text_swipe)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
         val imgView: ImageView = root.findViewById(R.id.img_swipe)
+
+        //layout for swipe hint
+        //https://www.spaceotechnologies.com/android-overlay-app-tutorial/
         val hintLayout: RelativeLayout = root.findViewById(R.id.hint_layout)
-        val btnHint: Button = root.findViewById(R.id.gotIt)
-        btnHint.setOnClickListener(View.OnClickListener {
-            if (!hintAccept){
+        val btnHint: Button = root.findViewById(R.id.got_it)
+        if (!hintAccept){
+            hintLayout.setVisibility(View.VISIBLE)
+            btnHint.setOnClickListener(View.OnClickListener {
                 hintLayout.setVisibility(View.GONE)
                 hintAccept = true
-            }
-        })
+            })
+        }
 
-        pgsBar = root.findViewById(R.id.pBar1);
+        pgsBar = root.findViewById(R.id.pBar1)
+
+        //notification
         notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         layout = root.findViewById(R.id.swipe_layout)
 
