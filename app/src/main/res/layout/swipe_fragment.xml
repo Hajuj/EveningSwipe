@@ -62,7 +62,8 @@
             android:id="@+id/hint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -70,7 +71,7 @@
                 android:background="@color/transparent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/gotIt"
+                android:id="@+id/got_it"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="430dp"
@@ -80,23 +81,46 @@
                 app:backgroundTint="@null" />
 
             <TextView
-                android:id="@+id/leftHint"
+                android:id="@+id/left_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Swipe left\nfor like"
-                android:textSize="28dp"
+                android:text="like"
+                android:textSize="28sp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="160dp"
                 android:textColor="@color/white" />
 
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/swipe_left_white"
+                android:layout_below="@+id/left_hint"/>
+
             <TextView
-                android:id="@+id/rightHint"
+                android:id="@+id/right_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Swipe right\nfor unlike"
-                android:textSize="28dp"
+                android:text="dislike"
+                android:textSize="28sp"
                 android:layout_marginTop="160dp"
                 android:gravity="right"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:src="@drawable/swipe_right_white"
+                android:layout_below="@+id/right_hint"/>
 
         </RelativeLayout>
     </RelativeLayout>
