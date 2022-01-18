@@ -6,19 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.eveningswipe.httpRequests.GetUserInfo
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.google.android.material.textfield.TextInputLayout
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
-    private val BASE_URL_Login = "http://192.168.178.30:8080/login"
+    //private val BASE_URL_Login = "http://192.168.178.30:8080/login"
+    private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user/info"
     private var register: TextView? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
     private  var password: TextInputLayout? = null
+    var userInfo = ArrayList<GetUserInfo>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +47,11 @@ class MainActivity : AppCompatActivity() {
         val password = password?.getEditText()?.getText().toString().trim()
         println("Hallo Login !!!!!")
         HttpRequests.postLoginUser(url, email, password)
+        userInfo = HttpRequests.getUserInformation(url)
         //TODO: check if login was successful
         //if user is allowed to login:
         startHomeActivity()
+        println("userinfo: " + userInfo)
     }
 
     /**

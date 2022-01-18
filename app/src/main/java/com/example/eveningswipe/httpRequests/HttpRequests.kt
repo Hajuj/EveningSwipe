@@ -8,6 +8,7 @@ import com.google.gson.Gson
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
     private var ResponseFilterRating = ArrayList<FilterRating>()
+    private var ResponseUserInfo = ArrayList<GetUserInfo>()
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
 
@@ -52,6 +53,17 @@ object HttpRequests {
             .response() { req, res, result ->
 
             }
+    }
+
+    fun getUserInformation(url: String): ArrayList<GetUserInfo> {
+        url.httpGet().responseObject(GetUserInfo.Deserializer()) { request, response, result ->
+            val (item, err) = result
+
+            item?.forEach { element ->
+                ResponseUserInfo.add(element)
+            }
+        }
+        return ResponseUserInfo
     }
 
 
