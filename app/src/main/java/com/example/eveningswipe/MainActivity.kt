@@ -8,11 +8,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.eveningswipe.httpRequests.HttpRequests
+import com.example.eveningswipe.httpRequests.TokenDto
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
     private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/login"
     private val BASE_URL_User = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
+    private val BASE_URL_groupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
     private var register: TextView? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
@@ -54,10 +56,13 @@ class MainActivity : AppCompatActivity() {
      * final login after token is initialized
      */
     private fun login(){
-        val token = HttpRequests.responseToken
+        //val token = HttpRequests.responseToken
+        val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxODA3MTIwLCJleHAiOjE2NDE4OTM1MjB9.qoaDmmsfnOg71H8IWikp3yYg6gGnWpwDrYaXbM5XN2g")
         HttpRequests.getUserInformation(BASE_URL_User, token)
-
-
+        HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
+        while(!HttpRequests.checkifInitialized()) {
+            // waiting for initialization
+        }
         //if user can login:
         startHomeActivity()
     }

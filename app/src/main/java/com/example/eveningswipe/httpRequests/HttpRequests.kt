@@ -79,6 +79,7 @@ object HttpRequests {
 
             val (info, err) = result
                 info?.let { responseUserInfo = info }
+                 err?. let{ println("ERROR !!")}
                 println("reg: "+ req + " res: " + res+ " result: " + result)
                  println(responseUserInfo.userName)
         }
@@ -97,8 +98,10 @@ object HttpRequests {
                 .body(Gson().toJson(groupInfo).toString())
                 .response()
                 { req, res, result ->
-                    /*val (info, err) = result
-                    info?.let { responseGroupInfo = info }*/
+
+                    val (info, err) = result
+                    //info?.let { responseGroupInfo = info }
+                    err?. let{ println("ERROR !!")}
                     println("reg: "+ req + " res: " + res+ " result: " + result)
                 }
     }
