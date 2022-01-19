@@ -8,10 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.eveningswipe.httpRequests.HttpRequests
 
-const val BASE_URL_createGroup = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/group/create/"
-
 class AddGroup : AppCompatActivity() {
 
+    private val BASE_URL_createGroup = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/group/create/"
     private var saveGroup: Button? = null
     private var addUser: Button? = null
     private var name: EditText? = null
@@ -29,19 +28,15 @@ class AddGroup : AppCompatActivity() {
         addUser!!.setOnClickListener(View.OnClickListener { startAddUserActivity() })
     }
 
-    //TODO change value of id
-    private val id: Int = 1
-
     /**
      * method to save a group in the database
      */
     private fun saveGroupToDatabase() {
-        val url = BASE_URL_createGroup
         val token = HttpRequests.responseToken.token
-        val name = "Test"
-        val description = "Beschreibung der Gruppe"
+        val name = name.toString()
+        val description = description.toString()
         println("Hallo !!!!!")
-        HttpRequests.postCreatedGroup2(url, token, name, description)
+        HttpRequests.postCreatedGroup2(BASE_URL_createGroup, token, name, description)
     }
 
     /**

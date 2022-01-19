@@ -17,10 +17,11 @@ import com.example.eveningswipe.AddGroup
 import com.example.eveningswipe.GroupDataRecycle
 import com.example.eveningswipe.GroupsAdapter
 import com.example.eveningswipe.R
+import com.example.eveningswipe.httpRequests.HttpRequests
 
 
 class SlideshowFragment : Fragment() {
-
+    private val BASE_URL_groupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
     private lateinit var slideshowViewModel: SlideshowViewModel
     private var newGroup: Button? = null
     private var grReView: RecyclerView? = null
@@ -41,14 +42,11 @@ class SlideshowFragment : Fragment() {
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
         //TODO: for testing, need to be replaced with groups of database
-        var grouplist= mutableListOf(
-            GroupDataRecycle("test1", 3),
-            GroupDataRecycle("test2", 1),
-            GroupDataRecycle("test3", 5)
-        )
+        while(!HttpRequests.checkifGroupInfoInitialized()) {
+            // waiting for initialization
+        }
+        showGroups()
 
-        val adapter = GroupsAdapter(grouplist)
-        grReView!!.adapter = adapter
 
         newGroup = root.findViewById(R.id.newGroup) as Button
         newGroup!!.setOnClickListener(View.OnClickListener { createNewGroup() })
@@ -59,6 +57,20 @@ class SlideshowFragment : Fragment() {
         }
         return root
 
+    }
+
+    private fun showGroups(){
+        val token = HttpRequests.responseToken.token
+        val test = HttpRequests.responseGroupInfo.name
+        val testmember = HttpRequests.responseGroupInfo.member
+        var grouplist= mutableListOf(
+                GroupDataRecycle("test1", 2),
+                GroupDataRecycle("test2", 1),
+                GroupDataRecycle("test3", 5)
+        )
+
+        val adapter = GroupsAdapter(grouplist)
+        grReView!!.adapter = adapter
     }
 
     /**
