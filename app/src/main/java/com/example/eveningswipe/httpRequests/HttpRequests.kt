@@ -4,8 +4,6 @@ import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
-import java.lang.reflect.Array
-import kotlin.reflect.typeOf
 
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
@@ -42,7 +40,6 @@ object HttpRequests {
                 .body(Gson().toJson(loginUser).toString())
                 .responseObject(TokenDto.Deserializer())
                 { req, res, result ->
-
                     val (info, err) = result
                     info?.let { responseToken = info }
                     println("reg: "+ req + " res: " + res+ " result: " + result)
@@ -73,6 +70,7 @@ object HttpRequests {
     }
 
     fun getUserInformation(url: String, token: TokenDto) {
+
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(token).toString())
@@ -86,19 +84,12 @@ object HttpRequests {
         }
     }
 
-    /**
-     * method to check whether token has already been initialized
-     */
-    fun checkifGroupInfoInitialized() : Boolean{
-        return this::responseGroupInfo.isInitialized
-    }
 
-    fun getGroupInformation(url: String, token: String, groupId: Int, name: String, member: List<Int>, filter: List<Int>) {
+
+    fun getGroupInformation(url: String, token: TokenDto, groupId: Int, name: String) {
         val groupInfo = GroupInfoDto(
                 name = name,
-                member = member,
-                filter = filter,
-                token = TokenDto(token = token),
+                token = token,
                 groupid = groupId
         )
         url.httpPost()

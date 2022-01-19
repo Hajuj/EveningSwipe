@@ -31,7 +31,7 @@ class AddUserActivity : AppCompatActivity() {
 
         //TODO: for testing, need to be replaced with groups of database
         var userList= mutableListOf(
-            AddUserDataRecycle("anna"),
+            AddUserDataRecycle(HttpRequests.responseUserInfo.userName),
             AddUserDataRecycle("alex"),
             AddUserDataRecycle("tom")
         )

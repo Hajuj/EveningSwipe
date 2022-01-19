@@ -25,12 +25,13 @@ class SlideshowFragment : Fragment() {
     private lateinit var slideshowViewModel: SlideshowViewModel
     private var newGroup: Button? = null
     private var grReView: RecyclerView? = null
+    val token = HttpRequests.responseToken
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         slideshowViewModel =
             ViewModelProvider(this).get(SlideshowViewModel::class.java)
@@ -41,12 +42,8 @@ class SlideshowFragment : Fragment() {
         })
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
-        //TODO: for testing, need to be replaced with groups of database
-        while(!HttpRequests.checkifGroupInfoInitialized()) {
-            // waiting for initialization
-        }
+        HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
         showGroups()
-
 
         newGroup = root.findViewById(R.id.newGroup) as Button
         newGroup!!.setOnClickListener(View.OnClickListener { createNewGroup() })
@@ -60,16 +57,23 @@ class SlideshowFragment : Fragment() {
     }
 
     private fun showGroups(){
-        val token = HttpRequests.responseToken.token
-        val test = HttpRequests.responseGroupInfo.name
-        val testmember = HttpRequests.responseGroupInfo.member
-        var grouplist= mutableListOf(
-                GroupDataRecycle("test1", 2),
+        val groupListCounter = HttpRequests.responseUserInfo.groupId
+        val groupName: String = ""
+        val memberNumber: Int = 0
+        val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber))
+        for (i in 0..groupListCounter.size) {
+            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupListCounter.get(0), groupName)
+            //groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo.name, 3))
+        }
+
+        println(groupListCounter)
+        /*var grouplist= mutableListOf(
+                GroupDataRecycle(HttpRequests.responseGroupInfo.name.get(i), 2),
                 GroupDataRecycle("test2", 1),
                 GroupDataRecycle("test3", 5)
-        )
+        )*/
 
-        val adapter = GroupsAdapter(grouplist)
+        val adapter = GroupsAdapter(groups)
         grReView!!.adapter = adapter
     }
 
@@ -83,3 +87,5 @@ class SlideshowFragment : Fragment() {
 
 
 }
+
+
