@@ -9,7 +9,8 @@ import kotlin.reflect.typeOf
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
     private var ResponseFilterRating = ArrayList<FilterRating>()
-    lateinit  private var responseUserInfo: UserInfoDto
+    lateinit var responseUserInfo: UserInfoDto
+    lateinit var responseToken: TokenDto
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
 
@@ -37,10 +38,22 @@ object HttpRequests {
         url.httpPost()
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(loginUser).toString())
-                .response() { req, res, result ->
-                    println("reglogin: "+ req + " resloginUser: " + res+ " resultloginUser: " + result)
-                    println(email)
+                .responseObject(TokenDto.Deserializer())
+                { req, res, result ->
+
+                    val (info, err) = result
+                    info?.let { responseToken = info }
+                    println("reg: "+ req + " res: " + res+ " result: " + result)
+                    println(responseToken.token)
+
                 }
+    }
+
+    /**
+     * method to check whether token has already been initialized
+     */
+    fun checkifInitialized() : Boolean{
+        return this::responseToken.isInitialized
     }
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
@@ -61,20 +74,14 @@ object HttpRequests {
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(token).toString())
-            //.responseObject(UserInfoDto.Deserializer())
-            .response() { req, res, result ->
+            .responseObject(UserInfoDto.Deserializer())
+             { req, res, result ->
 
-            /*val (info, err) = result
-                info?.let { responseUserInfo = info }*/
+            val (info, err) = result
+                info?.let { responseUserInfo = info }
                 println("reg: "+ req + " res: " + res+ " result: " + result)
-
-            /*item?.forEach { element ->
-                ResponseUserInfo.add(element)
-            }*/
-
+                 println(responseUserInfo.userName)
         }
-
-        //return responseUserInfo
     }
 
 

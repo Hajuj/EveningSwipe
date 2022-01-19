@@ -7,12 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.eveningswipe.httpRequests.GetUserInfo
 import com.example.eveningswipe.httpRequests.HttpRequests
-import com.example.eveningswipe.httpRequests.TokenDto
-import com.example.eveningswipe.httpRequests.UserInfoDto
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.extensions.authentication
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
     private  var password: TextInputLayout? = null
-    lateinit  private var userInfo: UserInfoDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,18 +40,24 @@ class MainActivity : AppCompatActivity() {
      * method to handle login
      */
     private fun allowLogin() {
-        val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjIiLCJpYXQiOjE2NDI1MDAzMDIsImV4cCI6MTY0MjU4NjcwMn0.9Coew80TwhOZ_9_q3jcb1of_WIxdO0BR-N8RgPkpAog")
         val email = email?.getEditText()?.getText().toString().trim()
         val password = password?.getEditText()?.getText().toString().trim()
         println("Hallo Login !!!!!")
         HttpRequests.postLoginUser(BASE_URL_Login, email, password)
-        //userInfo = HttpRequests.getUserInformation(url, token)
+        while(!HttpRequests.checkifInitialized()) {
+            // waiting for initialization
+        }
+        login()
+    }
 
+    /**
+     * final login after token is initialized
+     */
+    private fun login(){
+        val token = HttpRequests.responseToken
         HttpRequests.getUserInformation(BASE_URL_User, token)
-        //TODO: check if login was successful
-        //if user is allowed to login:
+        //if user can login:
         startHomeActivity()
-        //println("userinfo: " + userInfo)
     }
 
     /**
