@@ -38,7 +38,8 @@ object HttpRequests {
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(loginUser).toString())
                 .response() { req, res, result ->
-
+                    println("reglogin: "+ req + " resloginUser: " + res+ " resultloginUser: " + result)
+                    println(email)
                 }
     }
 
@@ -56,18 +57,16 @@ object HttpRequests {
             }
     }
 
-    fun getUserInformation(url: String, token: TokenDto): UserInfoDto {
-        val url2 = "http://10.0.2.2:8080/api/user"
-        val token2 = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjIiLCJpYXQiOjE2NDI1MDAzMDIsImV4cCI6MTY0MjU4NjcwMn0.9Coew80TwhOZ_9_q3jcb1of_WIxdO0BR-N8RgPkpAog")
-        url2.httpPost()
+    fun getUserInformation(url: String, token: TokenDto) {
+        url.httpPost()
             .header("Content-Type" to "application/json")
-            .body(Gson().toJson(token2).toString())
-            .responseObject(UserInfoDto.Deserializer())
-            { req, res, result ->
+            .body(Gson().toJson(token).toString())
+            //.responseObject(UserInfoDto.Deserializer())
+            .response() { req, res, result ->
 
-            val (info, err) = result
-                info?.let { responseUserInfo = info }
-
+            /*val (info, err) = result
+                info?.let { responseUserInfo = info }*/
+                println("reg: "+ req + " res: " + res+ " result: " + result)
 
             /*item?.forEach { element ->
                 ResponseUserInfo.add(element)
@@ -75,7 +74,7 @@ object HttpRequests {
 
         }
 
-        return responseUserInfo
+        //return responseUserInfo
     }
 
 

@@ -10,16 +10,19 @@ import android.widget.TextView
 import com.example.eveningswipe.httpRequests.GetUserInfo
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.httpRequests.TokenDto
+import com.example.eveningswipe.httpRequests.UserInfoDto
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.extensions.authentication
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
-    //private val BASE_URL_Login = "http://192.168.178.30:8080/login"
-    private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
+    private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/login"
+    private val BASE_URL_User = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
     private var register: TextView? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
     private  var password: TextInputLayout? = null
-    var userInfo = ArrayList<GetUserInfo>()
+    lateinit  private var userInfo: UserInfoDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +47,17 @@ class MainActivity : AppCompatActivity() {
      */
     private fun allowLogin() {
         val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjIiLCJpYXQiOjE2NDI1MDAzMDIsImV4cCI6MTY0MjU4NjcwMn0.9Coew80TwhOZ_9_q3jcb1of_WIxdO0BR-N8RgPkpAog")
-        val url = BASE_URL_Login
         val email = email?.getEditText()?.getText().toString().trim()
         val password = password?.getEditText()?.getText().toString().trim()
         println("Hallo Login !!!!!")
-        HttpRequests.postLoginUser(url, email, password)
-        userInfo = HttpRequests.getUserInformation(url, token)
+        HttpRequests.postLoginUser(BASE_URL_Login, email, password)
+        //userInfo = HttpRequests.getUserInformation(url, token)
+
+        HttpRequests.getUserInformation(BASE_URL_User, token)
         //TODO: check if login was successful
         //if user is allowed to login:
         startHomeActivity()
-        println("userinfo: " + userInfo)
+        //println("userinfo: " + userInfo)
     }
 
     /**
