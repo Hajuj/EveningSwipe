@@ -32,18 +32,18 @@ class MovieEndpoints (
 
 
 
-    /*@GetMapping("movie/{id}")
+    /*@PostMapping("movie/{id}")
     fun getMovi(@PathVariable id: Int): ResponseEntity<MovieDTO> = ResponseEntity.ok(movieService.getMovie(id))*/
 
     var logbook = Logbook.create()
-    @GetMapping("/api/movie/{id}")
+    @PostMapping("/api/movie/{id}")
     fun getBasicMovie(@PathVariable id: String): ResponseEntity<Basic_movieDTO> = ResponseEntity.ok(movieService.getBasicMovie(id))
 
-    @GetMapping("/api/movie/group/)")
+    @PostMapping("/api/movie/group/)")
     fun getRandBasicMovie(): ResponseEntity<List<String>> =
         ResponseEntity.ok(movieService.getRandBasicMovies())
 
-    @GetMapping("/api/movie/details")
+    @PostMapping("/api/movie/details")
     fun getMovieDetails(@RequestBody body: AuthMovieDetailsDto): ResponseEntity<RetMovieDetailsDto> {
         if (jwtService.validateToken(body.token.token)) {
             val tmdb = tmdbService.getMovieResource(body.movieId)
@@ -87,7 +87,7 @@ class MovieEndpoints (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
-    @GetMapping("/api/user")
+    @PostMapping("/api/user")
     fun getUser(@RequestBody dto: TokenDto): ResponseEntity<UserInfoDto> {
         if (jwtService.validateToken(dto.token)) {
             val id = jwtService.getIdFromToken(dto.token)
@@ -128,7 +128,7 @@ class MovieEndpoints (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
-    @GetMapping("/api/filter/byid")
+    @PostMapping("/api/filter/byid")
     fun getFilterByGroupid(@RequestBody body: AuthGetFilterDto) :ResponseEntity<List<GroupFilterDTO>>{
         if (jwtService.validateToken(body.token.token)) {
             val id = jwtService.getIdFromToken(body.token.token)
@@ -144,7 +144,7 @@ class MovieEndpoints (
 
     }
 
-    @GetMapping("/api/filter/movies/{id}")
+    @PostMapping("/api/filter/movies/{id}")
     fun getMoviesByFilterId(@PathVariable id :Int): ResponseEntity<List<String>>{
         return ResponseEntity.ok(groupFilterService.getMoviesByGroupId(id))
 
@@ -169,7 +169,7 @@ class MovieEndpoints (
 
     }
 
-    @GetMapping("/api/filter/rating")
+    @PostMapping("/api/filter/rating")
     fun getMovieRating(@RequestBody body:AuthGetFilterRatingDto): ResponseEntity<List<MovieRatingDTO>>{
         if (jwtService.validateToken(body.token.token)) {
         val id = jwtService.getIdFromToken(body.token.token)
@@ -186,7 +186,7 @@ class MovieEndpoints (
 
     }
 
-    @GetMapping("/api/group/info")
+    @PostMapping("/api/group/info")
     fun getGroupInformation(@RequestBody body:AuthGroupInfoDto): ResponseEntity<GroupInfoDto>{
         if (jwtService.validateToken(body.token.token)) {
             val id = jwtService.getIdFromToken(body.token.token)
@@ -206,7 +206,7 @@ class MovieEndpoints (
 
     }
 
-    @GetMapping("/api/user/info")
+    @PostMapping("/api/user/info")
     fun getUserInfo(@RequestBody body:AuthUserInfoDto): ResponseEntity<RetUserInfoDto>{
         if (jwtService.validateToken(body.token.token)) {
             val id = jwtService.getIdFromToken(body.token.token)

@@ -44,7 +44,7 @@ class AuthController (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
-    @GetMapping("/user")
+    @PostMapping("/user")
     fun getUser(@RequestBody requestDTO: RequestDTO?): ResponseEntity<Any>{
 
         requestDTO?.let{
