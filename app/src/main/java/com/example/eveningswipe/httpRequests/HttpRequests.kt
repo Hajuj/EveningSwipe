@@ -4,13 +4,16 @@ import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import com.github.kittinunf.fuel.core.*
+import com.github.kittinunf.fuel.coroutines.*
+import kotlinx.coroutines.runBlocking
 
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
     private var ResponseFilterRating = ArrayList<FilterRating>()
     lateinit var responseUserInfo: UserInfoDto
-    lateinit var responseToken: TokenDto
-    lateinit var responseGroupInfo: GroupInfoDto
+    var responseToken: TokenDto? = null
+    var responseGroupInfo: GroupInfoDto? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
 
@@ -43,17 +46,20 @@ object HttpRequests {
                     val (info, err) = result
                     info?.let { responseToken = info }
                     println("reg: "+ req + " res: " + res+ " result: " + result)
-                    println(responseToken.token)
+                    println(responseToken?.token)
 
                 }
+        return
     }
 
     /**
      * method to check whether token has already been initialized
      */
-    fun checkifInitialized() : Boolean{
+   /* fun checkifInitialized() : Boolean{
+        println("Token here: " + responseToken)
+        val token = responseToken.toString()
         return this::responseToken.isInitialized
-    }
+    }*/
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
         val addUserToGroup = AddUserToGroup(
@@ -70,7 +76,6 @@ object HttpRequests {
     }
 
     fun getUserInformation(url: String, token: TokenDto) {
-
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(token).toString())

@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.httpRequests.TokenDto
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/login"
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
     private  var password: TextInputLayout? = null
+    lateinit var token: TokenDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         password = findViewById<View>(R.id.password) as TextInputLayout
         signIn = findViewById<View>(R.id.signIn) as Button
         signIn!!.setOnClickListener(View.OnClickListener { allowLogin() })
+
 
         // Set cut corner background for API 23+
         var layout = findViewById(R.id.header_layout) as View
@@ -44,25 +47,31 @@ class MainActivity : AppCompatActivity() {
     private fun allowLogin() {
         val email = email?.getEditText()?.getText().toString().trim()
         val password = password?.getEditText()?.getText().toString().trim()
-        println("Hallo Login !!!!!")
+
         HttpRequests.postLoginUser(BASE_URL_Login, email, password)
-        while(!HttpRequests.checkifInitialized()) {
+
+        while(HttpRequests.responseToken == null) {
             // waiting for initialization
         }
+
         login()
     }
 
     /**
      * final login after token is initialized
      */
-    private fun login(){
-        //val token = HttpRequests.responseToken
-        val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxODA3MTIwLCJleHAiOjE2NDE4OTM1MjB9.qoaDmmsfnOg71H8IWikp3yYg6gGnWpwDrYaXbM5XN2g")
-        HttpRequests.getUserInformation(BASE_URL_User, token)
-        HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
-        while(!HttpRequests.checkifInitialized()) {
-            // waiting for initialization
+    private fun login() {
+        val token = HttpRequests.responseToken
+        //val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxODA3MTIwLCJleHAiOjE2NDE4OTM1MjB9.qoaDmmsfnOg71H8IWikp3yYg6gGnWpwDrYaXbM5XN2g")
+
+        if (token != null) {
+            HttpRequests.getUserInformation(BASE_URL_User, token)
         }
+
+        if (token != null) {
+            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
+        }
+
         //if user can login:
         startHomeActivity()
     }

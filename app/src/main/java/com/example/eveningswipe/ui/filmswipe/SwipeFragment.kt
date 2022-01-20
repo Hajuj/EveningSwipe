@@ -33,11 +33,11 @@ import android.opengl.Visibility
 
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
-const val BASE_URL_ById = "http://192.168.2.104:8080/api/filter/byid/"
+const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
 //"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
 //instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
-const val BASE_URL_MovieDetails = "http://192.168.2.104:8080/api/movie/details/"
-const val BASE_URL_RateMovie = "http://192.168.2.104:8080/api/filter/rate/"
+const val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
+const val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
 var MovieById = ArrayList<FilterByGroupId>()
 var i: Int = 0
 var currentId: Int = 0
@@ -157,7 +157,7 @@ class SwipeFragment : Fragment() {
             swipeViewModel.movieTitle.value = "Lorem ipsum dolor sit amet, "
             swipeViewModel.movieText.value = "consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
             pgsBar?.setVisibility(View.GONE)
-            imgURL = IMG_BASE_URL + dummyPoster[posterTemp]
+            //imgURL = IMG_BASE_URL + dummyPoster[posterTemp]
             Picasso.get().load(imgURL).into(imgView)
             posterTemp+=1
 
