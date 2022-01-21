@@ -43,7 +43,7 @@ class SlideshowFragment : Fragment() {
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
         if (token != null) {
-            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
+            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431)
         }
         /*while(!HttpRequests.checkifInitialized()) {
             // waiting for initialization
@@ -63,14 +63,18 @@ class SlideshowFragment : Fragment() {
 
     private fun showGroups(){
         val groupListCounter = HttpRequests.responseUserInfo.groupId
-        val groupName: String = ""
+        var groupName: String = ""
         val memberNumber: Int = 0
         val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber))
-        for (i in 0..groupListCounter.size) {
+        for (i in 0..groupListCounter.size-1) {
             if (token != null) {
-                HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupListCounter.get(0), groupName)
+                HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupListCounter.get(i))
+                while(HttpRequests.responseGroupInfo == null || HttpRequests.responseGroupInfo!!.name == groupName) {
+                    // waiting for initialization
+                }
+                groupName = HttpRequests.responseGroupInfo!!.name
+                 groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, 3))
             }
-            //groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo.name, 3))
         }
 
         println(groupListCounter)

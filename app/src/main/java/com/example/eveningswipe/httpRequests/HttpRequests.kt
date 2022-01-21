@@ -13,9 +13,10 @@ object HttpRequests {
     private var ResponseFilterRating = ArrayList<FilterRating>()
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
-    var responseGroupInfo: GroupInfoDto? = null
+    var responseGroupInfo: PostGroupInfo? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
+    var groupName: String? = null
 
     fun postRegisterUser(url: String, nam: String, email: String, password: String) {
         val registerUser = RegisterUser(
@@ -86,28 +87,30 @@ object HttpRequests {
                 info?.let { responseUserInfo = info }
                  err?. let{ println("ERROR !!")}
                 println("reg: "+ req + " res: " + res+ " result: " + result)
-                 println(responseUserInfo.userName)
+                 println("user name: " +responseUserInfo.userName)
         }
     }
 
 
 
-    fun getGroupInformation(url: String, token: TokenDto, groupId: Int, name: String) {
+    fun getGroupInformation(url: String, token: TokenDto, groupId: Int) {
         val groupInfo = GroupInfoDto(
-                name = name,
+                //name = name,
                 token = token,
                 groupid = groupId
         )
         url.httpPost()
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(groupInfo).toString())
-                .response()
+                .responseObject(PostGroupInfo.Deserializer())
                 { req, res, result ->
 
                     val (info, err) = result
-                    //info?.let { responseGroupInfo = info }
+                    info?.let { responseGroupInfo = info }
                     err?. let{ println("ERROR !!")}
                     println("reg: "+ req + " res: " + res+ " result: " + result)
+                    responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
+                    groupName =  result.get().name
                 }
     }
 

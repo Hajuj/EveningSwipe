@@ -68,9 +68,9 @@ class MainActivity : AppCompatActivity() {
             HttpRequests.getUserInformation(BASE_URL_User, token)
         }
 
-        if (token != null) {
+        /*if (token != null) {
             HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
-        }
+        }*/
 
         //if user can login:
         startHomeActivity()
