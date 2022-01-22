@@ -1,18 +1,19 @@
 package com.example.eveningswipe
 
+import android.app.ActionBar
 import android.content.Intent
-import android.os.Build
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import com.google.android.material.navigation.NavigationView
+
 
 class NavigationDrawer : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class NavigationDrawer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar2: Toolbar = findViewById(R.id.toolbar2)
         setSupportActionBar(toolbar)
 
         /*val fab: FloatingActionButton = findViewById(R.id.fab)
@@ -42,9 +44,12 @@ class NavigationDrawer : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        navView.setNavigationItemSelectedListener {dest ->
+        navView.setNavigationItemSelectedListener { dest ->
             when(dest.itemId) {
                 R.id.nav_logout -> logout()
+                R.id.nav_home -> {
+                   //TODO: change color of appbar
+                }
                 else -> {
                     NavigationUI.onNavDestinationSelected(dest, navController)
                     drawerLayout.closeDrawers()

@@ -32,8 +32,6 @@ class GroupsAdapter(
                 val intent = Intent(context, GroupProfile::class.java)
                 intent.putExtra("groupName", groupName.text)
                 context.startActivity(intent)
-
-                Logger.getLogger(GroupsAdapter::class.java.name).warning("Hello..")
             }
             memberNumber.text = groups[position].memberNumber.toString()
         }

@@ -56,11 +56,9 @@ object HttpRequests {
     /**
      * method to check whether token has already been initialized
      */
-   /* fun checkifInitialized() : Boolean{
-        println("Token here: " + responseToken)
-        val token = responseToken.toString()
-        return this::responseToken.isInitialized
-    }*/
+    fun checkifInitialized() : Boolean{
+        return this::responseUserInfo.isInitialized
+    }
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
         val addUserToGroup = AddUserToGroup(
