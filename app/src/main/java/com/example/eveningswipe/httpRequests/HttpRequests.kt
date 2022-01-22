@@ -4,15 +4,19 @@ import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import com.github.kittinunf.fuel.core.*
+import com.github.kittinunf.fuel.coroutines.*
+import kotlinx.coroutines.runBlocking
 
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
     private var ResponseFilterRating = ArrayList<FilterRating>()
     lateinit var responseUserInfo: UserInfoDto
-    lateinit var responseToken: TokenDto
-    lateinit var responseGroupInfo: GroupInfoDto
+    var responseToken: TokenDto? = null
+    var responseGroupInfo: PostGroupInfo? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     private var ResponseMovieResult = ArrayList<MovieDetailsById>()
+    var groupName: String? = null
 
     fun postRegisterUser(url: String, nam: String, email: String, password: String) {
         val registerUser = RegisterUser(
@@ -43,17 +47,20 @@ object HttpRequests {
                     val (info, err) = result
                     info?.let { responseToken = info }
                     println("reg: "+ req + " res: " + res+ " result: " + result)
-                    println(responseToken.token)
+                    println(responseToken?.token)
 
                 }
+        return
     }
 
     /**
      * method to check whether token has already been initialized
      */
-    fun checkifInitialized() : Boolean{
+   /* fun checkifInitialized() : Boolean{
+        println("Token here: " + responseToken)
+        val token = responseToken.toString()
         return this::responseToken.isInitialized
-    }
+    }*/
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
         val addUserToGroup = AddUserToGroup(
@@ -70,7 +77,6 @@ object HttpRequests {
     }
 
     fun getUserInformation(url: String, token: TokenDto) {
-
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(token).toString())
@@ -81,28 +87,30 @@ object HttpRequests {
                 info?.let { responseUserInfo = info }
                  err?. let{ println("ERROR !!")}
                 println("reg: "+ req + " res: " + res+ " result: " + result)
-                 println(responseUserInfo.userName)
+                 println("user name: " +responseUserInfo.userName)
         }
     }
 
 
 
-    fun getGroupInformation(url: String, token: TokenDto, groupId: Int, name: String) {
+    fun getGroupInformation(url: String, token: TokenDto, groupId: Int) {
         val groupInfo = GroupInfoDto(
-                name = name,
+                //name = name,
                 token = token,
                 groupid = groupId
         )
         url.httpPost()
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(groupInfo).toString())
-                .response()
+                .responseObject(PostGroupInfo.Deserializer())
                 { req, res, result ->
 
                     val (info, err) = result
-                    //info?.let { responseGroupInfo = info }
+                    info?.let { responseGroupInfo = info }
                     err?. let{ println("ERROR !!")}
                     println("reg: "+ req + " res: " + res+ " result: " + result)
+                    responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
+                    groupName =  result.get().name
                 }
     }
 

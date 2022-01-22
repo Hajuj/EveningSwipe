@@ -32,7 +32,7 @@ class AddGroup : AppCompatActivity() {
      * method to save a group in the database
      */
     private fun saveGroupToDatabase() {
-        val token = HttpRequests.responseToken.token
+        val token = HttpRequests.responseToken!!.token
         val name = name.toString()
         val description = description.toString()
         println("Hallo !!!!!")

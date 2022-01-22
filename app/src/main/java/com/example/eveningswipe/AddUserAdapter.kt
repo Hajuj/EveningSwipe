@@ -30,7 +30,7 @@ class AddUserAdapter(
             userName.text = user[position].name
             userName.setOnClickListener{
                 //TODO: send to another activity / save chosen class etc
-                val token = HttpRequests.responseToken.token
+                val token = HttpRequests.responseToken!!.token
                 val groupId = 431
                 val userToAdd = user[position].name
                 println("Hallo addUserToGroup !!!!! " + userToAdd)
