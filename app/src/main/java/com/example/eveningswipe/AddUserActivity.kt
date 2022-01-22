@@ -64,11 +64,16 @@ class AddUserActivity : AppCompatActivity() {
 
     private fun addUserToGroup(){
         val token = HttpRequests.responseToken!!.token
-        val groupId = 431
+        val getID = GroupProfile()
+        val groupId = GroupProfile.getValue()?.toInt()
+        println("groupIDforUserAdding "+ GroupProfile.getValue()+ " getID " + getID)
         val userToAdd = searchInput
         if (userToAdd != null) {
-            HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
+            if (groupId != null) {
+                HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
+            }
         }
 
     }
+
 }

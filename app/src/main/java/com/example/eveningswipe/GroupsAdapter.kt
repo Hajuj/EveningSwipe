@@ -27,10 +27,13 @@ class GroupsAdapter(
 
         holder.binding.apply {
             groupName.text = groups[position].name
+            groupID.text = groups[position].groupId.toString()
             groupName.setOnClickListener{
                 val context=holder.itemView.context
                 val intent = Intent(context, GroupProfile::class.java)
                 intent.putExtra("groupName", groupName.text)
+                intent.putExtra("groupID", groupID.text)
+                println("groupIDfromAdapter "+ groups[position].groupId.toString())
                 context.startActivity(intent)
             }
             memberNumber.text = groups[position].memberNumber.toString()

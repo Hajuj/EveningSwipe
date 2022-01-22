@@ -129,7 +129,7 @@ object HttpRequests {
     }
 
 
-    fun getMovieById(url: String): ArrayList<FilterByGroupId> {
+    /*fun getMovieById(url: String): ArrayList<FilterByGroupId> {
         url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
             val (item, err) = result
 
@@ -138,9 +138,9 @@ object HttpRequests {
             }
         }
         return ResponseFilterByGroupId
-    }
+    }*/
 
-    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
+    /*fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),
             group = Group(name = nam, description = descript)
@@ -159,7 +159,7 @@ object HttpRequests {
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
                 groupName = result.get().name
             }
-    }
+    }*/
 
 
     fun getFilterByGroupId(url: String, token: TokenDto, groupId: Int) {

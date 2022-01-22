@@ -68,7 +68,8 @@ class SlideshowFragment : Fragment() {
         val groupListCounter = HttpRequests.responseUserInfo.groupId
         var groupName: String = ""
         val memberNumber: Int = 0
-        val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber))
+        val groupId: Int = 0
+        val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber, groupId))
         for (i in 0..groupListCounter.size-1) {
             if (token != null) {
                 HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupListCounter[i])
@@ -76,7 +77,9 @@ class SlideshowFragment : Fragment() {
                     // waiting for initialization
                 }
                 groupName = HttpRequests.responseGroupInfo!!.name
-                groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size))
+                groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size,
+                        HttpRequests.responseUserInfo.groupId[i]
+                ))
             }
         }
 
