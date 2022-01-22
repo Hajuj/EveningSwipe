@@ -15,7 +15,6 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
     private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/login"
     private val BASE_URL_User = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
-    private val BASE_URL_groupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
     private var register: TextView? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null

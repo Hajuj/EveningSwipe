@@ -11,6 +11,7 @@ object HttpRequests {
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
+    var responseFindUserInfo: FindUserDto? = null
     var responseMovieDetails: GetMovieDetails? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     var groupName: String? = null
@@ -53,11 +54,9 @@ object HttpRequests {
     /**
      * method to check whether token has already been initialized
      */
-    /* fun checkifInitialized() : Boolean{
-        println("Token here: " + responseToken)
-        val token = responseToken.toString()
-        return this::responseToken.isInitialized
-    }*/
+    fun checkifInitialized() : Boolean{
+        return this::responseUserInfo.isInitialized
+    }
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
         val addUserToGroup = AddUserToGroup(
@@ -90,9 +89,61 @@ object HttpRequests {
 
     fun getGroupInformation(url: String, token: TokenDto, groupId: Int) {
         val groupInfo = GroupInfoDto(
-            //name = name,
+                //name = name,
+                token = token,
+                groupid = groupId
+        )
+        url.httpPost()
+                .header("Content-Type" to "application/json")
+                .body(Gson().toJson(groupInfo).toString())
+                .responseObject(PostGroupInfo.Deserializer())
+                { req, res, result ->
+
+                    val (info, err) = result
+                    info?.let { responseGroupInfo = info }
+                    err?. let{ println("ERROR !!")}
+                    println("reg: "+ req + " res: " + res+ " result: " + result)
+                    responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
+                    groupName =  result.get().name
+                }
+    }
+
+    fun getAllUser(url: String, token: String, search: String) {
+        val findUser = FindUserInfoDto(
             token = token,
-            groupid = groupId
+            search = search
+        )
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(findUser).toString())
+            .responseObject(FindUserDto.Deserializer())
+            { req, res, result ->
+
+                val (info, err) = result
+                info?.let { responseFindUserInfo = info }
+                err?. let{ println("ERROR !!")}
+                println("reg: "+ req + " res: " + res+ " result: " + result)
+                responseFindUserInfo = FindUserDto(result.get().email, result.get().name)
+                //groupName =  result.get().name
+            }
+    }
+
+
+    fun getMovieById(url: String): ArrayList<FilterByGroupId> {
+        url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
+            val (item, err) = result
+
+            item?.forEach { element ->
+                ResponseFilterByGroupId.add(element)
+            }
+        }
+        return ResponseFilterByGroupId
+    }
+
+    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
+        val createGroup = CreateGroup2(
+            token = TokenCG(token = tok),
+            group = Group(name = nam, description = descript)
         )
         url.httpPost()
             .header("Content-Type" to "application/json")

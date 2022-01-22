@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.eveningswipe">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_widget"
@@ -10,10 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EveningSwipe"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddUserActivity"></activity>
-
+        <activity android:name=".GroupProfile"></activity>
+        <activity android:name=".AddUserActivity" />
         <activity android:name=".AddGroup" />
-
         <activity android:name=".FinishedSwipeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
@@ -29,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".RankingWidget"
             android:exported="true">
@@ -41,7 +43,5 @@
                 android:resource="@xml/ranking_widget_info" />
         </receiver>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

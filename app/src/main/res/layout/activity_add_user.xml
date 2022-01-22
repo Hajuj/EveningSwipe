@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AddUserActivity"
     android:orientation="horizontal"
-    android:background="@color/Canteloupe"
+    android:background="@color/white"
     android:id="@+id/add_user_layout">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -17,10 +17,10 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <EditText
         android:id="@+id/searchUser"
@@ -45,6 +45,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <ImageButton
+        android:id="@+id/searchButton"
+        android:layout_width="78dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14"
+        app:srcCompat="@drawable/search_icon" />
+
+    <Button
+        android:id="@+id/searchedUser"
+        android:layout_width="284dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294"
+        android:textColor="@color/white"
+        android:text="add button"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
