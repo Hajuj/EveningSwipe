@@ -30,6 +30,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.R.attr.button
 import android.opengl.Visibility
+import com.example.eveningswipe.GroupDataRecycle
 
 
 const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
@@ -59,6 +60,7 @@ class SwipeFragment : Fragment() {
     private val description = "Result notification"
     private lateinit var swipeViewModel: SwipeViewModel
     private var pgsBar: ProgressBar? = null
+    val token = HttpRequests.responseToken
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -97,8 +99,8 @@ class SwipeFragment : Fragment() {
         swipeViewModel.movieText.observe(viewLifecycleOwner, Observer {
             movieTextView.text = it
         })
-        //nextMovie()
-        swipeViewModel.movieTitle.value = "Lorem ipsum dolor sit amet, "
+        nextMovie(imgView)
+        /*swipeViewModel.movieTitle.value = "Lorem ipsum dolor sit amet, "
         swipeViewModel.movieText.value = "consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
         imgURL = IMG_BASE_URL + dummyPoster[posterTemp]
@@ -107,7 +109,7 @@ class SwipeFragment : Fragment() {
             posterTemp = 0
         } else {
             posterTemp+=1
-        }
+        }*/
 
         touchListener(imgView)
         // Set cut corner background for API 23+
@@ -146,7 +148,19 @@ class SwipeFragment : Fragment() {
     }
 
     fun nextMovie(imgView: ImageView) {
-        val url = BASE_URL_ById + "5"
+        var movieTitle: String = ""
+        for (i in 0..dummy.size-1){
+            if (token != null) {
+                HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, dummy[i])
+             /*   while(HttpRequests.responseMovieDetails == null || HttpRequests.responseMovieDetails!!.original_title == movieTitle) {
+                    // waiting for initialization
+                }*/
+
+                //movieTitle = HttpRequests.responseMovieDetails!!.original_title
+            }
+        }
+
+/*        val url = BASE_URL_ById + "5"
         // + element in list with group Id
         MovieById = HttpRequests.getMovieById(url)
 
@@ -171,7 +185,7 @@ class SwipeFragment : Fragment() {
         //currentId = MovieById.id
         //var imgURL = IMG_BASE_URL + MovieById.poster_path
         //Picasso.get().load(imgURL).into(imgView)
-        i+=1
+        i+=1*/
     }
 
     fun rateMovie() {

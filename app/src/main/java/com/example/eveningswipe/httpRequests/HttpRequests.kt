@@ -6,7 +6,6 @@ import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
 import com.github.kittinunf.fuel.core.*
 import com.github.kittinunf.fuel.coroutines.*
-import kotlinx.coroutines.runBlocking
 
 object HttpRequests {
     private var ResponseFilterByGroupId = ArrayList<FilterByGroupId>()
@@ -14,8 +13,8 @@ object HttpRequests {
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
+    var responseMovieDetails: GetMovieDetails? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
-    private var ResponseMovieResult = ArrayList<MovieDetailsById>()
     var groupName: String? = null
 
     fun postRegisterUser(url: String, nam: String, email: String, password: String) {
@@ -91,8 +90,6 @@ object HttpRequests {
         }
     }
 
-
-
     fun getGroupInformation(url: String, token: TokenDto, groupId: Int) {
         val groupInfo = GroupInfoDto(
                 //name = name,
@@ -126,17 +123,6 @@ object HttpRequests {
         return ResponseFilterByGroupId
     }
 
-    fun getFilterRating(url: String): ArrayList<FilterRating> {
-        url.httpGet().responseObject(FilterRating.Deserializer()) { request, response, result ->
-            val (item, err) = result
-
-            item?.forEach { element ->
-                ResponseFilterRating.add(element)
-            }
-        }
-        return ResponseFilterRating
-    }
-
     fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),
@@ -151,17 +137,26 @@ object HttpRequests {
             }
     }
 
-    /*
-    fun getMovieResult(url: String): ArrayList<MovieDetailsById>{
-        url.httpGet().responseObject(MovieDetailsById.Deserializer()) { request, response, result ->
-        val (item, err) = result
+    fun getMovieDetails(url: String, token: TokenDto, movieId: String) {
+        val movieInfo = PostMovieDetailsById(
+            token = token,
+            movieId = movieId
+        )
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(movieInfo).toString())
+            .responseObject(GetMovieDetails.Deserializer())
+            { req, res, result ->
 
-            item?.forEach { element ->
-                ResponseMovieResult.add(element)
+                val (info, err) = result
+                //info?.let { responseMovieDetails = info }
+                err?. let{ println("ERROR !!")}
+                println("reg: "+ req + " res: " + res+ " result: " + result)
+             //   responseMovieDetails = GetMovieDetails(
+               //     result.get().ori, result.get().member , result.get().name)
+
             }
-        }
-        return ResponseMovieResult
-    }*/
+    }
 
     fun postRateMovie(url: String, movId: String, filId: Int, tok: String) {
         val rateMovie = RateMovie(
