@@ -223,4 +223,30 @@ class MovieEndpoints (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
 
     }
+
+    @PostMapping("/api/users/all")
+    fun getAllUsers(@RequestBody body: TokenDto): ResponseEntity<List<RetUserEmNaDto>> {
+        if (jwtService.validateToken(body.token)) {
+            val id = jwtService.getIdFromToken(body.token)
+
+            id?.let {
+                return ResponseEntity.ok(userService.getAllUsers())
+
+            }
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+    }
+
+    @PostMapping("/api/users/find")
+    fun getAllUsers(@RequestBody body: AuthFindUsers): ResponseEntity<List<RetUserEmNaDto>> {
+        if (jwtService.validateToken(body.token)) {
+            val id = jwtService.getIdFromToken(body.token)
+
+            id?.let {
+                return ResponseEntity.ok(userService.findUsers(body.search))
+
+            }
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+    }
 }
