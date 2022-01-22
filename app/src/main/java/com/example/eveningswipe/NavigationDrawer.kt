@@ -23,7 +23,6 @@ class NavigationDrawer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        val toolbar2: Toolbar = findViewById(R.id.toolbar2)
         setSupportActionBar(toolbar)
 
         /*val fab: FloatingActionButton = findViewById(R.id.fab)
