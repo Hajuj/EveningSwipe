@@ -61,6 +61,9 @@ class SlideshowFragment : Fragment() {
 
     }
 
+    /**
+     * method to fill group recyclerview
+     */
     private fun showGroups(){
         val groupListCounter = HttpRequests.responseUserInfo.groupId
         var groupName: String = ""
@@ -76,13 +79,6 @@ class SlideshowFragment : Fragment() {
                  groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size))
             }
         }
-
-        println(groupListCounter)
-        /*var grouplist= mutableListOf(
-                GroupDataRecycle(HttpRequests.responseGroupInfo.name.get(i), 2),
-                GroupDataRecycle("test2", 1),
-                GroupDataRecycle("test3", 5)
-        )*/
 
         val adapter = GroupsAdapter(groups)
         grReView!!.adapter = adapter

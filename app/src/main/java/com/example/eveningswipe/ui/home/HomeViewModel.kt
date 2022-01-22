@@ -10,7 +10,7 @@ class HomeViewModel : ViewModel() {
 
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Hi " + HttpRequests.responseUserInfo.userName + "!"
+        //value = "Hi " + HttpRequests.responseUserInfo.userName + "!"
     }
     val text: LiveData<String> = _text
 
