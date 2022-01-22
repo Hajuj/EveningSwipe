@@ -73,7 +73,7 @@ class SlideshowFragment : Fragment() {
                     // waiting for initialization
                 }
                 groupName = HttpRequests.responseGroupInfo!!.name
-                 groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, 3))
+                 groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size))
             }
         }
 
