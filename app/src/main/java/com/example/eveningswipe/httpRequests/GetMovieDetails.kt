@@ -1,5 +1,6 @@
 package com.example.eveningswipe.httpRequests
 
+import com.example.eveningswipe.httpRequests.postRequests.PostGroupInfo
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 
@@ -12,8 +13,9 @@ data class GetMovieDetails(
     val title: String,
     val vote_average: Double,
     val vote_count: Int
-){
-    class Deserializer: ResponseDeserializable<Array<GetMovieDetails>> {
-        override fun deserialize(content: String): Array<GetMovieDetails>? = Gson().fromJson(content, Array<GetMovieDetails>::class.java)
+) {
+    //User Deserializer
+    class Deserializer : ResponseDeserializable<GetMovieDetails> {
+        override fun deserialize(content: String) = Gson().fromJson(content, GetMovieDetails::class.java)
     }
 }

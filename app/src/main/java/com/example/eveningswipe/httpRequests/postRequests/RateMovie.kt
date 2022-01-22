@@ -1,13 +1,11 @@
 package com.example.eveningswipe.httpRequests.postRequests
 
+import com.example.eveningswipe.httpRequests.TokenDto
 import com.google.gson.annotations.SerializedName
 
 data class RateMovie(
-    @SerializedName("token") val token: Token,
+    @SerializedName("token") val token: TokenDto,
     @SerializedName("rating") val rating: Rating
-)
-data class Token(
-    @SerializedName("token") val token : String
 )
 data class Rating (
 

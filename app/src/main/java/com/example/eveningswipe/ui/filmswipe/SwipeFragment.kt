@@ -1,6 +1,5 @@
 package com.example.eveningswipe.ui.filmswipe
 
-import android.R.attr
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -18,36 +17,27 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.widget.*
-import com.example.eveningswipe.httpRequests.FilterByGroupId
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.rating.RatingResultFragment
 import com.squareup.picasso.Picasso
 import android.widget.Toast
-import android.widget.LinearLayout
 
 import android.widget.RelativeLayout
 
 import android.widget.TextView
-import android.R.attr.button
-import android.opengl.Visibility
-import com.example.eveningswipe.GroupDataRecycle
 
 
-const val IMG_BASE_URL = "https://image.tmdb.org/t/p/original"
 const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
-//"http://localhost:8080/api/movie/details/" --> doesn't work because it's local
-//instead use: "http://YOUR_IP_ADRESS:8080/api/movie/details/"
 const val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
 const val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
-var MovieById = ArrayList<FilterByGroupId>()
-var i: Int = 0
+
+//TODO: erste 3 Movies geben bad request -- handle bad request?
+var i: Int = 4
 var currentId: Int = 0
 var posterTemp: Int = 0
 var hintAccept: Boolean = false
 
 class SwipeFragment : Fragment() {
-    private var layout: View? = null
-    private var imgURL: String? = null
     companion object {
         fun newInstance() = SwipeFragment()
     }
@@ -59,8 +49,13 @@ class SwipeFragment : Fragment() {
     private val channelId = "i.apps.notifications"
     private val description = "Result notification"
     private lateinit var swipeViewModel: SwipeViewModel
+    var movieTitle: String? = null
+    private var layout: View? = null
+    private var imgURL: String? = null
     private var pgsBar: ProgressBar? = null
     val token = HttpRequests.responseToken
+    var groupId = 431
+    var movieList: ArrayList<String>? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -71,8 +66,11 @@ class SwipeFragment : Fragment() {
         swipeViewModel =
             ViewModelProvider(this).get(SwipeViewModel::class.java)
         val root = inflater.inflate(R.layout.swipe_fragment, container, false)
-        val textView: TextView = root.findViewById(R.id.text_swipe)
+        val movieTitleView: TextView = root.findViewById(R.id.movie_title)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
+        val movieDateView: TextView = root.findViewById(R.id.movie_date)
+        val movieVoteView: TextView = root.findViewById(R.id.movie_vote)
+        val movieVoteCountView: TextView = root.findViewById(R.id.movie_vote_count)
         val imgView: ImageView = root.findViewById(R.id.img_swipe)
 
         //layout for swipe hint
@@ -94,22 +92,32 @@ class SwipeFragment : Fragment() {
         layout = root.findViewById(R.id.swipe_layout)
 
         swipeViewModel.movieTitle.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            movieTitleView.text = it
         })
         swipeViewModel.movieText.observe(viewLifecycleOwner, Observer {
             movieTextView.text = it
         })
-        nextMovie(imgView)
-        /*swipeViewModel.movieTitle.value = "Lorem ipsum dolor sit amet, "
-        swipeViewModel.movieText.value = "consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        swipeViewModel.movieDate.observe(viewLifecycleOwner, Observer {
+            movieDateView.text = it
+        })
+        swipeViewModel.movieVote.observe(viewLifecycleOwner, Observer {
+            movieVoteView.text = it.toString()
+        })
+        swipeViewModel.movieVoteCount.observe(viewLifecycleOwner, Observer {
+            movieVoteCountView.text = it
+        })
 
-        imgURL = IMG_BASE_URL + dummyPoster[posterTemp]
-        Picasso.get().load(imgURL).into(imgView)
-        if (posterTemp == dummyPoster.size){
-            posterTemp = 0
-        } else {
-            posterTemp+=1
-        }*/
+        //get movie list
+        if (token != null) {
+            HttpRequests.getFilterByGroupId(BASE_URL_ById, token, groupId)
+            while (HttpRequests.responseFilterByGroupId?.selection == null){
+                // waiting for initialization
+            }
+            movieList = HttpRequests.responseFilterByGroupId?.selection
+            println("list " + movieList)
+        }
+
+        nextMovie(imgView)
 
         touchListener(imgView)
         // Set cut corner background for API 23+
@@ -126,7 +134,7 @@ class SwipeFragment : Fragment() {
                 super.onSwipeLeft()
                 nextMovie(imgView)
 
-                Toast.makeText(activity, "no match", Toast.LENGTH_SHORT)
+                Toast.makeText(activity, "dislike", Toast.LENGTH_SHORT)
                     .show()
             }
 
@@ -135,7 +143,7 @@ class SwipeFragment : Fragment() {
                 rateMovie()
                 nextMovie(imgView)
 
-                Toast.makeText(activity, "This is a match", Toast.LENGTH_SHORT)
+                Toast.makeText(activity, "like", Toast.LENGTH_SHORT)
                     .show()
                 if(temp==5){
                     resultNotification()
@@ -148,53 +156,56 @@ class SwipeFragment : Fragment() {
     }
 
     fun nextMovie(imgView: ImageView) {
-        var movieTitle: String = ""
-        for (i in 0..dummy.size-1){
             if (token != null) {
-                HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, dummy[i])
-             /*   while(HttpRequests.responseMovieDetails == null || HttpRequests.responseMovieDetails!!.original_title == movieTitle) {
+                //TODO: error handling wenn response 404
+                HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, movieList!!.get(i))
+
+                while(HttpRequests.responseMovieDetails == null || HttpRequests.responseMovieDetails!!.original_title == movieTitle) {
                     // waiting for initialization
-                }*/
+                    pgsBar?.setVisibility(View.VISIBLE)
+                }
+                //ohne while kommt Fehlermeldung
+                // FATAL EXCEPTION: main
+                //    Process: com.example.eveningswipe, PID: 8511
+                //    java.lang.NullPointerException
 
-                //movieTitle = HttpRequests.responseMovieDetails!!.original_title
+                movieTitle = HttpRequests.responseMovieDetails!!.original_title
+
+                if (HttpRequests.responseMovieDetails!!.original_title != HttpRequests.responseMovieDetails!!.title){
+                    swipeViewModel.movieTitle.value = HttpRequests.responseMovieDetails!!.original_title + "\n(" +
+                            HttpRequests.responseMovieDetails!!.title + ")"
+                }else{
+                    swipeViewModel.movieTitle.value = HttpRequests.responseMovieDetails!!.original_title
+                }
+                swipeViewModel.movieText.value = HttpRequests.responseMovieDetails!!.overview
+                swipeViewModel.movieDate.value = HttpRequests.responseMovieDetails!!.release_date
+                swipeViewModel.movieVote.value = HttpRequests.responseMovieDetails!!.vote_average
+                swipeViewModel.movieVoteCount.value = "("+ HttpRequests.responseMovieDetails!!.vote_count.toString() +")"
+
+                //show image
+                imgURL = HttpRequests.responseMovieDetails!!.poster_path
+                pgsBar?.setVisibility(View.VISIBLE)
+                Picasso.get()
+                    .load(imgURL)
+                    .into(imgView, object: com.squareup.picasso.Callback {
+                        override fun onSuccess() {
+                            pgsBar?.setVisibility(View.GONE)
+
+                        }
+                        override fun onError(e: java.lang.Exception?) {
+                            Picasso.get().load("https://media.istockphoto.com/vectors/back-row-view-of-a-cinema-screen-vector-id96611482?k=20&m=96611482&s=612x612&w=0&h=clnNR2OsgNFjk83AYDTJoh8Q6cVaYD4LsYO0teqNTN4=").into(imgView)
+                        }
+                    })
             }
-        }
-
-/*        val url = BASE_URL_ById + "5"
-        // + element in list with group Id
-        MovieById = HttpRequests.getMovieById(url)
-
-        val handler = android.os.Handler()
-        pgsBar?.setVisibility(View.VISIBLE)
-        handler.postDelayed({
-            //swipeViewModel.movieTitle.value = MovieById.toString()
-            swipeViewModel.movieTitle.value = "Lorem ipsum dolor sit amet, "
-            swipeViewModel.movieText.value = "consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-            pgsBar?.setVisibility(View.GONE)
-            //imgURL = IMG_BASE_URL + dummyPoster[posterTemp]
-            Picasso.get().load(imgURL).into(imgView)
-            posterTemp+=1
-
-            if(posterTemp == 2){
-                posterTemp =0
-            }
-        }, 1000)
-
-        //movieTitle.value = "show movie "+"#"+i+" with poster and description"
-
-        //currentId = MovieById.id
-        //var imgURL = IMG_BASE_URL + MovieById.poster_path
-        //Picasso.get().load(imgURL).into(imgView)
-        i+=1*/
+        i+=1
     }
 
     fun rateMovie() {
-        val url = BASE_URL_RateMovie
-        //+ dummy[i] + "/503"
-        val movieId = "tt0165929"
+        val movieId = dummy[i]
         val filterId = 503
-        val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxMDQ2MTg5LCJleHAiOjE2NDExMzI1ODl9.Rdu8nYi_844wJLbsay0QGE3a19sbWUBMNCBbzdQ4cN0"
-        HttpRequests.postRateMovie(url, movieId, filterId, token)
+        if (token != null) {
+            HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
+        }
     }
 
     // https://www.geeksforgeeks.org/notifications-in-kotlin/
@@ -385,9 +396,4 @@ var dummy = listOf(
     "tt0280990",
     "tt0281019",
     "tt0281718"
-)
-
-var dummyPoster = listOf(
-    "/q9ASlBI2Fe5xinuMjO81UCjRoDz.jpg",
-    "/vvevzdYIrk2636maNW4qeWmlPFG.jpg"
 )

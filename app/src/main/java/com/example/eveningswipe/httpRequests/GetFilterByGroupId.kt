@@ -3,7 +3,10 @@ package com.example.eveningswipe.httpRequests
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 
-data class FilterByGroupId (
+class GetFilterByGroupId1 : ArrayList<GetFilterByGroupId2>()
+
+data class GetFilterByGroupId2 (
+
     val id: Int,
     val genre_1: String,
     val genre_2: String,
@@ -17,7 +20,7 @@ data class FilterByGroupId (
     val group_id: Int,
     val selection: ArrayList<String>
     ){
-        class Deserializer: ResponseDeserializable<Array<FilterByGroupId>> {
-            override fun deserialize(content: String): Array<FilterByGroupId>? = Gson().fromJson(content, Array<FilterByGroupId>::class.java)
+        class Deserializer: ResponseDeserializable<Array<GetFilterByGroupId2>> {
+            override fun deserialize(content: String): Array<GetFilterByGroupId2>? = Gson().fromJson(content, Array<GetFilterByGroupId2>::class.java)
         }
 }
