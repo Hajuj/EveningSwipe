@@ -13,6 +13,7 @@ object HttpRequests {
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
+    var responseFindUserInfo: FindUserDto? = null
     var responseMovieDetails: GetMovieDetails? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     var groupName: String? = null
@@ -109,6 +110,26 @@ object HttpRequests {
                     responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
                     groupName =  result.get().name
                 }
+    }
+
+    fun getAllUser(url: String, token: String, search: String) {
+        val findUser = FindUserInfoDto(
+            token = token,
+            search = search
+        )
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(findUser).toString())
+            .responseObject(FindUserDto.Deserializer())
+            { req, res, result ->
+
+                val (info, err) = result
+                info?.let { responseFindUserInfo = info }
+                err?. let{ println("ERROR !!")}
+                println("reg: "+ req + " res: " + res+ " result: " + result)
+                responseFindUserInfo = FindUserDto(result.get().email, result.get().name)
+                //groupName =  result.get().name
+            }
     }
 
 

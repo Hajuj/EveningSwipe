@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 class AddUserActivity : AppCompatActivity() {
-
+    private val BASE_URL_FindUser = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/users/find"
     private var addUser: TextView? = null
     private  var searchUser: EditText? = null
     private var addUserReView: RecyclerView? = null
@@ -22,6 +22,11 @@ class AddUserActivity : AppCompatActivity() {
         addUser = findViewById<View>(R.id.text_addUser) as TextView
         searchUser = findViewById<View>(R.id.searchUser) as EditText
         addUserReView = findViewById<RecyclerView>(R.id.addUserRecyclerView)
+
+        val token = HttpRequests.responseToken?.token
+        if (token != null) {
+            HttpRequests.getAllUser(BASE_URL_FindUser, token, searchUser!!.text.toString())
+        }
 
         // Set cut corner background for API 23+
         var layout = findViewById(R.id.add_user_layout) as View
