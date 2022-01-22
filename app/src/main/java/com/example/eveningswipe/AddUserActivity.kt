@@ -19,6 +19,7 @@ class AddUserActivity : AppCompatActivity() {
     private var addUserReView: RecyclerView? = null
     private var searchButton: ImageButton? = null
     private var searchedUser: Button? = null
+    private var searchFinished: Button? = null
     private var searchInput : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,8 @@ class AddUserActivity : AppCompatActivity() {
         searchedUser = findViewById<View>(R.id.searchedUser) as Button
         searchedUser!!.setOnClickListener(View.OnClickListener { addUserToGroup() })
         searchedUser!!.setVisibility(View.INVISIBLE);
+        searchFinished = findViewById<View>(R.id.searchFinished) as Button
+        searchFinished!!.setVisibility(View.INVISIBLE);
         addUserReView = findViewById<RecyclerView>(R.id.addUserRecyclerView)
 
         // Set cut corner background for API 23+
@@ -62,6 +65,7 @@ class AddUserActivity : AppCompatActivity() {
         }
     }
 
+
     private fun addUserToGroup(){
         val token = HttpRequests.responseToken!!.token
         val getID = GroupProfile()
@@ -71,6 +75,9 @@ class AddUserActivity : AppCompatActivity() {
         if (userToAdd != null) {
             if (groupId != null) {
                 HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
+                searchedUser!!.visibility = View.INVISIBLE;
+                searchFinished!!.text = "User added successfully"
+                searchFinished!!.visibility = View.VISIBLE;
             }
         }
 
