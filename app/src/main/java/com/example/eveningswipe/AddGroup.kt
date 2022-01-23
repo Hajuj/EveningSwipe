@@ -36,7 +36,7 @@ class AddGroup : AppCompatActivity() {
         val name = name.toString()
         val description = description.toString()
         println("Hallo !!!!!")
-        //HttpRequests.postCreatedGroup2(BASE_URL_createGroup, token, name, description)
+        HttpRequests.postCreatedGroup2(BASE_URL_createGroup, token, name, description)
     }
 
     /**

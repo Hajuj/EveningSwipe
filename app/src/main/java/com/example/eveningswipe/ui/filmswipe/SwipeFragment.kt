@@ -114,7 +114,6 @@ class SwipeFragment : Fragment() {
                 // waiting for initialization
             }
             movieList = HttpRequests.responseFilterByGroupId?.selection
-            println("list " + movieList)
         }
 
         nextMovie(imgView)
@@ -204,7 +203,7 @@ class SwipeFragment : Fragment() {
         val movieId = dummy[i]
         val filterId = 503
         if (token != null) {
-            HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
+           // HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
         }
     }
 

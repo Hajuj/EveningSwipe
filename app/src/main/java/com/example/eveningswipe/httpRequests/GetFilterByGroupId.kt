@@ -19,8 +19,8 @@ data class GetFilterByGroupId2 (
     val size: Int,
     val group_id: Int,
     val selection: ArrayList<String>
-    ){
-        class Deserializer: ResponseDeserializable<Array<GetFilterByGroupId2>> {
-            override fun deserialize(content: String): Array<GetFilterByGroupId2>? = Gson().fromJson(content, Array<GetFilterByGroupId2>::class.java)
-        }
+){
+    class Deserializer: ResponseDeserializable<Array<GetFilterByGroupId2>> {
+        override fun deserialize(content: String): Array<GetFilterByGroupId2>? = Gson().fromJson(content, Array<GetFilterByGroupId2>::class.java)
+    }
 }

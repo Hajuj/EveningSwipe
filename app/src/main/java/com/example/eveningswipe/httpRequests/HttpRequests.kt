@@ -1,7 +1,6 @@
 package com.example.eveningswipe.httpRequests
 
 import com.example.eveningswipe.httpRequests.postRequests.*
-import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
 
@@ -128,26 +127,14 @@ object HttpRequests {
             }
     }
 
-
-    /*fun getMovieById(url: String): ArrayList<FilterByGroupId> {
-        url.httpGet().responseObject(FilterByGroupId.Deserializer()) { request, response, result ->
-            val (item, err) = result
-
-            item?.forEach { element ->
-                ResponseFilterByGroupId.add(element)
-            }
-        }
-        return ResponseFilterByGroupId
-    }*/
-
-    /*fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
+    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),
             group = Group(name = nam, description = descript)
         )
         url.httpPost()
             .header("Content-Type" to "application/json")
-            .body(Gson().toJson(groupInfo).toString())
+            .body(Gson().toJson(createGroup).toString())
             .responseObject(PostGroupInfo.Deserializer())
             { req, res, result ->
 
@@ -157,9 +144,8 @@ object HttpRequests {
                 println("reg: " + req + " res: " + res + " result: " + result)
                 responseGroupInfo =
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
-                groupName = result.get().name
             }
-    }*/
+    }
 
 
     fun getFilterByGroupId(url: String, token: TokenDto, groupId: Int) {
@@ -175,8 +161,8 @@ object HttpRequests {
 
                 val (info, err) = result
                 //info?.let { responseFilterByGroupId = info }
-                err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
+                err?.let { println("ERROR in getFilterByGroupId !!" + err) }
+                println("no error : reg: " + req + " res: " + res + " result: " + result)
                 responseFilterByGroupId = GetFilterByGroupId2(
                     result.get()[0].id,
                     result.get()[0].genre_1 ,
@@ -191,20 +177,6 @@ object HttpRequests {
                     result.get()[0].group_id,
                     result.get()[0].selection)
             }
-            }
-
-        fun postCreatedGroup2(url: String, tok: String, nam: String, descript: String) {
-            val createGroup = CreateGroup2(
-                token = TokenCG(token = tok),
-                group = Group(name = nam, description = descript)
-            )
-
-            url.httpPost()
-                .header("Content-Type" to "application/json")
-                .body(Gson().toJson(createGroup).toString())
-                .response() { req, res, result ->
-
-                }
         }
 
         fun getMovieDetails(url: String, token: TokenDto, movieId: String) {
@@ -219,7 +191,7 @@ object HttpRequests {
                 { req, res, result ->
 
                     val (info, err) = result
-                    //info?.let { responseMovieDetails = info }
+                    info?.let { responseMovieDetails = info }
                     err?.let { println("ERROR !!") }
                     println("reg: " + req + " res: " + res + " result: " + result)
                     responseMovieDetails = GetMovieDetails(
