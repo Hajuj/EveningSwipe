@@ -15,6 +15,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.*
 import com.example.eveningswipe.httpRequests.HttpRequests
@@ -25,37 +26,42 @@ import android.widget.Toast
 import android.widget.RelativeLayout
 
 import android.widget.TextView
+import androidx.core.view.marginTop
+import android.widget.LinearLayout
+import androidx.databinding.DataBindingUtil.setContentView
 
 
 const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
 const val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
 const val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
+const val URL_GroupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
 
-//TODO: erste 3 Movies geben bad request -- handle bad request?
+//TODO: erste 4 Movies geben bad request -- handle bad request?
 var i: Int = 4
-var currentId: Int = 0
-var posterTemp: Int = 0
 var hintAccept: Boolean = false
 
-class SwipeFragment : Fragment() {
+class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
     companion object {
         fun newInstance() = SwipeFragment()
     }
     private var temp = 0
-
+    private lateinit var root: View
     lateinit var notificationManager: NotificationManager
     lateinit var notificationChannel: NotificationChannel
     lateinit var builder: Notification.Builder
     private val channelId = "i.apps.notifications"
     private val description = "Result notification"
-    private lateinit var swipeViewModel: SwipeViewModel
-    var movieTitle: String? = null
     private var layout: View? = null
     private var imgURL: String? = null
     private var pgsBar: ProgressBar? = null
+    private lateinit var swipeViewModel: SwipeViewModel
+    var movieTitle: String? = null
     val token = HttpRequests.responseToken
-    var groupId = 431
     var movieList: ArrayList<String>? = null
+    var groupIdList: List<Int>? = null
+    var currentGroupName: String? = null
+    var groupNameList: MutableList<String> = mutableListOf("select group")
+    lateinit var chooseLayout: RelativeLayout
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -63,9 +69,51 @@ class SwipeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        root = inflater.inflate(R.layout.swipe_fragment, container, false)
+        groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
+
+        for (i in 0..groupIdList!!.size-1){
+            HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
+            while(HttpRequests.responseGroupInfo?.name == null) {
+                // waiting for initialization
+            }
+
+            //kann entfernt werden, sobald es keine doppelten Gruppennamen mehr gibt
+            if (HttpRequests.responseGroupInfo!!.name == "androidx.appcompat.widget.AppCompatEditText{6bf6ff7 VFED..CL. ........ 15,90-1065,274 #7f0800d1 app:id/fullName}"){
+                // doppelter Gruppenname
+            }else{
+                while(HttpRequests.responseGroupInfo?.name == groupNameList[i]) {
+                    // waiting for initialization
+                }
+                groupNameList.add(HttpRequests.responseGroupInfo!!.name)
+            }
+
+        }
+        //first you need to select the group
+        chooseLayout = root.findViewById(R.id.choose_group)
+        chooseLayout.setVisibility(View.VISIBLE)
+
+        //use spinner for selection
+        val spinner: Spinner = root.findViewById(R.id.groups_spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        val adapter = ArrayAdapter(requireContext(),
+            android.R.layout.simple_spinner_item,
+            groupNameList
+        )
+        // Set layout to use when the list of choices appear
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Set Adapter to Spinner
+        spinner.setAdapter(adapter)
+
+        spinner.onItemSelectedListener = this
+
+        return root
+    }
+
+    fun startSwipe(currentgroupId: Int){
         swipeViewModel =
             ViewModelProvider(this).get(SwipeViewModel::class.java)
-        val root = inflater.inflate(R.layout.swipe_fragment, container, false)
+
         val movieTitleView: TextView = root.findViewById(R.id.movie_title)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
         val movieDateView: TextView = root.findViewById(R.id.movie_date)
@@ -109,7 +157,7 @@ class SwipeFragment : Fragment() {
 
         //get movie list
         if (token != null) {
-            HttpRequests.getFilterByGroupId(BASE_URL_ById, token, groupId)
+            HttpRequests.getFilterByGroupId(BASE_URL_ById, token, currentgroupId)
             while (HttpRequests.responseFilterByGroupId?.selection == null){
                 // waiting for initialization
             }
@@ -123,7 +171,7 @@ class SwipeFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
         }
-        return root
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -192,7 +240,7 @@ class SwipeFragment : Fragment() {
 
                         }
                         override fun onError(e: java.lang.Exception?) {
-                            Picasso.get().load("https://media.istockphoto.com/vectors/back-row-view-of-a-cinema-screen-vector-id96611482?k=20&m=96611482&s=612x612&w=0&h=clnNR2OsgNFjk83AYDTJoh8Q6cVaYD4LsYO0teqNTN4=").into(imgView)
+                            imgView.setImageResource(R.drawable.cinema)
                         }
                     })
             }
@@ -200,10 +248,11 @@ class SwipeFragment : Fragment() {
     }
 
     fun rateMovie() {
-        val movieId = dummy[i]
-        val filterId = 503
+        val movieId = movieList!!.get(i-1)
+        val filterId = HttpRequests.responseFilterByGroupId!!.id
+        println("rate??? " + filterId + movieId + HttpRequests.responseMovieDetails!!.original_title)
         if (token != null) {
-           // HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
+            HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
         }
     }
 
@@ -223,7 +272,7 @@ class SwipeFragment : Fragment() {
 
                 builder = Notification.Builder(requireContext(), channelId)
                     .setContentTitle("Voting is over!")
-                    .setContentText("<groupname>" + " voted for " + "<moviename")
+                    .setContentText( currentGroupName + " voted for " + "<moviename")
                     .setSmallIcon(R.drawable.movie_icon)
                     .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
                     .setContentIntent(pendingIntent)
@@ -231,168 +280,19 @@ class SwipeFragment : Fragment() {
             }
             this.notificationManager.notify(1234, builder.build())
         }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        if(groupNameList.get(pos) == groupNameList[0]){
+            //do nothing
+        }else{
+            startSwipe(groupIdList!!.get(pos-1))
+            currentGroupName = groupNameList.get(pos)
+            chooseLayout.setVisibility(View.GONE)
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
 }
-
-
-//dummy list
-var dummy = listOf(
-    "tt0120667",
-    "tt0120737",
-    "tt0120755",
-    "tt0120804",
-    "tt0120903",
-    "tt0121765",
-    "tt0121766",
-    "tt0132910",
-    "tt0133152",
-    "tt0134847",
-    "tt0141926",
-    "tt0145487",
-    "tt0146316",
-    "tt0151150",
-    "tt0151299",
-    "tt0159273",
-    "tt0159378",
-    "tt0160009",
-    "tt0160275",
-    "tt0164052",
-    "tt0164184",
-    "tt0165929",
-    "tt0167190",
-    "tt0167260",
-    "tt0167261",
-    "tt0168504",
-    "tt0170452",
-    "tt0171827",
-    "tt0172156",
-    "tt0172495",
-    "tt0173840",
-    "tt0177971",
-    "tt0179626",
-    "tt0179987",
-    "tt0181689",
-    "tt0181852",
-    "tt0183790",
-    "tt0184858",
-    "tt0184894",
-    "tt0186566",
-    "tt0187078",
-    "tt0187393",
-    "tt0187738",
-    "tt0190332",
-    "tt0190865",
-    "tt0192614",
-    "tt0194104",
-    "tt0194704",
-    "tt0199753",
-    "tt0199898",
-    "tt0202677",
-    "tt0205380",
-    "tt0206634",
-    "tt0207198",
-    "tt0207826",
-    "tt0208198",
-    "tt0208988",
-    "tt0209163",
-    "tt0210223",
-    "tt0211938",
-    "tt0212346",
-    "tt0212867",
-    "tt0212879",
-    "tt0213149",
-    "tt0214728",
-    "tt0215715",
-    "tt0215824",
-    "tt0216216",
-    "tt0216651",
-    "tt0218533",
-    "tt0218817",
-    "tt0220623",
-    "tt0227194",
-    "tt0227445",
-    "tt0228750",
-    "tt0230055",
-    "tt0232500",
-    "tt0233142",
-    "tt0233469",
-    "tt0233600",
-    "tt0234000",
-    "tt0234215",
-    "tt0236027",
-    "tt0236167",
-    "tt0237534",
-    "tt0238380",
-    "tt0238552",
-    "tt0238883",
-    "tt0239235",
-    "tt0239341",
-    "tt0239655",
-    "tt0240510",
-    "tt0242445",
-    "tt0242519",
-    "tt0242653",
-    "tt0243278",
-    "tt0243415",
-    "tt0243573",
-    "tt0243609",
-    "tt0243876",
-    "tt0244479",
-    "tt0244884",
-    "tt0245562",
-    "tt0245803",
-    "tt0245844",
-    "tt0246460",
-    "tt0246544",
-    "tt0247944",
-    "tt0248012",
-    "tt0248185",
-    "tt0249371",
-    "tt0250687",
-    "tt0251094",
-    "tt0251433",
-    "tt0251756",
-    "tt0252277",
-    "tt0252503",
-    "tt0253556",
-    "tt0265086",
-    "tt0265226",
-    "tt0266048",
-    "tt0266308",
-    "tt0266408",
-    "tt0266465",
-    "tt0266697",
-    "tt0266987",
-    "tt0267287",
-    "tt0269043",
-    "tt0269217",
-    "tt0271748",
-    "tt0271946",
-    "tt0272020",
-    "tt0272105",
-    "tt0273516",
-    "tt0273870",
-    "tt0274188",
-    "tt0274830",
-    "tt0275083",
-    "tt0275277",
-    "tt0275688",
-    "tt0275773",
-    "tt0276210",
-    "tt0276816",
-    "tt0277327",
-    "tt0277386",
-    "tt0277434",
-    "tt0277941",
-    "tt0278274",
-    "tt0278291",
-    "tt0278351",
-    "tt0279112",
-    "tt0280380",
-    "tt0280427",
-    "tt0280486",
-    "tt0280490",
-    "tt0280609",
-    "tt0280990",
-    "tt0281019",
-    "tt0281718"
-)
