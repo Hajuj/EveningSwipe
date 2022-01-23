@@ -47,7 +47,6 @@ class RegisterActivity : AppCompatActivity() {
             val name = editTextFullName?.getEditText()?.getText().toString().trim()
             val email = editTextEmail?.getEditText()?.getText().toString().trim()
             val password = editTextPassword?.getEditText()?.getText().toString().trim()
-            println("Hallo Register !!!!!")
             HttpRequests.postRegisterUser(url, name, email, password)
             startHomeActivity()
         //TODO: check if registration was successful

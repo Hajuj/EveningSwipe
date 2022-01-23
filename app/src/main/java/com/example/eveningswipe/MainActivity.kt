@@ -61,16 +61,9 @@ class MainActivity : AppCompatActivity() {
      */
     private fun login() {
         val token = HttpRequests.responseToken
-        //val token = TokenDto("eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5IiwiaWF0IjoxNjQxODA3MTIwLCJleHAiOjE2NDE4OTM1MjB9.qoaDmmsfnOg71H8IWikp3yYg6gGnWpwDrYaXbM5XN2g")
-
         if (token != null) {
             HttpRequests.getUserInformation(BASE_URL_User, token)
         }
-
-        /*if (token != null) {
-            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431, "")
-        }*/
-
         //if user can login:
         startHomeActivity()
     }

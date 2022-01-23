@@ -54,6 +54,9 @@ class AddUserActivity : AppCompatActivity() {
         addUserReView!!.adapter = adapter
     }
 
+    /**
+     * method to search for a user
+     */
     private fun searchUser(){
         searchedUser!!.setVisibility(View.VISIBLE);
         searchInput = searchUser!!.text.toString()
@@ -65,7 +68,9 @@ class AddUserActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * method to add a user to a group
+     */
     private fun addUserToGroup(){
         val token = HttpRequests.responseToken!!.token
         val getID = GroupProfile()
