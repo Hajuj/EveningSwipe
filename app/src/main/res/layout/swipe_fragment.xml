@@ -109,7 +109,7 @@
             android:justificationMode="inter_word"/>
 
 
-        <!-- Hint Overlay -->
+        <!-- Hint Overlay
         <RelativeLayout
             android:id="@+id/hint_layout"
             android:layout_width="match_parent"
@@ -178,7 +178,7 @@
                 android:contentDescription="@string/right_hint" />
 
         </RelativeLayout>
-
+-->
         <!-- choose group -->
         <RelativeLayout
             android:id="@+id/choose_group"
