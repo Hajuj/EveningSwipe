@@ -1,5 +1,7 @@
 package com.example.eveningswipe.ui.filmswipe
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -123,7 +125,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
 
         //layout for swipe hint
         //https://www.spaceotechnologies.com/android-overlay-app-tutorial/
-        val hintLayout: RelativeLayout = root.findViewById(R.id.hint_layout)
+       /* val hintLayout: RelativeLayout = root.findViewById(R.id.hint_layout)
         val btnHint: Button = root.findViewById(R.id.got_it)
         if (!hintAccept){
             hintLayout.setVisibility(View.VISIBLE)
@@ -131,7 +133,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
                 hintLayout.setVisibility(View.GONE)
                 hintAccept = true
             })
-        }
+        }*/
 
         pgsBar = root.findViewById(R.id.pBar1)
 
@@ -244,6 +246,25 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
                         }
                     })
             }
+        if (!hintAccept){
+            val animator1 = ObjectAnimator.ofFloat(view, "translationX", 100f).apply {
+                duration = 750
+            }
+            val animator2 = ObjectAnimator.ofFloat(view, "translationX", -200f).apply {
+                duration = 1500
+            }
+            val animator3 = ObjectAnimator.ofFloat(view, "translationX", 0f).apply {
+                duration = 750
+            }
+
+            AnimatorSet().apply {
+                play(animator1).before(animator2)
+                play(animator3).after(animator2)
+                start()
+            }
+
+            hintAccept = true
+        }
         i+=1
     }
 
