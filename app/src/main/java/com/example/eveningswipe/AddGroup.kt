@@ -12,7 +12,6 @@ class AddGroup : AppCompatActivity() {
 
     private val BASE_URL_createGroup = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/group/create/"
     private var saveGroup: Button? = null
-    private var addUser: Button? = null
     private var name: EditText? = null
     private  var description: EditText? = null
 
@@ -24,8 +23,6 @@ class AddGroup : AppCompatActivity() {
         description = findViewById<View>(R.id.description) as EditText
         saveGroup = findViewById<View>(R.id.saveGroup) as Button
         saveGroup!!.setOnClickListener(View.OnClickListener { saveGroupToDatabase() })
-        addUser = findViewById<View>(R.id.addUser) as Button
-        addUser!!.setOnClickListener(View.OnClickListener { startAddUserActivity() })
     }
 
     /**

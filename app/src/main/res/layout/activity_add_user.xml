@@ -9,55 +9,43 @@
     android:background="@color/white"
     android:id="@+id/add_user_layout">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addUserRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
-
     <EditText
         android:id="@+id/searchUser"
-        android:layout_width="133dp"
-        android:layout_height="wrap_content"
+        android:layout_width="196dp"
+        android:layout_height="47dp"
         android:hint="Search User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_addUser"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <TextView
         android:id="@+id/text_addUser"
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
+        android:layout_width="264dp"
+        android:layout_height="79dp"
+        android:text="Please search for a user"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="User"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <ImageButton
         android:id="@+id/searchButton"
-        android:layout_width="78dp"
-        android:layout_height="39dp"
+        android:layout_width="72dp"
+        android:layout_height="44dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintHorizontal_bias="0.867"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14"
+        app:layout_constraintVertical_bias="0.394"
         app:srcCompat="@drawable/search_icon" />
 
     <Button
@@ -66,14 +54,14 @@
         android:layout_height="44dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="fitCenter"
+        android:text="add button"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294"
-        android:textColor="@color/white"
-        android:text="add button"/>
+        app:layout_constraintVertical_bias="0.732" />
 
     <Button
         android:id="@+id/searchFinished"
@@ -90,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.732" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

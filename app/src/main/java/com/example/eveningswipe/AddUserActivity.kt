@@ -16,7 +16,6 @@ class AddUserActivity : AppCompatActivity() {
     private val BASE_URL_AddUser = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/add"
     private var addUser: TextView? = null
     private  var searchUser: EditText? = null
-    private var addUserReView: RecyclerView? = null
     private var searchButton: ImageButton? = null
     private var searchedUser: Button? = null
     private var searchFinished: Button? = null
@@ -35,23 +34,12 @@ class AddUserActivity : AppCompatActivity() {
         searchedUser!!.setVisibility(View.INVISIBLE);
         searchFinished = findViewById<View>(R.id.searchFinished) as Button
         searchFinished!!.setVisibility(View.INVISIBLE);
-        addUserReView = findViewById<RecyclerView>(R.id.addUserRecyclerView)
 
         // Set cut corner background for API 23+
         var layout = findViewById(R.id.add_user_layout) as View
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
         }
-
-        //TODO: for testing, need to be replaced with groups of database
-        var userList= mutableListOf(
-            AddUserDataRecycle(HttpRequests.responseUserInfo.userName),
-            AddUserDataRecycle("alex"),
-            AddUserDataRecycle("tom")
-        )
-
-        val adapter = AddUserAdapter(userList)
-        addUserReView!!.adapter = adapter
     }
 
     /**

@@ -38,14 +38,4 @@
         android:ems="20"
         android:text="Save" />
 
-    <Button
-        android:id="@+id/addUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/saveGroup"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/buttons"
-        android:ems="20"
-        android:text="Add User" />
 </RelativeLayout>
