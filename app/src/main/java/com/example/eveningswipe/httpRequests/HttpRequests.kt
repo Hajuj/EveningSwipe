@@ -3,6 +3,7 @@ package com.example.eveningswipe.httpRequests
 import com.example.eveningswipe.httpRequests.postRequests.*
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import java.util.logging.Level.parse
 
 object HttpRequests {
     var responseFilterByGroupId: GetFilterByGroupId2? = null
@@ -14,6 +15,7 @@ object HttpRequests {
     var responseMovieDetails: GetMovieDetails? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     var groupName: String? = null
+    var wrongLoginData: String? = ""
 
     fun postRegisterUser(url: String, nam: String, email: String, password: String) {
         val registerUser = RegisterUser(
@@ -43,6 +45,9 @@ object HttpRequests {
             { req, res, result ->
                 val (info, err) = result
                 info?.let { responseToken = info }
+                err?.let {
+                    wrongLoginData = "Your login data are wrong. Please try again!"
+                    println("wrongLoginDataHTTP "+wrongLoginData) }
                 println("reg: " + req + " res: " + res + " result: " + result)
                 println(responseToken?.token)
 

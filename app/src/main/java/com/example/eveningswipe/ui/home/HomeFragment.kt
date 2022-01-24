@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
 
         // Set cut corner background for API 23+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            root.background = context?.getDrawable(R.drawable.cinema)
+            root.background = context?.getDrawable(R.drawable.cinema_background)
         }
         return root
 

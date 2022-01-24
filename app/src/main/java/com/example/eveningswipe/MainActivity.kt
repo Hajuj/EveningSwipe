@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity() {
      * method to handle login
      */
     private fun allowLogin() {
-        val email = email?.getEditText()?.getText().toString().trim()
-        val password = password?.getEditText()?.getText().toString().trim()
+        val email = email?.editText?.text.toString().trim()
+        val password = password?.editText?.text.toString().trim()
 
         HttpRequests.postLoginUser(BASE_URL_Login, email, password)
-
+        println("wrongLoginData "+HttpRequests.wrongLoginData)
         while(HttpRequests.responseToken == null) {
             // waiting for initialization
         }
