@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.google.android.material.textfield.TextInputLayout
 
 class RegisterActivity : AppCompatActivity() {
-    private val BASE_URL_Register = "http://192.168.178.30:8080/register"
+    private val BASE_URL_Register = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/register"
     private var register: Button? = null
     private var login:TextView? = null
     private var editTextFullName: TextInputLayout? = null
@@ -43,13 +44,20 @@ class RegisterActivity : AppCompatActivity() {
      * method to handle registration of a user
      */
     private fun registerUser() {
-            val url = BASE_URL_Register
-            val name = editTextFullName?.getEditText()?.getText().toString().trim()
-            val email = editTextEmail?.getEditText()?.getText().toString().trim()
-            val password = editTextPassword?.getEditText()?.getText().toString().trim()
+        val url = BASE_URL_Register
+        val name = editTextFullName?.getEditText()?.getText().toString().trim()
+        val email = editTextEmail?.getEditText()?.getText().toString().trim()
+        val password = editTextPassword?.getEditText()?.getText().toString().trim()
+        if(name.isNullOrBlank()){
+            Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show()
+        } else if (email.isNullOrBlank()) {
+            Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show()
+        } else if (password.isNullOrBlank()) {
+            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
+        } else {
             HttpRequests.postRegisterUser(url, name, email, password)
             startHomeActivity()
-        //TODO: check if registration was successful
+        }
     }
 
     /**

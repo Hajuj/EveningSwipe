@@ -17,19 +17,27 @@ object HttpRequests {
     var groupName: String? = null
     var wrongLoginData: String? = ""
 
-    fun postRegisterUser(url: String, nam: String, email: String, password: String) {
+    fun postRegisterUser(url: String, nam: String, email: String, password: String): Boolean? {
         val registerUser = RegisterUser(
             name = nam,
             email = email,
             password = password
         )
+        var success: Boolean? = null
 
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(registerUser).toString())
             .response() { req, res, result ->
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+                println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
 
-            }
+            }.join()
+        return success
     }
 
     fun postLoginUser(url: String, email: String, password: String): Boolean? {
