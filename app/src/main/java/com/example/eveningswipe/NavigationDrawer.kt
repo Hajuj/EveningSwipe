@@ -46,9 +46,9 @@ class NavigationDrawer : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { dest ->
             when(dest.itemId) {
                 R.id.nav_logout -> logout()
-                R.id.nav_home -> {
+               /* R.id.nav_home -> {
                    //TODO: change color of appbar
-                }
+                }*/
                 else -> {
                     NavigationUI.onNavDestinationSelected(dest, navController)
                     drawerLayout.closeDrawers()
