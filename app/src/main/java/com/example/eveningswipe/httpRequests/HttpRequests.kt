@@ -32,11 +32,12 @@ object HttpRequests {
             }
     }
 
-    fun postLoginUser(url: String, email: String, password: String) {
+    fun postLoginUser(url: String, email: String, password: String): Boolean? {
         val loginUser = LoginUser(
             email = email,
             password = password
         )
+        var success: Boolean? = null
 
         url.httpPost()
             .header("Content-Type" to "application/json")
@@ -48,11 +49,16 @@ object HttpRequests {
                 err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
                     println("wrongLoginDataHTTP "+wrongLoginData) }
-                println("reg: " + req + " res: " + res + " result: " + result)
+                println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
                 println(responseToken?.token)
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
 
-            }
-        return
+        return success
     }
 
     /**
@@ -109,7 +115,7 @@ object HttpRequests {
                     println("reg: "+ req + " res: " + res+ " result: " + result)
                     responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
                     groupName =  result.get().name
-                }
+                }.join()
     }
 
     fun getAllUser(url: String, token: String, search: String) {
@@ -181,7 +187,7 @@ object HttpRequests {
                     result.get()[0].size,
                     result.get()[0].group_id,
                     result.get()[0].selection)
-            }
+            }.join()
         }
 
         fun getMovieDetails(url: String, token: TokenDto, movieId: String) {
