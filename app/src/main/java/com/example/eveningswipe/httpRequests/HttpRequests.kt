@@ -46,11 +46,11 @@ object HttpRequests {
             { req, res, result ->
                 val (info, err) = result
                 info?.let { responseToken = info }
-                err?.let {
+                /*err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
                     println("wrongLoginDataHTTP "+wrongLoginData) }
                 println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
-                println(responseToken?.token)
+                println(responseToken?.token)*/
                 if(res.statusCode == 400){
                     success = false
                 }else{
@@ -138,16 +138,23 @@ object HttpRequests {
             }
     }
 
-    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String) {
+    fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String): Boolean?{
         val createGroup = CreateGroup2(
             token = TokenCG(token = tok),
             group = Group(name = nam, description = descript)
         )
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(createGroup).toString())
             .responseObject(PostGroupInfo.Deserializer())
             { req, res, result ->
+
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
 
                 val (info, err) = result
                 info?.let { responseGroupInfo = info }
@@ -155,7 +162,8 @@ object HttpRequests {
                 println("reg: " + req + " res: " + res + " result: " + result)
                 responseGroupInfo =
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
-            }
+            }.join()
+        return success
     }
 
 

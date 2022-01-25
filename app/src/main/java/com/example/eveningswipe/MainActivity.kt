@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun login() {
         val token = HttpRequests.responseToken
+
         if (token != null) {
             HttpRequests.getUserInformation(BASE_URL_User, token)
         }

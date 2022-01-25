@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 class AddGroup : AppCompatActivity() {
@@ -24,19 +25,31 @@ class AddGroup : AppCompatActivity() {
 
         name = findViewById<View>(R.id.fullName) as EditText
         saveGroup = findViewById<View>(R.id.saveGroup) as Button
-        saveGroup!!.setOnClickListener(View.OnClickListener { saveGroupToDatabase() })
+        saveGroup!!.setOnClickListener(View.OnClickListener { checkUserInput() })
         textDescription = findViewById<View>(R.id.textDescription) as TextView
         addGroupFinished = findViewById<View>(R.id.addGroupFinished) as TextView
         addGroupFinished!!.visibility = View.INVISIBLE;
     }
 
     /**
+     * method to check user input
+     */
+    private fun checkUserInput() {
+        newGroupName = name!!.text.toString()
+            if(newGroupName.isNullOrBlank()){
+                Toast.makeText(this, "Please enter a group name", Toast.LENGTH_SHORT)
+                        .show()
+            } else {
+                saveGroupToDatabase()
+            }
+
+    }
+
+    /**
      * method to save a group in the database
      */
-    private fun saveGroupToDatabase() {
+    private fun saveGroupToDatabase(){
         val token = HttpRequests.responseToken!!.token
-        newGroupName = name!!.text.toString()
-        println("Hallo !!!!! name " + newGroupName)
         HttpRequests.postCreatedGroup2(BASE_URL_createGroup, token, newGroupName!!, "")
         saveGroup!!.visibility = View.INVISIBLE;
         name!!.visibility = View.INVISIBLE;
