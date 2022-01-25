@@ -7,12 +7,12 @@ import java.util.logging.Level.parse
 
 object HttpRequests {
     var responseFilterByGroupId: GetFilterByGroupId2? = null
-    private var ResponseFilterRating = ArrayList<FilterRating>()
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
     var responseFindUserInfo: FindUserDto? = null
     var responseMovieDetails: GetMovieDetails? = null
+    var responseFilterRating: Array<GetFilterRating2>? = null
     private var ResponseCreateGroup = ArrayList<CreateGroup>()
     var groupName: String? = null
     var wrongLoginData: String? = ""
@@ -190,11 +190,12 @@ object HttpRequests {
             }
         }
 
-        fun getMovieDetails(url: String, token: TokenDto, movieId: String) {
+        fun getMovieDetails(url: String, token: TokenDto, movieId: String): Boolean? {
             val movieInfo = PostMovieDetailsById(
                 token = token,
                 movieId = movieId
             )
+            var success: Boolean? = null
             url.httpPost()
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(movieInfo).toString())
@@ -205,7 +206,7 @@ object HttpRequests {
                     info?.let { responseMovieDetails = info }
                     err?.let { println("ERROR !!") }
                     println("reg: " + req + " res: " + res + " result: " + result)
-                    responseMovieDetails = GetMovieDetails(
+                    /*responseMovieDetails = GetMovieDetails(
                         result.get().original_title,
                         result.get().overview,
                         result.get().popularity,
@@ -214,8 +215,14 @@ object HttpRequests {
                         result.get().title,
                         result.get().vote_average,
                         result.get().vote_count
-                    )
-                }
+                    )*/
+                    if(res.statusCode == 400){
+                        success = false
+                    }else{
+                        success = true
+                    }
+                }.join()
+            return success
         }
 
         fun postRateMovie(url: String, movId: String, filId: Int, tok: TokenDto) {
@@ -233,4 +240,32 @@ object HttpRequests {
                     println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
                 }
         }
+
+    fun getFilterRating(url: String, token: TokenDto, filterId: Int): Boolean? {
+        val filterRating = PostFilterRating(
+            token = token,
+            filterId = filterId
+        )
+        var success: Boolean? = null
+
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(filterRating).toString())
+            .responseObject(GetFilterRating2.Deserializer())
+            { req, res, result ->
+
+                val (info, err) = result
+                info?.let { responseFilterRating = info }
+                err?.let { println("ERROR !!"+ err) }
+                println("reg: " + req + " res: " + res + " result: " + result)
+
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
+
+        return success
     }
+}

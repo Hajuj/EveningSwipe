@@ -31,6 +31,7 @@ import android.widget.TextView
 import androidx.core.view.marginTop
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil.setContentView
+import com.example.eveningswipe.FinishedSwipeActivity
 
 
 const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
@@ -108,6 +109,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
         spinner.setAdapter(adapter)
 
         spinner.onItemSelectedListener = this
+        chooseLayout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
 
         return root
     }
@@ -191,11 +193,16 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener{
                 super.onSwipeRight()
                 rateMovie()
                 nextMovie(imgView)
-
+                println("temp: " + temp)
                 Toast.makeText(activity, "like", Toast.LENGTH_SHORT)
                     .show()
-                if(temp==5){
-                    resultNotification()
+                if(temp==1){
+                    println("ende!!! " + temp)
+                    //resultNotification()
+
+                    //start Finished Swipe Activity
+                    val intent = Intent(context, FinishedSwipeActivity::class.java)
+                    startActivity(intent)
                     temp = 0
                 }else{
                     temp+=1

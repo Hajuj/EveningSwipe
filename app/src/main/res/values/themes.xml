@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/Canteloupe</item>
         <item name="colorPrimaryVariant">@color/Pumpkin</item>
-        <item name="colorOnPrimary">@color/Cotton</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/Canteloupe</item>
         <item name="colorSecondaryVariant">@color/Pumpkin</item>

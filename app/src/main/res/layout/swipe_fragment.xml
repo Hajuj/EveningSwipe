@@ -184,7 +184,7 @@
             android:id="@+id/choose_group"
             android:layout_width="match_parent"
             android:layout_height="800dp"
-            android:background="@color/Cotton">
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/choose_ic"

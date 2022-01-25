@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FinishedSwipeActivity"
-    android:background="@color/Canteloupe"
-    android:id="@+id/finished_swipe_layout">
+    android:background="@color/Canteloupe">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/finished_swipe_layout"
+        android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/finished"
@@ -25,11 +31,12 @@
         android:id="@+id/finishedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Du hast alle ausgewählten Filem, welche einen Filtern entsprechen, gesehen. Sieh dir nun die Favortiten deiner Gruppe an."
+        android:text="Du hast alle verfügbaren Filme geswiped. \nSieh dir an, welcher Film gewonnen hat!"
         android:textSize="30dp"
         android:layout_below="@+id/finished"
         android:textAlignment="center"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/Hot_Chocolate"
@@ -46,6 +53,6 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttons"
         app:backgroundTint="@null"/>
-
+    </RelativeLayout>
 
 </RelativeLayout>
