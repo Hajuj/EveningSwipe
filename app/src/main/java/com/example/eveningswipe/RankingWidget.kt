@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.net.Uri
 import android.widget.RemoteViews
+import com.example.eveningswipe.httpRequests.HttpRequests
 
 /**
  * Implementation of App Widget functionality.
@@ -35,9 +36,15 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val widgetText = context.getString(R.string.appwidget_text)
+    val groupName = "gruppenname"
+    val movie1 = "test1"
+    val movie2 = "test1"
+    val movie3 = "test1"
+
+    val widgetText = "Last " + groupName + " voting: \n\n1. " + movie1 +
+            "\n2. " + movie2 + "\n3. " + movie3
     // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.ranking_widget)
+    val views = RemoteViews(context.packageName , R.layout.ranking_widget)
     views.setTextViewText(R.id.appwidget_text, widgetText)
 
     // Instruct the widget manager to update the widget

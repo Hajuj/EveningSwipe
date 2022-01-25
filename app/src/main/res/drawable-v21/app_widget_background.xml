@@ -7,5 +7,9 @@ appWidgetRadius attribute value
     android:shape="rectangle">
 
     <corners android:radius="10dp" />
-    <solid android:color="@color/Hot_Chocolate" />
+    <gradient
+        android:type="linear"
+        android:angle="90"
+        android:startColor="@color/Pumpkin"
+        android:endColor="#E59891" />
 </shape>

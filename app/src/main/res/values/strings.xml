@@ -12,12 +12,14 @@
     <string name="menu_profile">Profil</string>
     <string name="menu_groups">Gruppen</string>
     <string name="menu_swipe">Swipe</string>
-    <string name="appwidget_text">Last group name voting \n1. movie name \n2. movie name \n3. movie name</string>
+    <string name="appwidget_text">Last group voting \n\n1. movie name \n2. movie name \n3. movie name</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">See your last group voting</string>
     <string name="vote_of_movie">vote of movie</string>
     <string name="movie_poster">Movie Poster</string>
     <string name="description">Description</string>
+
+    <!-- swipe hint -->
     <string name="hint_background">hint background</string>
     <string name="got_it">Got it!</string>
     <string name="like">like</string>
