@@ -115,7 +115,7 @@ object HttpRequests {
                     println("reg: "+ req + " res: " + res+ " result: " + result)
                     responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
                     groupName =  result.get().name
-                }.join()
+                }
     }
 
     fun getAllUser(url: String, token: String, search: String) {
@@ -187,7 +187,7 @@ object HttpRequests {
                     result.get()[0].size,
                     result.get()[0].group_id,
                     result.get()[0].selection)
-            }.join()
+            }
         }
 
         fun getMovieDetails(url: String, token: TokenDto, movieId: String) {
