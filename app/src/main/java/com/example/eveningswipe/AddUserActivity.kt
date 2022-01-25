@@ -4,10 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.httpRequests.HttpRequests
 
@@ -31,9 +28,9 @@ class AddUserActivity : AppCompatActivity() {
         searchButton!!.setOnClickListener(View.OnClickListener { searchUser() })
         searchedUser = findViewById<View>(R.id.searchedUser) as Button
         searchedUser!!.setOnClickListener(View.OnClickListener { addUserToGroup() })
-        searchedUser!!.setVisibility(View.INVISIBLE);
+        searchedUser!!.visibility = View.INVISIBLE;
         searchFinished = findViewById<View>(R.id.searchFinished) as Button
-        searchFinished!!.setVisibility(View.INVISIBLE);
+        searchFinished!!.visibility = View.INVISIBLE;
 
         // Set cut corner background for API 23+
         var layout = findViewById(R.id.add_user_layout) as View
@@ -43,16 +40,28 @@ class AddUserActivity : AppCompatActivity() {
     }
 
     /**
-     * method to search for a user
+     * method to search for a user and check user input
      */
     private fun searchUser(){
-        searchedUser!!.setVisibility(View.VISIBLE);
         searchInput = searchUser!!.text.toString()
-        searchedUser!!.text = searchInput + " ADD"
-        println("search string "+ searchInput)
-        val token = HttpRequests.responseToken?.token
-        if (token != null) {
-            HttpRequests.getAllUser(BASE_URL_FindUser, token, searchInput!!)
+        if(searchInput.isNullOrBlank()){
+            Toast.makeText(this, "Please enter an user name", Toast.LENGTH_SHORT)
+                    .show()
+        } else {
+            searchedUser!!.visibility = View.VISIBLE;
+            searchFinished!!.visibility = View.INVISIBLE;
+            val token = HttpRequests.responseToken?.token
+            if (token != null) {
+                val response = HttpRequests.getAllUser(BASE_URL_FindUser, token, searchInput!!)
+                if(!response!!){
+                    Toast.makeText(this, "Wrong username or user does not exist", Toast.LENGTH_SHORT)
+                            .show()
+                    searchedUser!!.visibility = View.INVISIBLE;
+                }else{
+                    searchedUser!!.visibility = View.VISIBLE;
+                    searchedUser!!.text = searchInput + " ADD"
+                }
+            }
         }
     }
 
@@ -61,9 +70,8 @@ class AddUserActivity : AppCompatActivity() {
      */
     private fun addUserToGroup(){
         val token = HttpRequests.responseToken!!.token
-        val getID = GroupProfile()
         val groupId = GroupProfile.getValue()?.toInt()
-        println("groupIDforUserAdding "+ GroupProfile.getValue()+ " getID " + getID)
+        println("groupIDforUserAdding "+ GroupProfile.getValue())
         val userToAdd = searchInput
         if (userToAdd != null) {
             if (groupId != null) {

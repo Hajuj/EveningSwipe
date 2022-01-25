@@ -46,11 +46,11 @@ object HttpRequests {
             { req, res, result ->
                 val (info, err) = result
                 info?.let { responseToken = info }
-                /*err?.let {
+                err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
                     println("wrongLoginDataHTTP "+wrongLoginData) }
                 println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
-                println(responseToken?.token)*/
+                println(responseToken?.token)
                 if(res.statusCode == 400){
                     success = false
                 }else{
@@ -78,7 +78,7 @@ object HttpRequests {
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(addUserToGroup).toString())
             .response() { req, res, result ->
-
+                println("reg: " + req + " res: " + res + " result: " + result)
             }
     }
 
@@ -118,24 +118,30 @@ object HttpRequests {
                 }
     }
 
-    fun getAllUser(url: String, token: String, search: String) {
+    fun getAllUser(url: String, token: String, search: String): Boolean? {
         val findUser = FindUserInfoDto(
             token = token,
             search = search
         )
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(findUser).toString())
             .responseObject(FindUserDto.Deserializer())
             { req, res, result ->
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
 
                 val (info, err) = result
                 info?.let { responseFindUserInfo = info }
                 err?. let{ println("ERROR !!")}
                 println("reg: "+ req + " res: " + res+ " result: " + result)
                 responseFindUserInfo = FindUserDto(result.get().email, result.get().name)
-                //groupName =  result.get().name
-            }
+            }.join()
+        return success
     }
 
     fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String): Boolean?{
