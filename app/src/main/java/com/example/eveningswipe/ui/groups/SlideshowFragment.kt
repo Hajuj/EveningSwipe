@@ -62,26 +62,17 @@ class SlideshowFragment : Fragment() {
         val groupListCounter = HttpRequests.responseUserInfo.groupId
         //remove duplicates
         val groupList = groupListCounter.distinct()
-        var groupName: String = ""
+        val groupName: String = ""
         val memberNumber: Int = 0
         val groupId: Int = 0
         val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber, groupId))
         for (i in 0..groupList.size-1) {
             if (token != null) {
-                HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupList[i])
+                val response = HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupList[i])
 
-                while(HttpRequests.responseGroupInfo == null) {
-                    // waiting for initialization
-                }
-
-                //kann entfernt werden, sobald es keine doppelten Gruppennamen mehr gibt
-                if (HttpRequests.responseGroupInfo!!.name == "androidx.appcompat.widget.AppCompatEditText{6bf6ff7 VFED..CL. ........ 15,90-1065,274 #7f0800d1 app:id/fullName}"){
-                    // doppelter Gruppenname
-                }else{
-                    while(HttpRequests.responseGroupInfo!!.name == groupName) {
-                        // waiting for initialization
-                    }
-                    groupName = HttpRequests.responseGroupInfo!!.name
+                if (!response!!){
+                    // error
+                } else {
                     groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size,
                         groupList[i]
                     ))

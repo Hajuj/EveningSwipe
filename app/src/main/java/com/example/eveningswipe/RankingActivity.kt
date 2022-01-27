@@ -3,18 +3,19 @@ package com.example.eveningswipe
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.example.eveningswipe.httpRequests.HttpRequests
-import org.w3c.dom.Text
+import com.example.eveningswipe.ui.filmswipe.SwipeFragment
+
+
+val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
+val URL_FILTER_RATING = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
 
 class RankingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
 
-        val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
         val movieView1 = findViewById<View>(R.id.movie1) as TextView
         val movieView2 = findViewById<View>(R.id.movie2) as TextView
         val movieView3 = findViewById<View>(R.id.movie3) as TextView
@@ -26,12 +27,12 @@ class RankingActivity : AppCompatActivity() {
         val movieView9 = findViewById<View>(R.id.movie9) as TextView
         val movieView10 = findViewById<View>(R.id.movie10) as TextView
 
-        //TODO: wrong groupname
+        //TODO: wrong group name
+        val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
         val groupName = HttpRequests.responseGroupInfo!!.name
-        val textGroupName = groupNameView.text.toString() + groupName
+        val textGroupName = groupName + "'s result:"
         groupNameView.text = textGroupName
 
-        val URL_FILTER_RATING = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
         val token = HttpRequests.responseToken
         val filterId = HttpRequests.responseFilterByGroupId!!.id
         var response: Boolean? = null
@@ -44,13 +45,12 @@ class RankingActivity : AppCompatActivity() {
         if (!response!!) {
             //wait
         } else {
-            for (i in 0..19) {
+            for (i in 0..20) {
                 HttpRequests.responseFilterRating?.get(i)?.movie_id?.let { movieIdList.add(i, it) }
             }
         }
 
         // get movie name list
-        val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
         var response2: Boolean? = null
         var temp: Int = 0
         var i: Int = 0

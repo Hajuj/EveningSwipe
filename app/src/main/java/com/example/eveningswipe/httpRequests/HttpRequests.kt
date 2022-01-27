@@ -105,12 +105,13 @@ object HttpRequests {
             }
     }
 
-    fun getGroupInformation(url: String, token: TokenDto, groupId: Int) {
+    fun getGroupInformation(url: String, token: TokenDto, groupId: Int): Boolean? {
         val groupInfo = GroupInfoDto(
                 //name = name,
                 token = token,
                 groupid = groupId
         )
+        var success: Boolean? = null
         url.httpPost()
                 .header("Content-Type" to "application/json")
                 .body(Gson().toJson(groupInfo).toString())
@@ -123,7 +124,13 @@ object HttpRequests {
                     println("reg: "+ req + " res: " + res+ " result: " + result)
                     responseGroupInfo = PostGroupInfo(result.get().filter, result.get().member , result.get().name)
                     groupName =  result.get().name
-                }
+                    if(res.statusCode == 400){
+                        success = false
+                    }else{
+                        success = true
+                    }
+                }.join()
+        return success
     }
 
     fun getAllUser(url: String, token: String, search: String): Boolean? {
@@ -181,11 +188,12 @@ object HttpRequests {
     }
 
 
-    fun getFilterByGroupId(url: String, token: TokenDto, groupId: Int) {
+    fun getFilterByGroupId(url: String, token: TokenDto, groupId: Int): Boolean? {
         val movieInfo = PostFilterByGroupId(
             token = token,
             groupId = groupId
         )
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(movieInfo).toString())
@@ -209,7 +217,13 @@ object HttpRequests {
                     result.get()[0].size,
                     result.get()[0].group_id,
                     result.get()[0].selection)
-            }
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
+        return success
         }
 
         fun getMovieDetails(url: String, token: TokenDto, movieId: String): Boolean? {
@@ -228,16 +242,6 @@ object HttpRequests {
                     info?.let { responseMovieDetails = info }
                     err?.let { println("ERROR !!") }
                     println("reg: " + req + " res: " + res + " result: " + result)
-                    /*responseMovieDetails = GetMovieDetails(
-                        result.get().original_title,
-                        result.get().overview,
-                        result.get().popularity,
-                        result.get().poster_path,
-                        result.get().release_date,
-                        result.get().title,
-                        result.get().vote_average,
-                        result.get().vote_count
-                    )*/
                     if(res.statusCode == 400){
                         success = false
                     }else{
