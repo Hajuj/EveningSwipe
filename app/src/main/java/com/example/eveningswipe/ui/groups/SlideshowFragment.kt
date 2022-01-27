@@ -42,12 +42,6 @@ class SlideshowFragment : Fragment() {
         })
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
-        /*if (token != null) {
-            HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, 431)
-        }*/
-        /*while(!HttpRequests.checkifInitialized()) {
-            // waiting for initialization
-        }*/
         showGroups()
 
         newGroup = root.findViewById(R.id.newGroup) as Button

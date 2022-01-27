@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 
 data class GroupInfoDto(
 
-        //val name: String,
         @SerializedName("token") val token: TokenDto,
         @SerializedName("groupId") val groupid: Int
 ) {

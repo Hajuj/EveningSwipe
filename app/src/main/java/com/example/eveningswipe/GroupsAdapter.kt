@@ -33,7 +33,6 @@ class GroupsAdapter(
                 val intent = Intent(context, GroupProfile::class.java)
                 intent.putExtra("groupName", groupName.text)
                 intent.putExtra("groupID", groupID.text)
-                println("groupIDfromAdapter "+ groups[position].groupId.toString())
                 context.startActivity(intent)
             }
             memberNumber.text = groups[position].memberNumber.toString()
