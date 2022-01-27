@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/Canteloupe">
+    android:background="?attr/bgc">
 
     <LinearLayout
         android:id="@+id/header_layout"
@@ -24,7 +24,7 @@
             android:textSize="38dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="40dp"
-            android:textColor="@color/Hot_Chocolate" />
+            android:textColor="?attr/tc" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fullName"
@@ -108,7 +108,8 @@
                 android:layout_marginTop="40dp"
                 android:inputType="text"
                 android:text="Already have an account?"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:textColor="?attr/tc"/>
         </RelativeLayout>
 
     </LinearLayout>

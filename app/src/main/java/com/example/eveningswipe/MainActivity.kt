@@ -1,13 +1,17 @@
 package com.example.eveningswipe
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.httpRequests.TokenDto
 import com.google.android.material.textfield.TextInputLayout
@@ -26,6 +30,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //for dark mode
+        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.Theme_DarkMode)
+        } else {
+            setTheme(R.style.Theme_EveningSwipe)
+        }
+
         register = findViewById<View>(R.id.register) as Button
         register!!.setOnClickListener(View.OnClickListener { startRegisterActivity() })
         email = findViewById<View>(R.id.email) as TextInputLayout
@@ -40,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
         }
     }
-
     /**
      * method to handle login
      */

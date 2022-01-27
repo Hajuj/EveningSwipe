@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Canteloupe"
+    android:background="?attr/bgc"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:background="?attr/bgc"
         android:orientation="vertical">
 
         <ImageView
@@ -31,7 +32,7 @@
             android:textSize="44dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
-            android:textColor="@color/Hot_Chocolate" />
+            android:textColor="?attr/tc" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email"
@@ -99,7 +100,8 @@
             android:layout_marginTop="40dp"
             android:inputType="text"
             android:text="Register"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:textColor="?attr/tc"/>
         </RelativeLayout>
 
     </LinearLayout>

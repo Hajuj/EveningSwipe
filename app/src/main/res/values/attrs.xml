@@ -3,5 +3,9 @@
         <attr name="appWidgetPadding" format="dimension" />
         <attr name="appWidgetInnerRadius" format="dimension" />
         <attr name="appWidgetRadius" format="dimension" />
+        <attr name="bgc" format="color" />
+        <attr name="tc" format="color" />
+        <attr name="bgcInApp" format="color" />
+        <attr name="tcEdit" format="color" />
     </declare-styleable>
 </resources>
