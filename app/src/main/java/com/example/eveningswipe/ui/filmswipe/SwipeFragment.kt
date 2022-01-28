@@ -39,7 +39,6 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     val token = HttpRequests.responseToken
     var movieList: ArrayList<String>? = null
     var groupIdList: List<Int>? = null
-    var currentGroupName: String? = null
     var groupNameList: MutableList<String> = mutableListOf("select group")
     lateinit var chooseLayout: RelativeLayout
     var i: Int = 0
@@ -51,13 +50,13 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        swipeViewModel =
+            ViewModelProvider(this).get(SwipeViewModel::class.java)
         root = inflater.inflate(R.layout.swipe_fragment, container, false)
 
         groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
-
         for (i in 0..groupIdList!!.size - 1) {
             val response = HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
-
             if (!response!!){
                 // error
             } else {
@@ -88,9 +87,6 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun startSwipe() {
-        swipeViewModel =
-            ViewModelProvider(this).get(SwipeViewModel::class.java)
-
         val movieTitleView: TextView = root.findViewById(R.id.movie_title)
         val movieTextView: TextView = root.findViewById(R.id.movie_text)
         val movieDateView: TextView = root.findViewById(R.id.movie_date)
@@ -114,9 +110,6 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         layout = root.findViewById(R.id.swipe_layout)
 
-        swipeViewModel.groupName.observe(viewLifecycleOwner, Observer {
-            currentGroupName = it
-        })
         swipeViewModel.movieTitle.observe(viewLifecycleOwner, Observer {
             movieTitleView.text = it
         })
@@ -201,6 +194,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             //show image
             imgURL = HttpRequests.responseMovieDetails!!.poster_path
+            // loading spinner
             pgsBar?.setVisibility(View.VISIBLE)
             Picasso.get()
                 .load(imgURL)
@@ -270,7 +264,6 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     //TODO: add! FilterId + rateMovie()
                     movieList = HttpRequests.responseFilterByGroupId?.get(0)?.selection
                     startSwipe()
-                    currentGroupName = groupNameList.get(pos)
                     chooseLayout.setVisibility(View.GONE)
                 }
             }

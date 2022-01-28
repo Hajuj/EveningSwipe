@@ -3,9 +3,11 @@ package com.example.eveningswipe
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.RemoteViews
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.*
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
 import com.example.eveningswipe.ui.filmswipe.SwipeViewModel
@@ -13,13 +15,14 @@ import com.example.eveningswipe.ui.filmswipe.SwipeViewModel
 
 val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
 val URL_FILTER_RATING = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
+val URL_GroupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
 
 class RankingActivity : AppCompatActivity() {
-    private val model: SwipeViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
+
+        val token = HttpRequests.responseToken
 
         val movieView1 = findViewById<View>(R.id.movie1) as TextView
         val movieView2 = findViewById<View>(R.id.movie2) as TextView
@@ -34,17 +37,20 @@ class RankingActivity : AppCompatActivity() {
 
         //TODO: wrong group name
         val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
-        val groupName = model.groupName.toString() //HttpRequests.responseGroupInfo!!.name
-        val textGroupName = groupName + "'s result:"
+
+        val response3 = HttpRequests.getGroupInformation(URL_GroupInfo, token!!,HttpRequests.responseFilterByGroupId!!.get(0).group_id)
+        var groupName: String? = null
+        if (!response3!!){
+            // error
+        } else {
+            groupName = HttpRequests.responseGroupInfo!!.name
+        }
+        val textGroupName = groupName + "'s ranking:"
         groupNameView.text = textGroupName
 
-        val token = HttpRequests.responseToken
         //TODO: FilterId
         val filterId = HttpRequests.responseFilterByGroupId!!.get(0).id
-        var response: Boolean? = null
-        if (token != null) {
-            response = HttpRequests.getFilterRating(URL_FILTER_RATING, token, filterId)
-        }
+        var response = HttpRequests.getFilterRating(URL_FILTER_RATING, token, filterId)
 
         val movieIdList: MutableList<String> = mutableListOf()
         val movieNameList: MutableList<String> = mutableListOf()
@@ -84,6 +90,7 @@ class RankingActivity : AppCompatActivity() {
         movieView8.text = "8. " + movieNameList[7]
         movieView9.text = "9. " + movieNameList[8]
         movieView10.text = "10. " + movieNameList[9]
+
 
         // Set cut corner background
         val layout = findViewById<View>(R.id.ranking_layout)

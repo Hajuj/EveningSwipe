@@ -36,6 +36,8 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/movie_title"
             android:visibility="gone"/>
 
         <ImageView

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +22,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var letsSwipe: Button? = null
+    var textView: TextView? = null
+    var pgsBar2: ProgressBar? = null
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
@@ -32,11 +35,12 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         root.setBackgroundResource(R.drawable.cinema_background)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        textView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            textView?.text = it
         })
 
+        pgsBar2 = root.findViewById(R.id.pBar2)
         // Set cut corner background
         root.background = context?.getDrawable(R.drawable.cinema_background)
 
@@ -55,5 +59,7 @@ class HomeFragment : Fragment() {
         transaction?.commit()
         root.setBackgroundResource(R.drawable.bg_canteloupe)
         letsSwipe?.setVisibility(View.GONE)
+        textView?.setVisibility(View.GONE)
+        pgsBar2?.setVisibility(View.VISIBLE)
     }
 }

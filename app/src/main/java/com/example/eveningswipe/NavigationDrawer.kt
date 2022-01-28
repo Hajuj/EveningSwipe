@@ -6,12 +6,16 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import com.example.eveningswipe.httpRequests.HttpRequests
+import com.example.eveningswipe.ui.filmswipe.SwipeFragment
 import com.google.android.material.navigation.NavigationView
 
 
