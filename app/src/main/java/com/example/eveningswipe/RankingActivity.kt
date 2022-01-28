@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
 
@@ -34,7 +35,8 @@ class RankingActivity : AppCompatActivity() {
         groupNameView.text = textGroupName
 
         val token = HttpRequests.responseToken
-        val filterId = HttpRequests.responseFilterByGroupId!!.id
+        //TODO: FilterId
+        val filterId = HttpRequests.responseFilterByGroupId!!.get(0).id
         var response: Boolean? = null
         if (token != null) {
             response = HttpRequests.getFilterRating(URL_FILTER_RATING, token, filterId)

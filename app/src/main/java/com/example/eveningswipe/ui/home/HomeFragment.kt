@@ -11,7 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.eveningswipe.R
+import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
+import com.example.eveningswipe.ui.filmswipe.SwipeViewModel
+import com.example.eveningswipe.ui.filmswipe.URL_GroupInfo
 
 
 class HomeFragment : Fragment() {

@@ -1,6 +1,5 @@
 package com.example.eveningswipe.httpRequests
 
-import android.content.ClipData
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 

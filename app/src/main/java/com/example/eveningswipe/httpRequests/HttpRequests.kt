@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import java.util.logging.Level.parse
 
 object HttpRequests {
-    var responseFilterByGroupId: GetFilterByGroupId2? = null
+    var responseFilterByGroupId: Array<GetFilterByGroupId2>? = null
     lateinit var responseUserInfo: UserInfoDto
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
@@ -201,23 +201,10 @@ object HttpRequests {
             { req, res, result ->
 
                 val (info, err) = result
-                //info?.let { responseFilterByGroupId = info }
+                info?.let { responseFilterByGroupId = info }
                 err?.let { println("ERROR in getFilterByGroupId !!" + err) }
                 println("no error : reg: " + req + " res: " + res + " result: " + result)
-                responseFilterByGroupId = GetFilterByGroupId2(
-                    result.get()[0].id,
-                    result.get()[0].genre_1 ,
-                    result.get()[0].genre_2,
-                    result.get()[0].genre_3,
-                    result.get()[0].min_year,
-                    result.get()[0].max_year,
-                    result.get()[0].rating,
-                    result.get()[0].votes,
-                    result.get()[0].max_runtime,
-                    result.get()[0].size,
-                    result.get()[0].group_id,
-                    result.get()[0].selection)
-                if(res.statusCode == 400){
+                if(res.statusCode == 400 || res.body().length == null){
                     success = false
                 }else{
                     success = true

@@ -17,6 +17,7 @@ import android.widget.Toast
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.eveningswipe.FinishedSwipeActivity
+import com.example.eveningswipe.httpRequests.GetFilterByGroupId2
 
 
 const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
@@ -86,7 +87,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return root
     }
 
-    fun startSwipe(currentgroupId: Int) {
+    fun startSwipe() {
         swipeViewModel =
             ViewModelProvider(this).get(SwipeViewModel::class.java)
 
@@ -129,19 +130,10 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             movieVoteCountView.text = it
         })
 
-        //get movie list
-        if (token != null) {
-            val response = HttpRequests.getFilterByGroupId(BASE_URL_ById, token, currentgroupId)
-            if (!response!!){
-                //do nothing
-            }else{
-                movieList = HttpRequests.responseFilterByGroupId?.selection
-            }
-        }
-
         nextMovie(imgView)
 
         touchListener(imgView)
+
         // Set cut corner background
         root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
 
@@ -246,21 +238,39 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun rateMovie() {
         val movieId = movieList!!.get(i - 1)
-        val filterId = HttpRequests.responseFilterByGroupId!!.id
+
+      /*  val filterId = HttpRequests.responseFilterByGroupId!!.id
 
         if (token != null) {
             HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId, token)
-        }
+        }*/
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
         if (groupNameList.get(pos) == groupNameList[0]) {
-            //do nothing
+            //do nothing first element is just a hint to select group
         } else {
-            startSwipe(groupIdList!!.get(pos - 1))
-            currentGroupName = groupNameList.get(pos)
-            chooseLayout.setVisibility(View.GONE)
+            //check if group has a filter
+            //get movie list
+            if (token != null) {
+                val response = HttpRequests.getFilterByGroupId(BASE_URL_ById, token, groupIdList!!.get(pos - 1))
+                if (!response!! ) {
+                    Toast.makeText(
+                        context,
+                        "This group needs a filter. Please go back to the group settings and add a filter.",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                    //do nothing
+                } else {
+                    //TODO: add! FilterId + rateMovie()
+                    movieList = HttpRequests.responseFilterByGroupId?.get(0)?.selection
+                    startSwipe()
+                    currentGroupName = groupNameList.get(pos)
+                    chooseLayout.setVisibility(View.GONE)
+                }
+            }
         }
     }
 
