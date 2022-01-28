@@ -8,22 +8,27 @@
         <entry key="app/src/main/res/drawable-v21/shr_product_grid_background_shape.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable-v24/ic_swipe_left.xml" value="0.3539325842696629" />
+        <entry key="app/src/main/res/drawable/button_black.xml" value="0.318" />
         <entry key="app/src/main/res/drawable/buttons.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/drawable/buttons_grey.xml" value="0.318" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_groups.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/drawable/ic_menu_home.xml" value="0.2824074074074074" />
-        <entry key="app/src/main/res/drawable/ic_menu_logout.xml" value="0.2824074074074074" />
+        <entry key="app/src/main/res/drawable/ic_menu_logout.xml" value="0.11" />
         <entry key="app/src/main/res/drawable/ic_menu_profil.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_swipe.xml" value="0.2824074074074074" />
+        <entry key="app/src/main/res/drawable/ic_tv_chocolate_logo.xml" value="0.1105" />
         <entry key="app/src/main/res/drawable/ic_widget_background.xml" value="0.18385416666666668" />
-        <entry key="app/src/main/res/drawable/movie_icon.xml" value="0.346875" />
+        <entry key="app/src/main/res/drawable/movie_icon.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/outline_home_24.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/outline_live_tv_24.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/ranking_result.xml" value="0.35648148148148145" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/drawable/splash_image.xml" value="0.1105" />
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.11" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.26979166666666665" />
         <entry key="app/src/main/res/layout/activity_add_group.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.23802083333333332" />
@@ -41,7 +46,6 @@
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2957427536231884" />
-        <entry key="app/src/main/res/layout/progress_bar.xml" value="0.47554347826086957" />
         <entry key="app/src/main/res/layout/ranking_widget.xml" value="0.2907608695652174" />
         <entry key="app/src/main/res/layout/swipe_choose_group.xml" value="0.4628623188405797" />
         <entry key="app/src/main/res/layout/swipe_fragment.xml" value="0.25" />
@@ -53,7 +57,6 @@
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3609375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_widget.xml" value="0.3609375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_widget_round.xml" value="0.3609375" />
-        <entry key="app/src/main/res/xml/progress_bar.xml" value="0.22" />
       </map>
     </option>
   </component>
