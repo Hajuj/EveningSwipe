@@ -114,6 +114,9 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         layout = root.findViewById(R.id.swipe_layout)
 
+        swipeViewModel.groupName.observe(viewLifecycleOwner, Observer {
+            currentGroupName = it
+        })
         swipeViewModel.movieTitle.observe(viewLifecycleOwner, Observer {
             movieTitleView.text = it
         })

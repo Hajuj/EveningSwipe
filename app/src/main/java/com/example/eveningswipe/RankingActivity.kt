@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
+import com.example.eveningswipe.ui.filmswipe.SwipeViewModel
 
 
 val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
 val URL_FILTER_RATING = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
 
 class RankingActivity : AppCompatActivity() {
+    private val model: SwipeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
@@ -30,7 +34,7 @@ class RankingActivity : AppCompatActivity() {
 
         //TODO: wrong group name
         val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
-        val groupName = HttpRequests.responseGroupInfo!!.name
+        val groupName = model.groupName.toString() //HttpRequests.responseGroupInfo!!.name
         val textGroupName = groupName + "'s result:"
         groupNameView.text = textGroupName
 

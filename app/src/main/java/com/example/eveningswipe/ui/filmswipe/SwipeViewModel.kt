@@ -4,6 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SwipeViewModel: ViewModel() {
+    val groupName: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
     val movieTitle: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }

@@ -204,7 +204,7 @@ object HttpRequests {
                 info?.let { responseFilterByGroupId = info }
                 err?.let { println("ERROR in getFilterByGroupId !!" + err) }
                 println("no error : reg: " + req + " res: " + res + " result: " + result)
-                if(res.statusCode == 400 || res.body().length == null){
+                if(res.statusCode == 400 || responseFilterByGroupId.contentEquals(emptyArray<GetFilterByGroupId2>())){
                     success = false
                 }else{
                     success = true
