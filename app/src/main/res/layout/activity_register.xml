@@ -52,7 +52,7 @@
             android:layout_below="@+id/header_layout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:hint="maxmustermann@mail.com"
+            android:hint="Email"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:textSize="30sp">
