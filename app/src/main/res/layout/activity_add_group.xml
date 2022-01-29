@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/bgcInApp"
     tools:context=".AddGroup">
+<!--     android:background="?attr/bgcInApp"-->
 
     <TextView
         android:id="@+id/textDescription"
@@ -15,7 +15,6 @@
         android:ems="10"
         android:hint="Please enter a name to create a new group"
         android:textSize="30dp"
-        android:textColor="?attr/tc"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07" />
+<!-- android:textColor="?attr/tc" -->
 
     <EditText
         android:id="@+id/fullName"
@@ -33,12 +33,12 @@
         android:hint="Name of group"
         android:inputType="text"
         android:textSize="30dp"
-        android:textColor="?attr/tcEdit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.382" />
+<!-- android:textColor="?attr/tcEdit"-->
 
     <Button
         android:id="@+id/saveGroup"
@@ -62,12 +62,12 @@
         android:ems="20"
         android:text="GROUP ADDED SUCCESSFULLY"
         android:textSize="50dp"
-        android:textColor="?attr/tc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.567" />
+    <!-- android:textColor="?attr/tc"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

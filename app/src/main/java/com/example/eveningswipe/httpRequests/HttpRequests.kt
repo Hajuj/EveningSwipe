@@ -161,7 +161,7 @@ object HttpRequests {
 
     fun postCreatedGroup2(url: String,tok: String, nam: String, descript: String): Boolean?{
         val createGroup = CreateGroup2(
-            token = TokenCG(token = tok),
+            token = TokenDto(token = tok),
             group = Group(name = nam, description = descript)
         )
         var success: Boolean? = null
@@ -279,6 +279,45 @@ object HttpRequests {
                 }
             }.join()
 
+        return success
+    }
+
+    fun postCreateFilter(url: String, token: TokenDto, filter: FilterDto) {
+        val createFilter = CreateFilter(
+            token = token,
+            filter = filter
+        )
+
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(createFilter).toString())
+            .response() { req, res, result ->
+                val (info, err) = result
+                err?.let { println("ERROR !!") }
+                println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
+            }
+    }
+
+    fun getSwipeState(url: String, token: TokenDto, filterId: Int): Boolean? {
+        val swipeState = PostSwipeState(
+            token = token,
+            filterId = filterId
+        )
+        var success: Boolean? = null
+        //TODO add get data
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(swipeState).toString())
+            .response() { req, res, result ->
+                val (info, err) = result
+                err?.let { println("ERROR !!") }
+                println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
         return success
     }
 }
