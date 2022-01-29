@@ -75,12 +75,17 @@ class MainActivity : AppCompatActivity() {
      */
     private fun login() {
         val token = HttpRequests.responseToken
-
+        var response: Boolean? =null
         if (token != null) {
-            HttpRequests.getUserInformation(BASE_URL_User, token)
+            response = HttpRequests.getUserInformation(BASE_URL_User, token)
         }
         //if user can login:
-        startHomeActivity()
+        if(!response!!){
+            //login not possible
+        }else{
+            startHomeActivity()
+        }
+
     }
 
     /**

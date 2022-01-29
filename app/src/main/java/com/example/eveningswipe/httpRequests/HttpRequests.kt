@@ -7,7 +7,7 @@ import java.util.logging.Level.parse
 
 object HttpRequests {
     var responseFilterByGroupId: Array<GetFilterByGroupId2>? = null
-    lateinit var responseUserInfo: UserInfoDto
+    var responseUserInfo: UserInfoDto? = null
     var responseToken: TokenDto? = null
     var responseGroupInfo: PostGroupInfo? = null
     var responseFindUserInfo: FindUserDto? = null
@@ -72,9 +72,9 @@ object HttpRequests {
     /**
      * method to check whether token has already been initialized
      */
-    fun checkifInitialized() : Boolean{
+   /* fun checkifInitialized() : Boolean{
         return this::responseUserInfo.isInitialized
-    }
+    }*/
 
     fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
         val addUserToGroup = AddUserToGroup(
@@ -90,7 +90,8 @@ object HttpRequests {
             }
     }
 
-    fun getUserInformation(url: String, token: TokenDto) {
+    fun getUserInformation(url: String, token: TokenDto): Boolean? {
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(token).toString())
@@ -101,8 +102,14 @@ object HttpRequests {
                 info?.let { responseUserInfo = info }
                 err?.let { println("ERROR !!") }
                 println("reg: " + req + " res: " + res + " result: " + result)
-                println("user name: " + responseUserInfo.userName)
-            }
+                println("user name: " + responseUserInfo?.userName)
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
+        return success
     }
 
     fun getGroupInformation(url: String, token: TokenDto, groupId: Int): Boolean? {

@@ -54,7 +54,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             ViewModelProvider(this).get(SwipeViewModel::class.java)
         root = inflater.inflate(R.layout.swipe_fragment, container, false)
 
-        groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
+        groupIdList = HttpRequests.responseUserInfo?.groupId?.distinct()
         for (i in 0..groupIdList!!.size - 1) {
             val response = HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
             if (!response!!){

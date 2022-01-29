@@ -33,10 +33,12 @@
         <entry key="app/src/main/res/drawable/splash_image.xml" value="0.1105" />
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.11" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.26979166666666665" />
+        <entry key="app/src/main/res/layout/activity_add_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_add_group.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_after_notification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_finished_swipe.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_group_profile.xml" value="0.42934782608695654" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/activity_ranking.xml" value="0.33695652173913043" />
