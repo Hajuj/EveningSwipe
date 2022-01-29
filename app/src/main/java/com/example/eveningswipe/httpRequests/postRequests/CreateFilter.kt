@@ -3,19 +3,19 @@ package com.example.eveningswipe.httpRequests.postRequests
 import com.example.eveningswipe.httpRequests.TokenDto
 
 data class CreateFilter (
-    val filter: FilterDto,
-    val token: TokenDto
+    val token: TokenDto,
+    val filter: FilterDto
 )
 
 data class FilterDto(
     var genre_1: String,
-    val genre_2: String,
-    val genre_3: String,
-    val group_id: Int,
-    var max_runtime: Int,
-    var max_year: Int,
+    var genre_2: String,
+    var genre_3: String,
     var min_year: Int,
-    val rating: Int,
+    var max_year: Int,
+    var rating: Int,
+    var votes: Int,
+    var max_runtime: Int,
     var size: Int,
-    val votes: Int
+    var group_id: Int
 )

@@ -17,6 +17,8 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     private var runtime: TextInputLayout? = null
     private var size: TextInputLayout? = null
     private var createFilter: Button? = null
+    private var rating: TextInputLayout? = null
+    private var votes: TextInputLayout? = null
     var genre: String? = null
     val token = HttpRequests.responseToken
     var genreList: MutableList<String> = mutableListOf("select genre")
@@ -24,11 +26,13 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_filter)
-
+        println("hallooooo")
         minYear = findViewById<View>(R.id.year_begin_input) as TextInputLayout
         maxYear = findViewById<View>(R.id.year_end_input) as TextInputLayout
         runtime = findViewById<View>(R.id.runtime_input) as TextInputLayout
         size = findViewById<View>(R.id.size_input) as TextInputLayout
+        rating = findViewById<View>(R.id.rating_input) as TextInputLayout
+        votes = findViewById<View>(R.id.votes_input) as TextInputLayout
         createFilter = findViewById<Button>(R.id.create_filter) as Button
         createFilter!!.setOnClickListener(View.OnClickListener { addFilter() })
 
@@ -39,7 +43,7 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             "Game-Show", "History", "Horror", "Music", "Musical", "Mystery", "Reality-TV",
             "Romance", "Short", "Sport", "Thriller", "War"))
 
-        val spinner: Spinner = findViewById(R.id.groups_spinner)
+        val spinner: Spinner = findViewById(R.id.genre_spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         val adapter = ArrayAdapter(
             this,
@@ -54,31 +58,25 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         spinner.onItemSelectedListener = this
 
         // Set cut corner background for API 23+
-        val layout = findViewById(R.id.header_layout) as View
+        val layout = findViewById(R.id.add_filter_layout) as View
         layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
     }
 
     fun addFilter(){
-        val min_year = minYear?.editText?.text.toString().trim()
-        val max_year = maxYear?.editText?.text.toString().trim()
-        val runtime = runtime?.editText?.text.toString().trim()
-        val size = size?.editText?.text.toString().trim()
+        val minYearInput = minYear?.editText?.text.toString().trim()
+        val maxYearInput = maxYear?.editText?.text.toString().trim()
+        val runtimeInput = runtime?.editText?.text.toString().trim()
+        val sizeInput = size?.editText?.text.toString().trim()
+        val ratingInput = rating?.editText?.text.toString().trim()
+        val votesInput = votes?.editText?.text.toString().trim()
 
-        val filter: FilterDto? = null
-        filter?.genre_1 = genre.toString()
-    //    filter?.genre_2 =
-    //    filter?.genre_3 =
-        filter?.min_year = min_year.toInt()
-        filter?.max_year = max_year.toInt()
-    //    filter?.rating =
-    //    filter?.votes =
-        filter?.max_runtime = runtime.toInt()
-        filter?.size = size.toInt()
-        //TODO: grouppID required
-    //    filter?.group_id =
+        val filter = FilterDto(genre.toString(), "", "",
+            minYearInput.toInt(), maxYearInput.toInt(), ratingInput.toInt(), votesInput.toInt(),
+            runtimeInput.toInt(), sizeInput.toInt(), GroupProfile.getValue()?.toInt()!!)
 
+        println("request3: " + filter)
         val response =
-            filter?.let { HttpRequests.postCreateFilter(BASE_URL_CREATEFILTER, token!!, it) }
+            filter.let { HttpRequests.postCreateFilter(BASE_URL_CREATEFILTER, token!!, it) }
         if (!response!!){
             // error
         } else {

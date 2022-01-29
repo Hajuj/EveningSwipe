@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="bgc">@color/Canteloupe</item>
         <item name="tc">@color/Hot_Chocolate</item>
-        <item name="bgcInApp">@color/white</item>
+        <item name="bgcInApp">@color/Canteloupe</item>
         <item name="tcEdit">@color/Hot_Chocolate</item>
     </style>
 
@@ -28,7 +28,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.EveningSwipe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <style name="Theme.EveningSwipe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColor">@color/Hot_Chocolate</item>
     </style>
 

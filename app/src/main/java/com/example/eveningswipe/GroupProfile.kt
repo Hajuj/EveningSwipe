@@ -27,7 +27,7 @@ class GroupProfile : AppCompatActivity() {
         addUserToGroup = findViewById<View>(R.id.addUserToGroup) as Button
         addFilterToGroup = findViewById<View>(R.id.addFilterToGroup) as Button
         addUserToGroup!!.setOnClickListener(View.OnClickListener { startAddUserActivityActivity() })
-     //   addFilterToGroup!!.setOnClickListener(View.OnClickListener { startAddFilterActivity() })
+        addFilterToGroup!!.setOnClickListener(View.OnClickListener { startAddFilterActivity() })
 
         val groupProfileName = intent.getStringExtra("groupName")
         val groupID = intent.getStringExtra("groupID")
@@ -35,7 +35,9 @@ class GroupProfile : AppCompatActivity() {
         idNumber!!.text = groupID
         groupIDforUserAdding = (idNumber!!.text as String?).toString()
 
-
+        // Set cut corner background for API 23+
+        val layout = findViewById(R.id.group_profile_layout) as View
+        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
     }
 
     companion object{

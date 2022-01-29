@@ -218,9 +218,9 @@
                 android:id="@+id/groups_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_below="@id/choose_text"
-                android:textColor="@color/Hot_Chocolate"/>
+                android:layout_marginTop="40dp"
+                android:textColor="@color/Hot_Chocolate" />
 
 
         </RelativeLayout>

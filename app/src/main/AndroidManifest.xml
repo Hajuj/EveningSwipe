@@ -13,8 +13,11 @@
         android:theme="@style/Theme.EveningSwipe"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AddFilterActivity"
-            android:exported="false" />
+            android:name=".ui.filmswipe.SelectFilterActivity"
+            android:exported="false"
+            android:label="@string/title_activity_select_group"
+            android:theme="@style/Theme.EveningSwipe.NoActionBar" />
+        <activity android:name=".AddFilterActivity" />
         <activity
             android:name=".RankingActivity"
             android:exported="false" />

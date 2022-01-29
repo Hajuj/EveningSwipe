@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/bgcInApp"
-    tools:context=".GroupProfile">
+    tools:context=".GroupProfile"
+    android:id="@+id/group_profile_layout">
 
     <ImageView
         android:layout_width="158dp"

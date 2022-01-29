@@ -29,6 +29,10 @@ class AddGroup : AppCompatActivity() {
         textDescription = findViewById<View>(R.id.textDescription) as TextView
         addGroupFinished = findViewById<View>(R.id.addGroupFinished) as TextView
         addGroupFinished!!.visibility = View.INVISIBLE;
+
+        // Set cut corner background for API 23+
+        val layout = findViewById(R.id.add_group_layout) as View
+        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
     }
 
     /**

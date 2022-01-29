@@ -16,7 +16,9 @@ import com.squareup.picasso.Picasso
 import android.widget.Toast
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.FinishedSwipeActivity
+import com.example.eveningswipe.GroupProfile
 import com.example.eveningswipe.httpRequests.GetFilterByGroupId2
 
 
@@ -262,6 +264,9 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     //do nothing
                 } else {
                     //TODO: add! FilterId + rateMovie()
+                 //   val intent = Intent(context, SelectFilterActivity::class.java)
+                 //   context?.startActivity(intent)
+                 //   SelectFilterActivity.setGroupId(groupIdList!!.get(pos))
                     movieList = HttpRequests.responseFilterByGroupId?.get(0)?.selection
                     startSwipe()
                     chooseLayout.setVisibility(View.GONE)
