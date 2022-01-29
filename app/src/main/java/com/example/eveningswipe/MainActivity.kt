@@ -48,10 +48,9 @@ class MainActivity : AppCompatActivity() {
 
 
         // Set cut corner background for API 23+
-        var layout = findViewById(R.id.header_layout) as View
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
-        }
+        val layout = findViewById(R.id.header_layout) as View
+        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
+
     }
     /**
      * method to handle login

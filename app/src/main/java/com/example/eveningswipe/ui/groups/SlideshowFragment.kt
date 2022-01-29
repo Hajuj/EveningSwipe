@@ -48,9 +48,8 @@ class SlideshowFragment : Fragment() {
         newGroup!!.setOnClickListener(View.OnClickListener { createNewGroup() })
 
         // Set cut corner background for API 23+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
-        }
+        root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
+
         return root
 
     }
@@ -59,14 +58,14 @@ class SlideshowFragment : Fragment() {
      * method to fill group recyclerview
      */
     private fun showGroups(){
-        val groupListCounter = HttpRequests.responseUserInfo?.groupId
+        val groupListCounter = HttpRequests.responseUserInfo.groupId
         //remove duplicates
-        val groupList = groupListCounter?.distinct()
+        val groupList = groupListCounter.distinct()
         val groupName: String = ""
         val memberNumber: Int = 0
         val groupId: Int = 0
         val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber, groupId))
-        for (i in 0..groupList!!.size-1) {
+        for (i in 0..groupList.size-1) {
             if (token != null) {
                 val response = HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupList[i])
 
