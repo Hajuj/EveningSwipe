@@ -27,7 +27,7 @@ class GroupProfile : AppCompatActivity() {
         addUserToGroup = findViewById<View>(R.id.addUserToGroup) as Button
         addFilterToGroup = findViewById<View>(R.id.addFilterToGroup) as Button
         addUserToGroup!!.setOnClickListener(View.OnClickListener { startAddUserActivityActivity() })
-       // addFilterToGroup!!.setOnClickListener(View.OnClickListener { startAddFilterActivity() })
+     //   addFilterToGroup!!.setOnClickListener(View.OnClickListener { startAddFilterActivity() })
 
         val groupProfileName = intent.getStringExtra("groupName")
         val groupID = intent.getStringExtra("groupID")
@@ -58,7 +58,7 @@ class GroupProfile : AppCompatActivity() {
      * add filter for this group and start filter activity
      */
     private fun startAddFilterActivity() {
-        val profileIntent = Intent(this@GroupProfile, AddUserActivity::class.java)
+        val profileIntent = Intent(this@GroupProfile, AddFilterActivity::class.java)
         startActivity(profileIntent)
         finish()
     }

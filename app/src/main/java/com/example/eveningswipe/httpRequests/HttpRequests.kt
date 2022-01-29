@@ -289,12 +289,13 @@ object HttpRequests {
         return success
     }
 
-    fun postCreateFilter(url: String, token: TokenDto, filter: FilterDto) {
+    fun postCreateFilter(url: String, token: TokenDto, filter: FilterDto): Boolean? {
         val createFilter = CreateFilter(
             token = token,
             filter = filter
         )
 
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(createFilter).toString())
@@ -302,7 +303,13 @@ object HttpRequests {
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
                 println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
-            }
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
+        return success
     }
 
     fun getSwipeState(url: String, token: TokenDto, filterId: Int): Boolean? {

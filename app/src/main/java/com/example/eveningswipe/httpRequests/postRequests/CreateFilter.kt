@@ -8,14 +8,14 @@ data class CreateFilter (
 )
 
 data class FilterDto(
-    val genre_1: String,
+    var genre_1: String,
     val genre_2: String,
     val genre_3: String,
     val group_id: Int,
-    val max_runtime: Int,
-    val max_year: Int,
-    val min_year: Int,
+    var max_runtime: Int,
+    var max_year: Int,
+    var min_year: Int,
     val rating: Int,
-    val size: Int,
+    var size: Int,
     val votes: Int
 )
