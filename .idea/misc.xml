@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/drawable-v21/app_widget_background.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable-v21/app_widget_inner_view_background.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable-v21/shr_product_grid_background_shape.xml" value="0.25" />
@@ -12,8 +13,11 @@
         <entry key="app/src/main/res/drawable/buttons.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/drawable/buttons_grey.xml" value="0.318" />
         <entry key="app/src/main/res/drawable/evening_swipe_text.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_evening_swipe_logo_black_min.xml" value="0.117" />
         <entry key="app/src/main/res/drawable/ic_evening_swipe_logos_black.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/ic_evening_swipe_text.xml" value="0.114" />
+        <entry key="app/src/main/res/drawable/ic_evening_swipe_logos_black_2.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_evening_swipe_logos_black_min.xml" value="0.117" />
+        <entry key="app/src/main/res/drawable/ic_evening_swipe_text.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.28072916666666664" />
@@ -24,6 +28,7 @@
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/drawable/ic_menu_swipe.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/drawable/ic_tv_chocolate_logo.xml" value="0.1105" />
+        <entry key="app/src/main/res/drawable/ic_tv_chocolate_logo_min.xml" value="0.117" />
         <entry key="app/src/main/res/drawable/ic_widget_background.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/movie_icon.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/outline_home_24.xml" value="0.346875" />
@@ -40,13 +45,13 @@
         <entry key="app/src/main/res/layout/activity_finished_swipe.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_group_profile.xml" value="0.42934782608695654" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.2957427536231884" />
+        <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ranking.xml" value="0.33695652173913043" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.31431159420289856" />
         <entry key="app/src/main/res/layout/activity_select_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_select_group.xml" value="0.6166666666666667" />
-        <entry key="app/src/main/res/layout/activity_swipe_movies.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.2957427536231884" />
+        <entry key="app/src/main/res/layout/activity_swipe_movies.xml" value="0.30364583333333334" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21693840579710144" />
@@ -73,5 +78,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

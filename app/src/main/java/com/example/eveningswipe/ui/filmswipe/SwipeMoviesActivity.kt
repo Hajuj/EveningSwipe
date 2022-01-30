@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -17,6 +18,7 @@ import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
+import java.lang.Float.min
 
 var swipeCount: Int? = null
 
@@ -31,8 +33,10 @@ class SwipeMoviesActivity : AppCompatActivity() {
     private var pgsBar: ProgressBar? = null
     private var layout: View? = null
     private var imgURL: String? = null
+    private var layoutSwipe: ImageView? = null
     private lateinit var swipeViewModel: SwipeViewModel
 
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe_movies)
@@ -47,6 +51,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
         val movieVoteView: TextView = findViewById(R.id.movie_vote)
         val movieVoteCountView: TextView = findViewById(R.id.movie_vote_count)
         val imgView: ImageView = findViewById(R.id.img_swipe)
+        layoutSwipe = findViewById(R.id.img_swipe)
 
         //layout for swipe hint
         //https://www.spaceotechnologies.com/android-overlay-app-tutorial/
@@ -144,13 +149,13 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
             // hint: deute swipe function an
             if (!hintAccept) {
-                val animator1 = ObjectAnimator.ofFloat(this, "translationX", 100f).apply {
+                val animator1 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", 100f).apply {
                     duration = 750
                 }
-                val animator2 = ObjectAnimator.ofFloat(this, "translationX", -200f).apply {
+                val animator2 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
                     duration = 1500
                 }
-                val animator3 = ObjectAnimator.ofFloat(this, "translationX", 0f).apply {
+                val animator3 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
                     duration = 750
                 }
 
@@ -169,27 +174,88 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     fun touchListener(imgView: ImageView) {
-        layout?.setOnTouchListener(object : OnSwipeTouchListener(this) {
-            override fun onSwipeLeft() {
-                super.onSwipeLeft()
-                nextMovie(imgView)
+        val maxSwipe = 600
+        val minSwipe = -200
 
-                Toast.makeText(applicationContext, "dislike", Toast.LENGTH_SHORT)
-                    .show()
+        layoutSwipe?.setOnTouchListener(
+            View.OnTouchListener {v, event ->
 
-                temp += 1
+                //variables to store current configuration of movie image
+                val layoutWidth = layoutSwipe!!.width
+                val displayMetrics = resources.displayMetrics
+                val layoutRightEdge = (displayMetrics.widthPixels.toFloat() / 2) + (layoutWidth / 2)
+                val layoutLeftEdge = (displayMetrics.widthPixels.toFloat() / 2) - (layoutWidth / 2)
+
+                when (event.action) {
+                    //swipe movie image
+                    MotionEvent.ACTION_MOVE -> {
+                        val newX = event.rawX
+
+                        //swipe right
+                        if (newX + layoutWidth > layoutLeftEdge) {
+                            layoutSwipe!!.animate().x(min(layoutLeftEdge, newX - (layoutWidth / 2)))
+                                .setDuration(0)
+                                .start()
+                        }
+
+                        //swipe left
+                        if (newX - layoutWidth < layoutRightEdge) {
+                            layoutSwipe!!.animate().x(min(layoutRightEdge, newX - (layoutWidth / 2)))
+                                .setDuration(0)
+                                .start()
+                        }
+                    }
+
+                    //swipe the movie image
+                    MotionEvent.ACTION_UP -> {
+                        val currentX = layoutSwipe!!.x
+
+                        //center the image when swiped or finger released
+                        layoutSwipe!!.animate().translationX(0f).setDuration(0).start()
+
+                        //swipe all the way to the right
+                        if (currentX > maxSwipe) {
+                            nextMovie(imgView)
+                            Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT).show()
+
+                            temp += 1
+                        }
+
+                        //swipe all the way to the left
+                        if (currentX < minSwipe) {
+                            nextMovie(imgView)
+                            Toast.makeText(applicationContext, "dislike", Toast.LENGTH_SHORT).show()
+
+                            temp += 1
+                        }
+                    }
+                }
+
+                return@OnTouchListener true
             }
+        )
 
-            override fun onSwipeRight() {
-                super.onSwipeRight()
-                rateMovie()
-                nextMovie(imgView)
-                Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT)
-                    .show()
-
-                temp += 1
-            }
-        })
+//        layout?.setOnTouchListener(object : OnSwipeTouchListener(this) {
+//            override fun onSwipeLeft() {
+//                super.onSwipeLeft()
+//                nextMovie(imgView)
+//
+//                Toast.makeText(applicationContext, "dislike", Toast.LENGTH_SHORT)
+//                    .show()
+//
+//                temp += 1
+//            }
+//
+//            override fun onSwipeRight() {
+//                super.onSwipeRight()
+//                rateMovie()
+//                nextMovie(imgView)
+//                Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT)
+//                    .show()
+//
+//                temp += 1
+//            }
+//        })
     }
 
     fun rateMovie() {
