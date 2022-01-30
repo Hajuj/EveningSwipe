@@ -3,6 +3,7 @@ package com.example.eveningswipe
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.*
@@ -15,6 +16,14 @@ class RankingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
+
+        val btn = findViewById<View>(R.id.refresh_ranking) as Button
+        btn.setOnClickListener(View.OnClickListener { showRanking() })
+
+        showRanking()
+    }
+
+    fun showRanking(){
 
         val token = HttpRequests.responseToken
 

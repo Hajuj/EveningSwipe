@@ -50,7 +50,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:background="@drawable/buttons"
-            android:ems="20"
             android:text="Show result"
             app:backgroundTint="@null" />
     </RelativeLayout>

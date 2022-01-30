@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ranking_group_name"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:text="1. "
             android:textColor="@color/Hot_Chocolate"
@@ -149,6 +149,17 @@
             android:layout_marginStart="20dp"
             android:textColor="@color/Hot_Chocolate"
             android:layout_below="@id/movie9"/>
+
+        <Button
+            android:id="@+id/refresh_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movie10"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/buttons"
+            android:text="refresh result"
+            app:backgroundTint="@null" />
     </RelativeLayout>
 
 
