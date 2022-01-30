@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 data class FindUserInfoDto(
 
     @SerializedName("token") val token: String,
-    @SerializedName("search") val search: String
+    @SerializedName("email") val email: String
 ) {
     //User Deserializer
     class Deserializer : ResponseDeserializable<FindUserInfoDto> {

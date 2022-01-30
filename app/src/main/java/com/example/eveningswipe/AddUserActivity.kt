@@ -65,6 +65,7 @@ class AddUserActivity : AppCompatActivity() {
         }
     }
 
+
     /**
      * method to add a user to a group
      */
@@ -73,21 +74,19 @@ class AddUserActivity : AppCompatActivity() {
         val groupId = GroupProfile.getValue()?.toInt()
         val userToAdd = searchInput
 
-            if (userToAdd != null) {
-                if (groupId != null) {
-                    val response = HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
-                    if(!response!!){
-                        Toast.makeText(this, "The user $userToAdd is already part of this group", Toast.LENGTH_SHORT)
-                                .show()
-                        searchedUser!!.visibility = View.INVISIBLE;
-                    } else {
-                        searchedUser!!.visibility = View.INVISIBLE;
-                        searchFinished!!.text = "User added successfully"
-                        searchFinished!!.visibility = View.VISIBLE;
-                    }
+        if (userToAdd != null) {
+            if (groupId != null) {
+                val response = HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
+                if(!response!!){
+                    Toast.makeText(this, "The user $userToAdd is already part of this group", Toast.LENGTH_SHORT)
+                            .show()
+                    searchedUser!!.visibility = View.INVISIBLE;
+                } else {
+                    searchedUser!!.visibility = View.INVISIBLE;
+                    searchFinished!!.text = "User added successfully"
+                    searchFinished!!.visibility = View.VISIBLE;
                 }
             }
+        }
     }
-
-
 }

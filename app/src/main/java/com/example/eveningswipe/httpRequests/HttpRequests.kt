@@ -146,10 +146,10 @@ object HttpRequests {
         return success
     }
 
-    fun getAllUser(url: String, token: String, search: String): Boolean? {
+    fun getAllUser(url: String, token: String, email: String): Boolean? {
         val findUser = FindUserInfoDto(
             token = token,
-            search = search
+            email = email
         )
         var success: Boolean? = null
         url.httpPost()
