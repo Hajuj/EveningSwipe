@@ -72,29 +72,21 @@ class AddUserActivity : AppCompatActivity() {
         val token = HttpRequests.responseToken!!.token
         val groupId = GroupProfile.getValue()?.toInt()
         val userToAdd = searchInput
-        var isPartOfGroup = false
-        val groupListCounter = HttpRequests.responseUserInfo.groupId
-        val groupList = groupListCounter.distinct()
-        for (i in 0..groupList.size - 1) {
-            if (groupList[i] == groupId) {
-                isPartOfGroup = true
-                searchedUser!!.visibility = View.INVISIBLE;
-            }
-        }
-        if (!isPartOfGroup) {
+
             if (userToAdd != null) {
                 if (groupId != null) {
-                    HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
-                    searchedUser!!.visibility = View.INVISIBLE;
-                    searchFinished!!.text = "User added successfully"
-                    searchFinished!!.visibility = View.VISIBLE;
+                    val response = HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
+                    if(!response!!){
+                        Toast.makeText(this, "The user $userToAdd is already part of this group", Toast.LENGTH_SHORT)
+                                .show()
+                        searchedUser!!.visibility = View.INVISIBLE;
+                    } else {
+                        searchedUser!!.visibility = View.INVISIBLE;
+                        searchFinished!!.text = "User added successfully"
+                        searchFinished!!.visibility = View.VISIBLE;
+                    }
                 }
             }
-        } else {
-            Toast.makeText(this, "The user $userToAdd is already part of this group", Toast.LENGTH_SHORT)
-                    .show()
-        }
-
     }
 
 
