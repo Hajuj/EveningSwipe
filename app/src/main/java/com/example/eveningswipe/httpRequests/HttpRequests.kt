@@ -76,18 +76,24 @@ object HttpRequests {
         return this::responseUserInfo.isInitialized
     }
 
-    fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String) {
+    fun postAddUserToGroup(url: String, tok: String, groupId: Int, userToAdd: String): Boolean?  {
         val addUserToGroup = AddUserToGroup(
             token = TokenAddUser(token = tok),
             add = Add(groupId = groupId, toAdd = userToAdd)
         )
-
+        var success: Boolean? = null
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(addUserToGroup).toString())
             .response() { req, res, result ->
                 println("reg: " + req + " res: " + res + " result: " + result)
-            }
+                if(res.statusCode == 400){
+                    success = false
+                }else{
+                    success = true
+                }
+            }.join()
+        return success
     }
 
     fun getUserInformation(url: String, token: TokenDto): Boolean? {

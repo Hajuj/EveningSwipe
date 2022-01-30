@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 data class FindUserInfoDto(
-     //val name: String,
+
     @SerializedName("token") val token: String,
     @SerializedName("search") val search: String
 ) {
