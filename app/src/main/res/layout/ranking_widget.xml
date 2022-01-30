@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:paddingTop="10dp"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
+        android:contentDescription="The top three of 'groupname':\n\n1. 'moviename'\n2. 'moviename'\n3. 'moviename'"
+        android:text="The top three of 'groupname':\n\n1. 'moviename'\n2. 'moviename'\n3. 'moviename'"
         android:textColor="@color/white"
         android:textSize="14dp" />
 </RelativeLayout>

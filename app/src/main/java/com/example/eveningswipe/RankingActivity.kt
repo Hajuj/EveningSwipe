@@ -1,5 +1,7 @@
 package com.example.eveningswipe
 
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +10,9 @@ import android.widget.TextView
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.*
 
+var movie1: String? = null
+var movie2: String? = null
+var movie3: String? = null
 
 val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
 val URL_FILTER_RATING = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
@@ -21,6 +26,10 @@ class RankingActivity : AppCompatActivity() {
         btn.setOnClickListener(View.OnClickListener { showRanking() })
 
         showRanking()
+
+        // Set cut corner background
+        val layout = findViewById<View>(R.id.ranking_layout)
+        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
     }
 
     fun showRanking(){
@@ -39,7 +48,7 @@ class RankingActivity : AppCompatActivity() {
         val movieView10 = findViewById<View>(R.id.movie10) as TextView
 
         val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
-        val textGroupName = groupName + "'s ranking:"
+        val textGroupName = groupName + "'s voting:"
         groupNameView.text = textGroupName
 
         var response: Boolean? = null
@@ -77,12 +86,15 @@ class RankingActivity : AppCompatActivity() {
 
         if(movieNameList.size > 0){
             movieView1.text = "1. " + movieNameList[0]
+            movie1 = movieNameList[0]
         }
         if(movieNameList.size > 1){
             movieView2.text = "2. " + movieNameList[1]
+            movie2 = movieNameList[1]
         }
         if(movieNameList.size > 2){
             movieView3.text = "3. " + movieNameList[2]
+            movie3 = movieNameList[2]
         }
         if(movieNameList.size > 3){
             movieView4.text = "4. " + movieNameList[3]
@@ -106,8 +118,9 @@ class RankingActivity : AppCompatActivity() {
             movieView10.text = "10. " + movieNameList[9]
         }
 
-        // Set cut corner background
-        val layout = findViewById<View>(R.id.ranking_layout)
-        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
+        for (i in 0..widgetIds!!.size-1){
+            updateAppWidget(this, AppWidgetManager.getInstance(this), widgetIds!![i])
+        }
+
     }
 }

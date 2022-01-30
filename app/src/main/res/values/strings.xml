@@ -12,7 +12,6 @@
     <string name="menu_profile">Profil</string>
     <string name="menu_groups">Gruppen</string>
     <string name="menu_swipe">Swipe</string>
-    <string name="appwidget_text">Last group voting \n\n1. movie name \n2. movie name \n3. movie name</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">See your last group voting</string>
     <string name="vote_of_movie">vote of movie</string>

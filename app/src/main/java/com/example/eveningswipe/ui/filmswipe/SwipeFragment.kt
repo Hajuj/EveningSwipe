@@ -10,22 +10,32 @@ import android.widget.*
 import com.example.eveningswipe.httpRequests.HttpRequests
 import android.widget.Toast
 
-
-const val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
-const val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
-const val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
-const val URL_GroupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
-
+/**
+ * swipe fragment
+ * @property BASE_URL_ById url for http request
+ * @property URL_GroupInfo url for htttp request
+ * @property root layout view of the fragment
+ * @property token current token of the user
+ * @property groupIdList list with the group id of the user
+ * @property groupNameList list of the group names
+ */
 class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     companion object {
         fun newInstance() = SwipeFragment()
     }
 
+    val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
+    val URL_GroupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
     private lateinit var root: View
     val token = HttpRequests.responseToken
     var groupIdList: List<Int>? = null
     var groupNameList: MutableList<String> = mutableListOf("select group")
 
+    /**
+     * create content of fragment
+     * fill the groupNameList for the spinner
+     * create spinner
+     */
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,11 +44,14 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View {
         root = inflater.inflate(R.layout.swipe_fragment, container, false)
 
+        // list with the ids  of all the groups where the user is member
         groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
 
+        //get the names of the groups an add them to another list
         for (i in 0..groupIdList!!.size - 1) {
-            val response = HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
-            if (!response!!){
+            val response =
+                HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
+            if (!response!!) {
                 // error
             } else {
                 groupNameList.add(HttpRequests.responseGroupInfo!!.name)
@@ -57,8 +70,8 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         // Set Adapter to Spinner
         spinner.setAdapter(adapter)
-
         spinner.onItemSelectedListener = this
+
         // Set cut corner background
         val layout = root.findViewById<View>(R.id.choose_group)
         layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
@@ -66,25 +79,31 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return root
     }
 
+    /**
+     *  function what happens if a group is selected in the spinner
+     *  @property pos the index of the selected item
+     */
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
         if (groupNameList.get(pos) == groupNameList[0]) {
             //do nothing first element is just a hint to select group
         } else {
-            //check if group has a filter
-            //get movie list
             if (token != null) {
-                val response = HttpRequests.getFilterByGroupId(BASE_URL_ById, token, groupIdList!!.get(pos - 1))
-                if (!response!! ) {
+                //check if group has a filter
+                val response = HttpRequests.getFilterByGroupId(
+                    BASE_URL_ById,
+                    token,
+                    groupIdList!!.get(pos - 1)
+                )
+                if (!response!!) {
                     Toast.makeText(
                         context,
                         "This group needs a filter. Please go back to the group settings and add a filter.",
                         Toast.LENGTH_LONG
                     )
                         .show()
-                    //do nothing
                 } else {
-                    SelectFilterActivity.setGroupId(groupIdList!!.get(pos-1))
+                    SelectFilterActivity.setGroupId(groupIdList!!.get(pos - 1))
                     SelectFilterActivity.setGroupName(groupNameList.get(pos))
                     val intent = Intent(context, SelectFilterActivity::class.java)
                     context?.startActivity(intent)
@@ -94,6 +113,6 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        // do nothing
     }
 }
