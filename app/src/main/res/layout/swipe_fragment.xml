@@ -4,9 +4,47 @@
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Canteloupe"
     tools:context=".ui.filmswipe.SwipeFragment">
 
+    <!-- choose group -->
     <RelativeLayout
+        android:id="@+id/choose_group"
+        android:layout_width="match_parent"
+        android:layout_height="800dp">
+
+        <ImageView
+            android:id="@+id/choose_ic"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            app:srcCompat="@drawable/ic_menu_groups" />
+
+        <TextView
+            android:id="@+id/choose_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/choose_ic"
+            android:layout_centerHorizontal="true"
+            android:text="Please select your current group:"
+            android:textAlignment="center"
+            android:textColor="@color/Hot_Chocolate"
+            android:textSize="22sp" />
+
+        <Spinner
+            android:id="@+id/groups_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/choose_text"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/Hot_Chocolate" />
+
+
+    </RelativeLayout>
+
+<!-- swipe layout -->
+ <!--   <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -117,7 +155,9 @@
             android:layout_below="@+id/title_description"
             android:justificationMode="inter_word"/>
 
+    </RelativeLayout>
 
+-->
         <!-- Hint Overlay
         <RelativeLayout
             android:id="@+id/hint_layout"
@@ -188,43 +228,6 @@
 
         </RelativeLayout>
 -->
-        <!-- choose group -->
-        <RelativeLayout
-            android:id="@+id/choose_group"
-            android:layout_width="match_parent"
-            android:layout_height="800dp"
-            android:background="@color/white">
 
-            <ImageView
-                android:id="@+id/choose_ic"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="80dp"
-                app:srcCompat="@drawable/ic_menu_groups" />
-
-            <TextView
-                android:id="@+id/choose_text"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/choose_ic"
-                android:layout_centerHorizontal="true"
-                android:text="Please select your current group:"
-                android:textColor="@color/Hot_Chocolate"
-                android:textSize="22sp"
-                android:textAlignment="center"/>
-
-            <Spinner
-                android:id="@+id/groups_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/choose_text"
-                android:layout_marginTop="40dp"
-                android:textColor="@color/Hot_Chocolate" />
-
-
-        </RelativeLayout>
-
-    </RelativeLayout>
 
 </ScrollView>

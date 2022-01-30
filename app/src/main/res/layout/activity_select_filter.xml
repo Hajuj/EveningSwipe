@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.filmswipe.SelectFilterActivity"
-    android:background="@color/white"
-    android:id="@+id/choose_filter">
+    android:background="@color/Canteloupe">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/choose_filter">
 
     <ImageView
         android:id="@+id/choose_ic"
@@ -35,5 +38,6 @@
         android:layout_below="@id/choose_text"
         android:layout_marginTop="40dp"
         android:textColor="@color/Hot_Chocolate" />
+    </RelativeLayout>
 
 </RelativeLayout>

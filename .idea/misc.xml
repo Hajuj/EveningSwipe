@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.31431159420289856" />
         <entry key="app/src/main/res/layout/activity_select_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_select_group.xml" value="0.6166666666666667" />
+        <entry key="app/src/main/res/layout/activity_swipe_movies.xml" value="0.33" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1897644927536232" />

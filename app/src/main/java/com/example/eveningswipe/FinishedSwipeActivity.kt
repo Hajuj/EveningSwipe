@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.RemoteViews
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
+import com.example.eveningswipe.ui.filmswipe.SwipeMoviesActivity
 
 
 class FinishedSwipeActivity : AppCompatActivity() {
@@ -48,9 +49,8 @@ class FinishedSwipeActivity : AppCompatActivity() {
      * send user to ...
      */
     private fun showMostSwiped() {
-        val profileIntent = Intent(this@FinishedSwipeActivity, RankingActivity::class.java)
-        startActivity(profileIntent)
-        finish()
+        val intent = Intent(this, RankingActivity::class.java)
+        this.startActivity(intent)
     }
 
     // https://www.geeksforgeeks.org/notifications-in-kotlin/

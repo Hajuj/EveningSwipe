@@ -12,15 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EveningSwipe"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.filmswipe.SelectFilterActivity"
-            android:exported="false"
-            android:label="@string/title_activity_select_group"
-            android:theme="@style/Theme.EveningSwipe.NoActionBar" />
+        <activity android:name=".ui.filmswipe.SwipeMoviesActivity"/>
+        <activity android:name=".ui.filmswipe.SelectFilterActivity" />
         <activity android:name=".AddFilterActivity" />
-        <activity
-            android:name=".RankingActivity"
-            android:exported="false" />
+        <activity android:name=".RankingActivity"/>
         <activity android:name=".GroupProfile" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".AddGroup" />

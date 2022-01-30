@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.filmswipe.SwipeMoviesActivity"
+    android:id="@+id/swipe_movie_layout"
+    android:background="@color/Canteloupe">
+
+    <!-- swipe layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:id="@+id/swipe_layout">
+
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:id="@+id/img_swipe"
+            android:layout_centerInParent="true"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:contentDescription="@string/movie_poster"
+            android:layout_below="@+id/movie_title"
+            android:scaleType="centerInside"/>
+
+        <ProgressBar
+            android:id="@+id/pBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/movie_title"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:id="@+id/star"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_star"
+            android:layout_below="@+id/img_swipe"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/vote_of_movie" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/movie_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:layout_toEndOf="@+id/star"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/img_swipe"/>
+
+        <TextView
+            android:id="@+id/movie_vote_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:paddingStart="5dp"
+            android:breakStrategy="simple"
+            android:layout_toEndOf="@+id/movie_vote"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/img_swipe"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/movie_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/img_swipe"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/title_description"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:text="@string/description"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/movie_vote"/>
+
+
+        <TextView
+            android:id="@+id/movie_text"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="simple"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/Hot_Chocolate"
+            android:layout_below="@+id/title_description"
+            android:justificationMode="inter_word"/>
+
+    </RelativeLayout>
+
+</ScrollView>
