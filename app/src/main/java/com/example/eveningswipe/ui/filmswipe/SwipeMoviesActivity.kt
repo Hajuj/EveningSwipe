@@ -215,6 +215,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         //swipe all the way to the right
                         if (currentX > maxSwipe) {
+                            rateMovie()
                             nextMovie(imgView)
                             Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT).show()
 

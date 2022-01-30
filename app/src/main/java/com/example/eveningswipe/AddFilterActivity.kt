@@ -26,14 +26,13 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_filter)
-        println("hallooooo")
         minYear = findViewById<View>(R.id.year_begin_input) as TextInputLayout
         maxYear = findViewById<View>(R.id.year_end_input) as TextInputLayout
         runtime = findViewById<View>(R.id.runtime_input) as TextInputLayout
         size = findViewById<View>(R.id.size_input) as TextInputLayout
         rating = findViewById<View>(R.id.rating_input) as TextInputLayout
         votes = findViewById<View>(R.id.votes_input) as TextInputLayout
-        createFilter = findViewById<Button>(R.id.create_filter) as Button
+        createFilter = findViewById(R.id.create_filter) as Button
         createFilter!!.setOnClickListener(View.OnClickListener { addFilter() })
 
 
@@ -63,30 +62,46 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     }
 
     fun addFilter(){
-        val minYearInput = minYear?.editText?.text.toString().trim()
-        val maxYearInput = maxYear?.editText?.text.toString().trim()
-        val runtimeInput = runtime?.editText?.text.toString().trim()
-        val sizeInput = size?.editText?.text.toString().trim()
-        val ratingInput = rating?.editText?.text.toString().trim()
-        val votesInput = votes?.editText?.text.toString().trim()
+        var minYearInput: Int? = null
+        var maxYearInput: Int? = null
+        var runtimeInput: Int? = null
+        var sizeInput: Int? = null
+        var ratingInput: Int? = null
+        var votesInput: Int? = null
 
-        val filter = FilterDto(genre.toString(), "", "",
-            minYearInput.toInt(), maxYearInput.toInt(), ratingInput.toInt(), votesInput.toInt(),
-            runtimeInput.toInt(), sizeInput.toInt(), GroupProfile.getValue()?.toInt()!!)
-
-        println("request3: " + filter)
-        val response =
-            filter.let { HttpRequests.postCreateFilter(BASE_URL_CREATEFILTER, token!!, it) }
-        if (!response!!){
-            // error
-        } else {
+        if (genre == null || minYear?.editText?.text!!.isEmpty() ||  maxYear?.editText?.text!!.isEmpty() ||
+            runtime?.editText?.text!!.isEmpty() || size?.editText?.text!!.isEmpty() ||
+                rating?.editText?.text!!.isEmpty() || votes?.editText?.text!!.isEmpty()){
             Toast.makeText(
                 this,
-                "Filter is added to group.",
+                "Please fill in every field.",
                 Toast.LENGTH_LONG
-            )
-                .show()
+            ).show()
+        }else{
+            minYearInput = minYear?.editText?.text.toString().trim().toInt()
+            maxYearInput = maxYear?.editText?.text.toString().trim().toInt()
+            runtimeInput = runtime?.editText?.text.toString().trim().toInt()
+            sizeInput = size?.editText?.text.toString().trim().toInt()
+            ratingInput = rating?.editText?.text.toString().trim().toInt()
+            votesInput = votes?.editText?.text.toString().trim().toInt()
+
+            val filter = FilterDto(genre.toString(), "", "",
+                minYearInput, maxYearInput, ratingInput, votesInput,
+                runtimeInput, sizeInput, GroupProfile.getValue()?.toInt()!!)
+
+            val response =
+                filter.let { HttpRequests.postCreateFilter(BASE_URL_CREATEFILTER, token!!, it) }
+            if (!response!!){
+                // error
+            } else {
+                Toast.makeText(
+                    this,
+                    "Filter is added to group.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {

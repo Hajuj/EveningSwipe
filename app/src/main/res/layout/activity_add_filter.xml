@@ -7,12 +7,12 @@
     tools:context=".AddFilterActivity"
     android:orientation="horizontal"
     android:background="?attr/bgcInApp"
-    android:id="@+id/add_filter_layout"
     tools:ignore="ScrollViewCount">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/add_filter_layout">
 
     <TextView
         android:id="@+id/select_genre"
