@@ -5,6 +5,7 @@ import com.example.user_demo_postgres.dto.*
 import com.example.user_demo_postgres.entity.TmdbMovieInfo
 import com.example.user_demo_postgres.returnDto.GroupInfoDto
 import com.example.user_demo_postgres.returnDto.RetMovieDetailsDto
+import com.example.user_demo_postgres.returnDto.RetSwipeStateDto
 import com.example.user_demo_postgres.returnDto.RetUserInfoDto
 import com.example.user_demo_postgres.service.*
 import com.example.user_demo_postgres.utils.mapper.MovieDetailMaper
@@ -87,6 +88,25 @@ class MovieEndpoints (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
+    @PostMapping("/api/filter/create/random")
+    fun createRandomFilter(@RequestBody dto: AuthFilterDto): ResponseEntity<GroupFilterDTO> {
+        if (jwtService.validateToken(dto.token.token)) {
+            val id = jwtService.getIdFromToken(dto.token.token)
+
+            id?.let {
+                if (id == groupService.getGroup(dto.filter.group_id).owner) {
+                    val result = groupFilterService.createRandomFilter(dto.filter)
+                    val users = groupUserService.getUsersByGroup(dto.filter.group_id)
+                    users?.map{
+                        ratingUserService.createRatinUser(result.id, it)
+                    }
+                    return ResponseEntity.ok(result)
+                }
+            }
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+    }
+
     @PostMapping("/api/user")
     fun getUser(@RequestBody dto: TokenDto): ResponseEntity<UserInfoDto> {
         if (jwtService.validateToken(dto.token)) {
@@ -113,9 +133,8 @@ class MovieEndpoints (
             val id = jwtService.getIdFromToken(dto.token.token)
 
             id?.let {
-                if (groupService.getOwner(dto.add.groupId) == id){
+                if (groupUserService.isUserInGroup(dto.add.groupId, id)){
                      val user = userService.findByEmail(dto.add.toAdd)
-
                     user?.let{
                         groupUserService.adUserToGroup(user.id ,dto.add.groupId)
                         return ResponseEntity.ok("User added to Group")
@@ -158,13 +177,30 @@ class MovieEndpoints (
             id?.let {
                 val groupId = groupFilterService.getGroupIdByFilter(body.rating.filterId)
                 if (groupUserService.isUserInGroup(groupId, id)) {
-                    movieRatingService.rateMovie(body.rating.movieId, body.rating.filterId)
+                    if ( body.rating.like) {
+                        movieRatingService.rateMovie(body.rating.movieId, body.rating.filterId)
+                    }
                     ratingUserService.rateMovieInFilter(body.rating.filterId, id)
                     return ResponseEntity.ok("Rating added to movie in filter")
 
                 }
             }
         }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+
+    }
+    @PostMapping("/api/swipestate")
+    fun getSwipeState (@RequestBody body: AuthgetSwiperstateDto) : ResponseEntity<RetSwipeStateDto>{
+        if (jwtService.validateToken(body.token.token)) {
+            val id = jwtService.getIdFromToken(body.token.token)
+
+            id?.let {
+                 return ResponseEntity.ok( RetSwipeStateDto(ratingUserService.getSwipeState(id, body.filterId)))
+
+
+                }
+            }
+
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
 
     }
@@ -244,6 +280,23 @@ class MovieEndpoints (
 
             id?.let {
                 return ResponseEntity.ok(userService.findUsers(body.search))
+
+            }
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+    }
+
+    @PostMapping("/api/users/exist")
+    fun chekcIfusersExist(@RequestBody body: AuthCheckUserDto): ResponseEntity<RetUserEmNaDto> {
+        if (jwtService.validateToken(body.token)) {
+            val id = jwtService.getIdFromToken(body.token)
+
+            id?.let {
+                val user = userService.findByEmail(body.email)
+                user?.let{
+                    return ResponseEntity.ok(RetUserEmNaDto(user.email, user.name))
+                }
+                throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
             }
         }

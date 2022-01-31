@@ -68,4 +68,23 @@ class GroupFilterServiceImpl(
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
+    override fun createRandomFilter(groupFilterDTO: GroupFilterDTO): GroupFilterDTO {
+        val group = groupService.getGroup(groupFilterDTO.group_id)
+        val movies = basicMovieservice.getRandomMovies(groupFilterDTO.size)
+        groupFilterDTO.selection = movies
+        val filter = groupFilterMapper.toEntity(groupFilterDTO)
+        groupFilterRepository.save(filter)
+        val saved_filter = groupFilterMapper.fromEntity(filter)
+        for ( movie in movies){
+            var rating = MovieRatingDTO( id = 0, movie_id = movie, filter_id = saved_filter.id, rating = 0)
+            print(rating)
+            ratingService.createMovieRating(rating)
+        }
+
+        return groupFilterMapper.fromEntity(filter)
+
+
+
+    }
+
 }

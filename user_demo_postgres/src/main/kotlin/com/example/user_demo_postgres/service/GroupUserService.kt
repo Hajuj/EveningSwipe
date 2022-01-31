@@ -12,7 +12,12 @@ class GroupUserService(
 ) {
 
     fun adUserToGroup(userid:Int, groupId:Int){
-        groupUserRepository.save(GroupUsers(0, groupId = groupId, userId = userid))
+        if (!isUserInGroup(groupId, userid)) {
+            groupUserRepository.save(GroupUsers(0, groupId = groupId, userId = userid))
+        }
+        else {
+            throw ResponseStatusException(HttpStatus.FORBIDDEN)
+        }
 
     }
     fun isUserInGroup(grupId: Int , userId : Int): Boolean{
@@ -22,6 +27,7 @@ class GroupUserService(
                 if (user.userId == userId)
                 return true
             }
+            return false
 
         }
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)

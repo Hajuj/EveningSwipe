@@ -28,4 +28,9 @@ class Basic_MovieServiceImpl (
         return moveis
     }
 
+    override fun getRandomMovies(size: Int): List<String> {
+        return basicMovierepository.getRandomMovies(size)
+
+    }
+
 }

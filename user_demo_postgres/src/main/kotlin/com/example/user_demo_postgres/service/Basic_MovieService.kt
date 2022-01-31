@@ -10,4 +10,6 @@ interface Basic_MovieService {
      fun getRandBasicMovies(): List<String>
 
      fun getMoveiByFilter(filterDTO: GroupFilterDTO): List<String>
+
+     fun getRandomMovies(size: Int): List<String>
 }

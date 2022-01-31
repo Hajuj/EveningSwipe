@@ -5,7 +5,9 @@ import com.example.user_demo_postgres.dto.RetUserEmNaDto
 import com.example.user_demo_postgres.entity.UserApp
 import com.example.user_demo_postgres.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 @Service
@@ -38,6 +40,10 @@ class UserService (
         val retUsers = mutableListOf<RetUserEmNaDto>()
         users?.map {
             retUsers.add(RetUserEmNaDto(it.email, it.name))
+        }
+        if( retUsers == emptyList<RetUserEmNaDto>()){
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+
         }
         return retUsers
     }

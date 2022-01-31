@@ -14,4 +14,6 @@ interface GroupFilterService {
     fun getMoviesByGroupId(id: Int): List<String>
 
     fun getGroupIdByFilter(filterId: Int): Int
+
+    fun createRandomFilter(groupFilterDTO: GroupFilterDTO): GroupFilterDTO
 }

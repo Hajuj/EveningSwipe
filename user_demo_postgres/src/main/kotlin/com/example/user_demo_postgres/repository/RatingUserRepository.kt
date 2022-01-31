@@ -14,4 +14,7 @@ interface RatingUserRepository: JpaRepository<RatingUser, Int> {
     @Query(nativeQuery = true, value = "update rating_user set rating = rating +1 where filter_id = ?1 and user_id = ?2")
     fun increaseUserRating(filterId: Int , userId: Int)
 
+    @Query(nativeQuery = true , value = "select rating from rating_user where user_id= ?1 and filter_id = ?2")
+    fun getSwipeState(userId: Int, filterId: Int): Int
+
 }

@@ -3,6 +3,7 @@ import com.example.user_demo_postgres.dto.LoginDTO
 import com.example.user_demo_postgres.dto.RegisterDTO
 import com.example.user_demo_postgres.dto.RequestDTO
 import com.example.user_demo_postgres.entity.UserApp
+import com.example.user_demo_postgres.returnDto.RetmesageDto
 import com.example.user_demo_postgres.service.EncoderService
 import com.example.user_demo_postgres.service.JwtService
 import com.example.user_demo_postgres.service.RegexService
@@ -20,14 +21,15 @@ class AuthController (
     private val jwtService: JwtService,
     private val regexService: RegexService
         ){
-    /*@PostMapping("/register")
+    @PostMapping("/register")
     fun register(@RequestBody body: RegisterDTO): ResponseEntity<Any> {
         if (regexService.isEmailFormatValid(body.email) and regexService.isPasswordStrongEnough(body.password)) {
             val user = userService.mapRegisterTouser(body)
-            return ResponseEntity.ok(this.userService.save(user))
+            this.userService.save(user)
+            return ResponseEntity.ok(RetmesageDto("registration successful"))
         }
         throw ResponseStatusException(HttpStatus.BAD_REQUEST)
-    }*/
+    }
 
 
     @PostMapping("/login")

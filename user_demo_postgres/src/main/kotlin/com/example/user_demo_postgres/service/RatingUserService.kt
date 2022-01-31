@@ -20,5 +20,9 @@ class RatingUserService(
         ratingUserRepositoy.save(RatingUser(0 ,filterId, userId, 0))
     }
 
+    fun getSwipeState(userId: Int, filterId: Int): Int{
+         return ratingUserRepositoy.getSwipeState(userId, filterId)
+    }
+
 }
 

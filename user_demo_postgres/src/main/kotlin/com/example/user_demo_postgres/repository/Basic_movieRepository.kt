@@ -19,4 +19,8 @@ interface Basic_movieRepository: CrudRepository<Basic_movie, String> {
             "                                 votes >= ?5 and" +
             "                                 runtime <= ?6 limit ?7" )
     fun getMoviesByFilter(genre_1: String, min_year: Int, max_year: Int, rating: Double, votes: Int, max_runtime: Int , size: Int):List<String>
+
+
+    @Query(nativeQuery = true, value = "select id from basic_movie order by  random() limit ?1 ")
+    fun getRandomMovies(size: Int) : List<String>
 }
