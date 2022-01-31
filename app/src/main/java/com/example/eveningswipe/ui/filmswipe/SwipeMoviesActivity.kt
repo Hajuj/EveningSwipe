@@ -8,17 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
-import java.lang.Float.min
+import kotlin.math.min
 
 /**
  * variable that can be accessed from other activities
@@ -55,6 +52,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
     private var layout: View? = null
     private var imgURL: String? = null
     private var layoutSwipe: ImageView? = null
+    private var scrollView: ScrollView? = null
     private lateinit var swipeViewModel: SwipeViewModel
     val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
     val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
@@ -82,6 +80,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
         val movieVoteCountView: TextView = findViewById(R.id.movie_vote_count)
         val imgView: ImageView = findViewById(R.id.img_swipe)
         layoutSwipe = findViewById(R.id.img_swipe)
+        scrollView = findViewById(R.id.swipe_movie_layout)
         pgsBar = findViewById(R.id.pBar1)
 
         //layout for swipe hint -- old
@@ -208,42 +207,38 @@ class SwipeMoviesActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * function to swipe the movie image
+     * track user's movement and correspond accordingly
+     */
     @SuppressLint("ClickableViewAccessibility")
     fun touchListener(imgView: ImageView) {
-        val maxSwipe = 600
-        val minSwipe = -200
+        //disable swipe page scrolling
+//        scrollView?.setOnTouchListener(
+//            View.OnTouchListener { v, event -> return@OnTouchListener true })
+
+        val maxSwipe = 510
+        val minSwipe = 0
+        var lastX = 0f
 
         layoutSwipe?.setOnTouchListener(
-            View.OnTouchListener { v, event ->
-
-                //variables to store current configuration of movie image
-                val layoutWidth = layoutSwipe!!.width
-                val displayMetrics = resources.displayMetrics
-                val layoutRightEdge = (displayMetrics.widthPixels.toFloat() / 2) + (layoutWidth / 2)
-                val layoutLeftEdge = (displayMetrics.widthPixels.toFloat() / 2) - (layoutWidth / 2)
+            View.OnTouchListener { _, event ->
 
                 when (event.action) {
-                    //swipe movie image
-                    MotionEvent.ACTION_MOVE -> {
-                        val newX = event.rawX
-
-                        //swipe right
-                        if (newX + layoutWidth > layoutLeftEdge) {
-                            layoutSwipe!!.animate().x(min(layoutLeftEdge, newX - (layoutWidth / 2)))
-                                .setDuration(0)
-                                .start()
-                        }
-
-                        //swipe left
-                        if (newX - layoutWidth < layoutRightEdge) {
-                            layoutSwipe!!.animate()
-                                .x(min(layoutRightEdge, newX - (layoutWidth / 2)))
-                                .setDuration(0)
-                                .start()
-                        }
+                    //hold the movie image
+                    MotionEvent.ACTION_DOWN -> {
+                        lastX = layoutSwipe!!.x - event.rawX
                     }
 
-                    //swipe the movie image
+                    //move the movie image
+                    MotionEvent.ACTION_MOVE -> {
+                        val newX = event.rawX + lastX
+
+                        //move the image to the right or left
+                        layoutSwipe!!.animate().x(newX).setDuration(0).start()
+                    }
+
+                    //release the movie image
                     MotionEvent.ACTION_UP -> {
                         val currentX = layoutSwipe!!.x
 
@@ -268,7 +263,6 @@ class SwipeMoviesActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 return@OnTouchListener true
             }
         )
