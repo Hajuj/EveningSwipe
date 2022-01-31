@@ -1,11 +1,9 @@
 package com.example.eveningswipe
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -15,15 +13,15 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.httpRequests.TokenDto
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     private val BASE_URL_Login = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/login"
     private val BASE_URL_User = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
-    private var register: TextView? = null
+    private var register: Button? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
     private  var password: TextInputLayout? = null
+    private  var title: TextView? = null
     lateinit var token: TokenDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,19 +37,39 @@ class MainActivity : AppCompatActivity() {
             setTheme(R.style.Theme_EveningSwipe)
         }
 
-        register = findViewById<View>(R.id.register) as Button
+        register = findViewById(R.id.register)
         register!!.setOnClickListener(View.OnClickListener { startRegisterActivity() })
-        email = findViewById<View>(R.id.email) as TextInputLayout
-        password = findViewById<View>(R.id.password) as TextInputLayout
-        signIn = findViewById<View>(R.id.signIn) as Button
+        email = findViewById(R.id.email)
+        password = findViewById(R.id.password)
+        signIn = findViewById(R.id.signIn)
         signIn!!.setOnClickListener(View.OnClickListener { allowLogin() })
+        title = findViewById(R.id.text)
 
 
         // Set cut corner background for API 23+
         val layout = findViewById(R.id.header_layout) as View
         layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
 
+        startAnimation()
     }
+
+    /**
+     * method to animate the login screen
+     */
+    private fun startAnimation() {
+        val button = AnimationUtils.loadAnimation(this, R.anim.button)
+        val text_input = AnimationUtils.loadAnimation(this , R.anim.text_input)
+//        val text = AnimationUtils.loadAnimation(this , R.anim.text)
+
+        signIn!!.startAnimation(button)
+        register!!.startAnimation(button)
+
+        email!!.startAnimation(text_input)
+        password!!.startAnimation(text_input)
+
+//        title!!.startAnimation(text)
+    }
+
     /**
      * method to handle login
      */
