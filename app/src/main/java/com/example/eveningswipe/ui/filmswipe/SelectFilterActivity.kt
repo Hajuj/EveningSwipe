@@ -13,10 +13,10 @@ import com.example.eveningswipe.httpRequests.HttpRequests
 
 /**
  * variables that can be accessed from other activities
- * @property groupId id of the selected group
- * @property groupName name of the selected group
- * @property filterId id of th selected filter
- * @property filterIndex index of the selected filter in spinner list
+ * @param groupId id of the selected group
+ * @param groupName name of the selected group
+ * @param filterId id of th selected filter
+ * @param filterIndex index of the selected filter in spinner list
  */
 var groupId: Int? = null
 var groupName: String? = null
@@ -25,10 +25,10 @@ var filterIndex: Int? = null
 
 /**
  * class to select the filter before swipe
- * @property BASE_URL_GetFilterById url for the http request
- * @property token the token of the current user, for identification
- * @property filterList a list with all filter of the group
- * @property filterNameList a list with just the names of all filter
+ * @param BASE_URL_GetFilterById url for the http request
+ * @param token the token of the current user, for identification
+ * @param filterList a list with all filter of the group
+ * @param filterNameList a list with just the names of all filter
  */
 class SelectFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var BASE_URL_GetFilterById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid"
@@ -85,8 +85,8 @@ class SelectFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
     /**
      * functions that are called in the SwipeFragment, to transfer the variables
-     * @property groupId is the Id from the selected group
-     * @property groupName is the name from the selected group
+     * @property getGroupId is the Id from the selected group
+     * @property getGroupName is the name from the selected group
      */
     companion object {
         fun setGroupId(getGroupId: Int) {

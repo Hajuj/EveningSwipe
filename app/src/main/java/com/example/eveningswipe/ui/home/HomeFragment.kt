@@ -12,10 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.eveningswipe.R
-import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
-import com.example.eveningswipe.ui.filmswipe.SwipeViewModel
-import com.example.eveningswipe.ui.filmswipe.URL_GroupInfo
 
 
 class HomeFragment : Fragment() {
@@ -51,12 +48,18 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    /**
+     * function to start the swipe fragment
+     * @property root view of home fragment
+     */
     @SuppressLint("ResourceAsColor")
     private fun startSwiping(root: View) {
+        //use fragment manager to replace fragment
         val transaction = activity?.supportFragmentManager?.beginTransaction()
-        transaction?.replace(R.id.nav_host_fragment ,SwipeFragment())
+        transaction?.replace(R.id.nav_host_fragment, SwipeFragment())
         transaction?.addToBackStack(null);
         transaction?.commit()
+        // hide button and text, show loading spinner
         root.setBackgroundResource(R.drawable.bg_canteloupe)
         letsSwipe?.setVisibility(View.GONE)
         textView?.setVisibility(View.GONE)

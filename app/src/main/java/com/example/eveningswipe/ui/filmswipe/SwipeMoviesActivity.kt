@@ -22,25 +22,25 @@ import java.lang.Float.min
 
 /**
  * variable that can be accessed from other activities
- * @property swipeCount how many movies to swipe
+ * @param swipeCount how many movies to swipe
  */
 var swipeCount: Int? = null
 
 /**
  * class to select the movie before swipe
- * @property temp variable to know when the last movie is reached
- * @property index index in the movieList
- * @property token current token of the user
- * @property hintAccept true if the hint has been seen
- * @property movieId id of the selected movie
- * @property movieList list of all movie ids in the filter
- * @property pgsBar loading spinner
- * @property layout swipe layout
- * @property imgURL url of the movie image
- * @property layoutSwipe
- * @property swipeViewModel View Model of the activity
- * @property BASE_URL_MovieDetails url for http request
- * @property BASE_URL_RateMovie url for http request
+ * @param temp variable to know when the last movie is reached
+ * @param index index in the movieList
+ * @param token current token of the user
+ * @param hintAccept true if the hint has been seen
+ * @param movieId id of the selected movie
+ * @param movieList list of all movie ids in the filter
+ * @param pgsBar loading spinner
+ * @param layout swipe layout
+ * @param imgURL url of the movie image
+ * @param layoutSwipe
+ * @param swipeViewModel View Model of the activity
+ * @param BASE_URL_MovieDetails url for http request
+ * @param BASE_URL_RateMovie url for http request
  *
  */
 class SwipeMoviesActivity : AppCompatActivity() {

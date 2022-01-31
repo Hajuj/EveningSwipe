@@ -12,12 +12,12 @@ import android.widget.Toast
 
 /**
  * swipe fragment
- * @property BASE_URL_ById url for http request
- * @property URL_GroupInfo url for htttp request
- * @property root layout view of the fragment
- * @property token current token of the user
- * @property groupIdList list with the group id of the user
- * @property groupNameList list of the group names
+ * @param BASE_URL_ById url for http request
+ * @param URL_GroupInfo url for htttp request
+ * @param root layout view of the fragment
+ * @param token current token of the user
+ * @param groupIdList list with the group id of the user
+ * @param groupNameList list of the group names
  */
 class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     companion object {

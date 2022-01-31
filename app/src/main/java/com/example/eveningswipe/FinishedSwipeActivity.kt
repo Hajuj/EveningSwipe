@@ -15,10 +15,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.RemoteViews
-import com.example.eveningswipe.ui.filmswipe.SwipeFragment
-import com.example.eveningswipe.ui.filmswipe.SwipeMoviesActivity
 
-
+/**
+ * activity show view that all movies are swiped and sends notification
+ * @param mostSwiped button to show ranking result
+ * @param notificationManager - description to create a notification
+ */
 class FinishedSwipeActivity : AppCompatActivity() {
 
     private var mostSwiped: Button? = null
@@ -28,6 +30,10 @@ class FinishedSwipeActivity : AppCompatActivity() {
     private val channelId = "i.apps.notifications"
     private val description = "Result notification"
 
+    /**
+     * create content of activity
+     * get views and call notification
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finished_swipe)
@@ -41,47 +47,47 @@ class FinishedSwipeActivity : AppCompatActivity() {
 
         //notification
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         resultNotification()
     }
 
     /**
-     * send user to ...
+     * send user to ranking activity by click on button
      */
     private fun showMostSwiped() {
         val intent = Intent(this, RankingActivity::class.java)
         this.startActivity(intent)
     }
 
-    // https://www.geeksforgeeks.org/notifications-in-kotlin/
-    @SuppressLint("RemoteViewLayout")
+    /**
+     * function that handles the notification
+     * source: https://www.geeksforgeeks.org/notifications-in-kotlin/
+     */
+    @SuppressLint("RemoteViewLayout", "UnspecifiedImmutableFlag")
     fun resultNotification() {
         val intent = Intent(this, RankingActivity::class.java)
         val pendingIntent =
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        val contentView = RemoteViews(packageName, R.layout.fragment_rating_result)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel =
-                NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(true)
-            this.notificationManager.createNotificationChannel(notificationChannel)
+        notificationChannel =
+            NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.GREEN
+        notificationChannel.enableVibration(true)
+        this.notificationManager.createNotificationChannel(notificationChannel)
 
-            builder = Notification.Builder(applicationContext, channelId)
-                .setContentTitle("Voting is over!")
-                .setContentText("You voted all movies. Click here to see the ranking!")
-                .setSmallIcon(R.drawable.movie_icon)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(
-                        this.resources,
-                        R.drawable.ic_launcher_background
-                    )
+        builder = Notification.Builder(applicationContext, channelId)
+            .setContentTitle("Voting is over!")
+            .setContentText("You voted all movies. Click here to see the ranking!")
+            .setSmallIcon(R.drawable.movie_icon)
+            .setLargeIcon(
+                BitmapFactory.decodeResource(
+                    this.resources,
+                    R.drawable.ic_launcher_background
                 )
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-        }
+            )
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
         this.notificationManager.notify(1234, builder.build())
     }
 }
