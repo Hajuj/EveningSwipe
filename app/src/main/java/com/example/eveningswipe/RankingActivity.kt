@@ -135,8 +135,10 @@ class RankingActivity : AppCompatActivity() {
         }
 
         // update the text in the widget
-        for (i in 0..widgetIds!!.size - 1) {
-            updateAppWidget(this, AppWidgetManager.getInstance(this), widgetIds!![i])
+        if(widgetIds != null){
+            for (i in 0..widgetIds!!.size - 1) {
+                updateAppWidget(this, AppWidgetManager.getInstance(this), widgetIds!![i])
+            }
         }
     }
 }
