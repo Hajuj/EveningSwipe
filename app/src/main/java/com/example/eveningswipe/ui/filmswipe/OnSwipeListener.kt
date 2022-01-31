@@ -9,31 +9,42 @@ import android.view.View
 import android.view.View.OnTouchListener
 import kotlin.math.abs
 
+/**
+ * function to handle the swipe gesture
+ * source: https://www.tutorialspoint.com/how-to-handle-swipe-gestures-in-kotlin
+ * use motion events to detect movement
+ */
 internal open class OnSwipeTouchListener(c: Context?) :
     OnTouchListener {
     private val gestureDetector: GestureDetector
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(motionEvent)
     }
+
     private inner class GestureListener : SimpleOnGestureListener() {
         private val SWIPE_THRESHOLD: Int = 100
         private val SWIPE_VELOCITY_THRESHOLD: Int = 100
         override fun onDown(e: MotionEvent): Boolean {
             return true
         }
+
         override fun onSingleTapUp(e: MotionEvent): Boolean {
             onClick()
             return super.onSingleTapUp(e)
         }
+
         override fun onDoubleTap(e: MotionEvent): Boolean {
             onDoubleClick()
             return super.onDoubleTap(e)
         }
+
         override fun onLongPress(e: MotionEvent) {
             onLongClick()
             super.onLongPress(e)
         }
+
         override fun onFling(
             e1: MotionEvent,
             e2: MotionEvent,
@@ -50,21 +61,18 @@ internal open class OnSwipeTouchListener(c: Context?) :
                     ) {
                         if (diffX > 0) {
                             onSwipeRight()
-                        }
-                        else {
+                        } else {
                             onSwipeLeft()
                         }
                     }
-                }
-                else {
+                } else {
                     if (abs(diffY) > SWIPE_THRESHOLD && abs(
                             velocityY
                         ) > SWIPE_VELOCITY_THRESHOLD
                     ) {
                         if (diffY < 0) {
                             onSwipeUp()
-                        }
-                        else {
+                        } else {
                             onSwipeDown()
                         }
                     }
@@ -75,6 +83,7 @@ internal open class OnSwipeTouchListener(c: Context?) :
             return false
         }
     }
+
     open fun onSwipeRight() {}
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
@@ -82,6 +91,7 @@ internal open class OnSwipeTouchListener(c: Context?) :
     private fun onClick() {}
     private fun onDoubleClick() {}
     private fun onLongClick() {}
+
     init {
         gestureDetector = GestureDetector(c, GestureListener())
     }
