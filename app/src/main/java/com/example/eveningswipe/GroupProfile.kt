@@ -7,9 +7,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.eveningswipe.GroupID.groupIDforUserAdding
-import com.example.eveningswipe.httpRequests.HttpRequests
-import com.example.eveningswipe.ui.groups.SlideshowFragment
-import com.google.android.material.textfield.TextInputLayout
 
 class GroupProfile : AppCompatActivity() {
 

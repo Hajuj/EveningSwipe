@@ -1,21 +1,13 @@
 package com.example.eveningswipe
 
-import android.app.ActionBar
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
-import com.example.eveningswipe.httpRequests.HttpRequests
-import com.example.eveningswipe.ui.filmswipe.SwipeFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -29,11 +21,6 @@ class NavigationDrawer : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        /*val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -50,9 +37,6 @@ class NavigationDrawer : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { dest ->
             when(dest.itemId) {
                 R.id.nav_logout -> logout()
-               /* R.id.nav_home -> {
-                   //TODO: change color of appbar
-                }*/
                 else -> {
                     NavigationUI.onNavDestinationSelected(dest, navController)
                     drawerLayout.closeDrawers()

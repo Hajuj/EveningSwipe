@@ -96,9 +96,9 @@ class MainActivity : AppCompatActivity() {
         if (token != null) {
             response = HttpRequests.getUserInformation(BASE_URL_User, token)
         }
-        //if user can login:
         if(!response!!){
-            //login not possible
+            Toast.makeText(this, "Something went wrong - please try to login again", Toast.LENGTH_SHORT)
+                    .show()
         }else{
             startHomeActivity()
         }

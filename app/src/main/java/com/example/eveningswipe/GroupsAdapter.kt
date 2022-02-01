@@ -1,12 +1,10 @@
 package com.example.eveningswipe
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.databinding.ItemGrouprecyclerBinding
-import java.util.logging.Logger
 
 class GroupsAdapter(
     var groups: List<GroupDataRecycle>
