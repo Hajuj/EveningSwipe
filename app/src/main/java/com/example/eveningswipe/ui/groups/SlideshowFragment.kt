@@ -2,15 +2,12 @@ package com.example.eveningswipe.ui.groups
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eveningswipe.AddGroup
@@ -18,6 +15,7 @@ import com.example.eveningswipe.GroupDataRecycle
 import com.example.eveningswipe.GroupsAdapter
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
+import java.util.logging.Logger
 
 
 class SlideshowFragment : Fragment() {
@@ -36,10 +34,7 @@ class SlideshowFragment : Fragment() {
         slideshowViewModel =
             ViewModelProvider(this).get(SlideshowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
         showGroups()
@@ -70,7 +65,7 @@ class SlideshowFragment : Fragment() {
                 val response = HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupList[i])
 
                 if (!response!!){
-                    // error
+                    Logger.getLogger(SlideshowFragment::class.java.name).warning("Group information could not be retrieved")
                 } else {
                     groups.add(GroupDataRecycle(HttpRequests.responseGroupInfo!!.name, HttpRequests.responseGroupInfo!!.member.size,
                         groupList.get(i)

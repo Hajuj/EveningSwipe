@@ -16,7 +16,7 @@ object HttpRequests {
     var wrongLoginData: String? = ""
 
     /**
-     * function to send reuqest to register a new user
+     * function to send request to register a new user
      */
     fun postRegisterUser(url: String, nam: String, email: String, password: String): Boolean? {
         val registerUser = RegisterUser(
@@ -35,8 +35,6 @@ object HttpRequests {
                 } else {
                     success = true
                 }
-                println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
-
             }.join()
         return success
     }
@@ -60,10 +58,7 @@ object HttpRequests {
                 info?.let { responseToken = info }
                 err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
-                    println("wrongLoginDataHTTP " + wrongLoginData)
                 }
-                println("reg: " + req + " res: " + res + " result: " + result + "code? " + res.statusCode)
-                println(responseToken?.token)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -94,7 +89,6 @@ object HttpRequests {
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(addUserToGroup).toString())
             .response() { req, res, result ->
-                println("reg: " + req + " res: " + res + " result: " + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -118,8 +112,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseUserInfo = info }
                 err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
-                println("user name: " + responseUserInfo.userName)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -134,7 +126,6 @@ object HttpRequests {
      */
     fun getGroupInformation(url: String, token: TokenDto, groupId: Int): Boolean? {
         val groupInfo = GroupInfoDto(
-            //name = name,
             token = token,
             groupid = groupId
         )
@@ -148,7 +139,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseGroupInfo = info }
                 err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
                 responseGroupInfo =
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
                 groupName = result.get().name
@@ -184,7 +174,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseFindUserInfo = info }
                 err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
                 responseFindUserInfo = FindUserDto(result.get().email, result.get().name)
             }.join()
         return success
@@ -214,7 +203,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseGroupInfo = info }
                 err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
                 responseGroupInfo =
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
             }.join()
@@ -239,7 +227,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseFilterByGroupId = info }
                 err?.let { println("ERROR in getFilterByGroupId !!" + err) }
-                println("no error : reg: " + req + " res: " + res + " result: " + result)
                 if (res.statusCode == 400 || responseFilterByGroupId.contentEquals(emptyArray<GetFilterByGroupId2>())) {
                     success = false
                 } else {
@@ -267,7 +254,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseMovieDetails = info }
                 err?.let { println("ERROR !!") }
-                println("reg: " + req + " res: " + res + " result: " + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -292,7 +278,6 @@ object HttpRequests {
             .response() { req, res, result ->
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
-                println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
             }
     }
 
@@ -315,7 +300,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseFilterRating = info }
                 err?.let { println("ERROR !!" + err) }
-                println("reg: " + req + " res: " + res + " result: " + result)
 
                 if (res.statusCode == 400) {
                     success = false
@@ -343,7 +327,6 @@ object HttpRequests {
             .response() { req, res, result ->
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
-                println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -369,7 +352,6 @@ object HttpRequests {
             .response() { req, res, result ->
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
-                println("rated!!" + "reg: " + req + " res: " + res + " result: " + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
