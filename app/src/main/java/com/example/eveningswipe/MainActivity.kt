@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     private var register: Button? = null
     private var signIn: Button? = null
     private var email: TextInputLayout? = null
-    private  var password: TextInputLayout? = null
-    private  var title: TextView? = null
+    private var password: TextInputLayout? = null
+    private var title: TextView? = null
     lateinit var token: TokenDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         //for dark mode
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.Theme_DarkMode)
         } else {
             setTheme(R.style.Theme_EveningSwipe)
@@ -58,14 +58,14 @@ class MainActivity : AppCompatActivity() {
      */
     private fun startAnimation() {
         val button = AnimationUtils.loadAnimation(this, R.anim.button)
-        val text_input = AnimationUtils.loadAnimation(this , R.anim.text_input)
+        val textInput = AnimationUtils.loadAnimation(this, R.anim.text_input)
 //        val text = AnimationUtils.loadAnimation(this , R.anim.text)
 
         signIn!!.startAnimation(button)
         register!!.startAnimation(button)
 
-        email!!.startAnimation(text_input)
-        password!!.startAnimation(text_input)
+        email!!.startAnimation(textInput)
+        password!!.startAnimation(textInput)
 
 //        title!!.startAnimation(text)
     }
@@ -79,10 +79,10 @@ class MainActivity : AppCompatActivity() {
 
         val response = HttpRequests.postLoginUser(BASE_URL_Login, email, password)
 
-        if(!response!!){
+        if (!response!!) {
             Toast.makeText(this, "Wrong username or password", Toast.LENGTH_SHORT)
                 .show()
-        }else{
+        } else {
             login()
         }
     }
@@ -92,14 +92,14 @@ class MainActivity : AppCompatActivity() {
      */
     private fun login() {
         val token = HttpRequests.responseToken
-        var response: Boolean? =null
+        var response: Boolean? = null
         if (token != null) {
             response = HttpRequests.getUserInformation(BASE_URL_User, token)
         }
         //if user can login:
-        if(!response!!){
+        if (!response!!) {
             //login not possible
-        }else{
+        } else {
             startHomeActivity()
         }
 

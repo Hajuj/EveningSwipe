@@ -220,6 +220,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
         val maxSwipe = 510
         val minSwipe = 0
         var lastX = 0f
+        var newX = 0f
 
         layoutSwipe?.setOnTouchListener(
             View.OnTouchListener { _, event ->
@@ -232,7 +233,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                     //move the movie image
                     MotionEvent.ACTION_MOVE -> {
-                        val newX = event.rawX + lastX
+                        newX = event.rawX + lastX
 
                         //move the image to the right or left
                         layoutSwipe!!.animate().x(newX).setDuration(0).start()
@@ -240,7 +241,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                     //release the movie image
                     MotionEvent.ACTION_UP -> {
-                        val currentX = layoutSwipe!!.x
+                        val currentX = newX
 
                         //center the image when swiped or finger released
                         layoutSwipe!!.animate().translationX(0f).setDuration(0).start()
