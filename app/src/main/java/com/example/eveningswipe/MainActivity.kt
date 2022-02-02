@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setTheme(R.style.Theme_EveningSwipe)
         setContentView(R.layout.activity_main)
+
 
         //for dark mode
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     private fun startAnimation() {
         val button = AnimationUtils.loadAnimation(this, R.anim.button)
         val textInput = AnimationUtils.loadAnimation(this, R.anim.text_input)
-//        val text = AnimationUtils.loadAnimation(this , R.anim.text)
 
         signIn!!.startAnimation(button)
         register!!.startAnimation(button)
@@ -67,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         email!!.startAnimation(textInput)
         password!!.startAnimation(textInput)
 
-//        title!!.startAnimation(text)
     }
 
     /**

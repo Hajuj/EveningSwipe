@@ -18,11 +18,6 @@
         <item name="tcEdit">@color/Hot_Chocolate</item>
     </style>
 
-    <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_image</item>
-        <item name="android:statusBarColor">@color/white</item>
-    </style>
-
     <style name="Theme.EveningSwipe.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
