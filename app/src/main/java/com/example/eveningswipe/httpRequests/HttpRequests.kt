@@ -203,7 +203,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseGroupInfo = info }
                 err?.let { println("ERROR !!") }
-                println("req " + req + " res " + res + " result "+ result)
                 responseGroupInfo =
                     PostGroupInfo(result.get().filter, result.get().member, result.get().name)
             }.join()

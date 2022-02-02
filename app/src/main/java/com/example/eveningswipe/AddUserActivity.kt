@@ -8,7 +8,7 @@ import android.widget.*
 import com.example.eveningswipe.httpRequests.HttpRequests
 
 class AddUserActivity : AppCompatActivity() {
-    private val BASE_URL_FindUser = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/users/find"
+    private val BASE_URL_FindUser = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/users/exist"
     private val BASE_URL_AddUser = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/add"
     private var addUser: TextView? = null
     private  var searchUser: EditText? = null

@@ -21,7 +21,7 @@
     <string name="noGroupName">Please enter a group name</string>
     <string name="noUserName">Please enter an user name</string>
     <string name="wrongUserName">Wrong username or user does not exist</string>
-    <string name="add"> ADD</string>
+    <string name="add">" ADD"</string>
     <string name="alreadyInGroup">The user %1$s is already part of this group</string>
     <string name="userAdded">User added successfully</string>
     <string name="wrongUserNamePassword">Wrong username or password</string>
