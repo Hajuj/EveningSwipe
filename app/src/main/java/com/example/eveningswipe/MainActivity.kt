@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val response = HttpRequests.postLoginUser(BASE_URL_Login, email, password)
 
         if (!response!!) {
-            Toast.makeText(this, "Wrong username or password", Toast.LENGTH_SHORT)
+            Toast.makeText(this, getString((R.string.wrongUserNamePassword)), Toast.LENGTH_SHORT)
                 .show()
         } else {
             login()
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             response = HttpRequests.getUserInformation(BASE_URL_User, token)
         }
         if(!response!!){
-            Toast.makeText(this, "Something went wrong - please try to login again", Toast.LENGTH_SHORT)
+            Toast.makeText(this, getString(R.string.noLogin), Toast.LENGTH_SHORT)
                     .show()
         }else{
             startHomeActivity()

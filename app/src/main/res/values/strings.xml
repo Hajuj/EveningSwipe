@@ -18,6 +18,18 @@
     <string name="movie_poster">Movie Poster</string>
     <string name="description">Description</string>
 
+    <string name="noGroupName">Please enter a group name</string>
+    <string name="noUserName">Please enter an user name</string>
+    <string name="wrongUserName">Wrong username or user does not exist</string>
+    <string name="add"> ADD</string>
+    <string name="alreadyInGroup">The user %1$s is already part of this group</string>
+    <string name="userAdded">User added successfully</string>
+    <string name="wrongUserNamePassword">Wrong username or password</string>
+    <string name="noLogin">Something went wrong - please try to login again</string>
+    <string name="noName">Please enter a name</string>
+    <string name="noEmail">Please enter an email</string>
+    <string name="noPassword">Please enter a password</string>
+
     <!-- swipe hint -->
     <string name="hint_background">hint background</string>
     <string name="got_it">Got it!</string>

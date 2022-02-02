@@ -40,7 +40,7 @@ class AddGroup : AppCompatActivity() {
     private fun checkUserInput() {
         newGroupName = name!!.text.toString()
             if(newGroupName.isNullOrBlank()){
-                Toast.makeText(this, "Please enter a group name", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.noGroupName), Toast.LENGTH_SHORT)
                         .show()
             } else {
                 saveGroupToDatabase()

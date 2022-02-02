@@ -44,7 +44,7 @@ class AddUserActivity : AppCompatActivity() {
     private fun searchUser(){
         searchInput = searchUser!!.text.toString()
         if(searchInput.isNullOrBlank()){
-            Toast.makeText(this, "Please enter an user name", Toast.LENGTH_SHORT)
+            Toast.makeText(this, getString(R.string.noUserName), Toast.LENGTH_SHORT)
                     .show()
         } else {
             searchedUser!!.visibility = View.VISIBLE;
@@ -53,12 +53,12 @@ class AddUserActivity : AppCompatActivity() {
             if (token != null) {
                 val response = HttpRequests.getAllUser(BASE_URL_FindUser, token, searchInput!!)
                 if(!response!!){
-                    Toast.makeText(this, "Wrong username or user does not exist", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, getString(R.string.wrongUserName), Toast.LENGTH_SHORT)
                             .show()
                     searchedUser!!.visibility = View.INVISIBLE;
                 }else{
                     searchedUser!!.visibility = View.VISIBLE;
-                    searchedUser!!.text = searchInput + " ADD"
+                    searchedUser!!.text = searchInput + getString(R.string.add)
                 }
             }
         }
@@ -77,12 +77,12 @@ class AddUserActivity : AppCompatActivity() {
             if (groupId != null) {
                 val response = HttpRequests.postAddUserToGroup(BASE_URL_AddUser, token, groupId, userToAdd)
                 if(!response!!){
-                    Toast.makeText(this, "The user $userToAdd is already part of this group", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, getString(R.string.alreadyInGroup,userToAdd), Toast.LENGTH_SHORT)
                             .show()
                     searchedUser!!.visibility = View.INVISIBLE;
                 } else {
                     searchedUser!!.visibility = View.INVISIBLE;
-                    searchFinished!!.text = "User added successfully"
+                    searchFinished!!.text = getString(R.string.userAdded)
                     searchFinished!!.visibility = View.VISIBLE;
                 }
             }

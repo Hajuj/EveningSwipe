@@ -48,11 +48,11 @@ class RegisterActivity : AppCompatActivity() {
         val email = editTextEmail?.getEditText()?.getText().toString().trim()
         val password = editTextPassword?.getEditText()?.getText().toString().trim()
         if(name.isNullOrBlank()){
-            Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.noName), Toast.LENGTH_SHORT).show()
         } else if (email.isNullOrBlank()) {
-            Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.noEmail), Toast.LENGTH_SHORT).show()
         } else if (password.isNullOrBlank()) {
-            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_SHORT).show()
         } else {
             HttpRequests.postRegisterUser(url, name, email, password)
             startHomeActivity()
