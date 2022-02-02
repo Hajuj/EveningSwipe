@@ -34,7 +34,7 @@
             android:layout_below="@+id/header_layout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:hint="Full Name"
+            android:hint="@string/hintFullName"
             android:ems="10"
             android:inputType="text"
             android:textSize="30sp">
@@ -52,7 +52,7 @@
             android:layout_below="@+id/header_layout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:hint="Email"
+            android:hint="@string/hintEmail"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:textSize="30sp">
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:hint="Password"
+            android:hint="@string/hintPassword"
             android:ems="10"
             android:inputType="textPassword"
             android:textSize="30sp"
@@ -93,7 +93,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/buttons"
-                android:text="Register"
+                android:text="@string/registerButton"
                 app:backgroundTint="@null" />
 
             <com.google.android.material.button.MaterialButton
@@ -107,7 +107,7 @@
                 android:layout_toLeftOf="@id/registerUser"
                 android:layout_marginTop="40dp"
                 android:inputType="text"
-                android:text="Already have an account?"
+                android:text="@string/alreadyAccount"
                 android:textSize="16dp"
                 android:textColor="?attr/tc"/>
         </RelativeLayout>

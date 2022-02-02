@@ -42,7 +42,7 @@
             android:layout_below="@+id/header_layout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:hint="Email"
+            android:hint="@string/hintEmail"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:textSize="30sp">
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:hint="Password"
+            android:hint="@string/hintPassword"
             android:ems="10"
             android:inputType="textPassword"
             android:textSize="30sp"
@@ -85,7 +85,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/buttons"
-                android:text="Login"
+                android:text="@string/loginButton"
                 app:backgroundTint="@null" />
 
         <com.google.android.material.button.MaterialButton
@@ -99,7 +99,7 @@
             android:layout_toLeftOf="@id/signIn"
             android:layout_marginTop="40dp"
             android:inputType="text"
-            android:text="Register"
+            android:text="@string/registerButton"
             android:textSize="20dp"
             android:textColor="?attr/tc"/>
         </RelativeLayout>

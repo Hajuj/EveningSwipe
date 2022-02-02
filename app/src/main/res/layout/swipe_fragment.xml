@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/choose_ic"
             android:layout_centerHorizontal="true"
-            android:text="Please select your current group:"
+            android:text="@string/selectGroup"
             android:textAlignment="center"
             android:textColor="@color/Hot_Chocolate"
             android:textSize="22sp" />

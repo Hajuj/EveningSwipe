@@ -29,6 +29,34 @@
     <string name="noName">Please enter a name</string>
     <string name="noEmail">Please enter an email</string>
     <string name="noPassword">Please enter a password</string>
+    <string name="textNewGroup">Please enter a name to create a new group</string>
+    <string name="hintGroupName">Name of group</string>
+    <string name="saveGroupButton">Save</string>
+    <string name="addGroupFinished">GROUP ADDED SUCCESSFULLY</string>
+    <string name="hintSearchUser">Search User</string>
+
+    <!-- XML files -->
+    <string name="textSearchUser">Please search for a user</string>
+    <string name="addButton">add button</string>
+    <string name="searchFinishedButton">search finished</string>
+    <string name="textGroupID">Group ID:</string>
+    <string name="groupID">Group ID</string>
+    <string name="textGroupName">Group Name:</string>
+    <string name="groupName">Group Name</string>
+    <string name="addGroupMember">Add Group Member</string>
+    <string name="addFilter">Add Filter</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintPassword">Password</string>
+    <string name="loginButton">Login</string>
+    <string name="registerButton">Register</string>
+    <string name="hintFullName">Full Name</string>
+    <string name="alreadyAccount">Already have an account?</string>
+    <string name="swipeButton">Let\'s Swipe</string>
+    <string name="newGroupButton">New Group</string>
+    <string name="recyGroupName">Group Name</string>
+    <string name="recyMemberNumber">Member Number</string>
+    <string name="recyGroupID">Group ID</string>
+    <string name="selectGroup">Please select your current group:</string>
 
     <!-- swipe hint -->
     <string name="hint_background">hint background</string>

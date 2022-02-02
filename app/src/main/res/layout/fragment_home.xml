@@ -29,7 +29,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/button_black"
-        android:text="Let's Swipe"
+        android:text="@string/swipeButton"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
