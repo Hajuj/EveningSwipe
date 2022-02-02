@@ -4,18 +4,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
-import kotlin.math.min
 
 /**
  * variable that can be accessed from other activities
@@ -217,26 +216,26 @@ class SwipeMoviesActivity : AppCompatActivity() {
 //        scrollView?.setOnTouchListener(
 //            View.OnTouchListener { v, event -> return@OnTouchListener true })
 
-        val maxSwipe = 510
-        val minSwipe = 0
+        val maxSwipe = 800
+        val minSwipe = 200
         var lastX = 0f
         var newX = 0f
 
         layoutSwipe?.setOnTouchListener(
-            View.OnTouchListener { _, event ->
+            View.OnTouchListener { view, event ->
 
                 when (event.action) {
                     //hold the movie image
                     MotionEvent.ACTION_DOWN -> {
-                        lastX = layoutSwipe!!.x - event.rawX
+                        lastX = view.x - event.rawX
                     }
 
                     //move the movie image
                     MotionEvent.ACTION_MOVE -> {
-                        newX = event.rawX + lastX
+                        newX = event.rawX
 
                         //move the image to the right or left
-                        layoutSwipe!!.animate().x(newX).setDuration(0).start()
+                        view.animate().x(newX + lastX).setDuration(0).start()
                     }
 
                     //release the movie image
