@@ -52,13 +52,15 @@
         <entry key="app/src/main/res/layout/activity_select_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_select_group.xml" value="0.6166666666666667" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2581053698074975" />
-        <entry key="app/src/main/res/layout/activity_swipe_movies.xml" value="0.30364583333333334" />
+        <entry key="app/src/main/res/layout/activity_swipe_movies.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_swipe_movies_2.xml" value="0.25785207700101315" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_rating_result.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/image_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/ranking_widget.xml" value="0.2907608695652174" />

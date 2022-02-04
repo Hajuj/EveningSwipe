@@ -231,9 +231,6 @@ class SwipeMoviesActivity : AppCompatActivity() {
      */
     @SuppressLint("ClickableViewAccessibility")
     fun touchListener(imgView: ImageView) {
-        //disable swipe page scrolling
-//        scrollView?.setOnTouchListener(
-//            View.OnTouchListener { v, event -> return@OnTouchListener true })
 
         val maxSwipe = 800
         val minSwipe = 200
@@ -246,6 +243,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                 when (event.action) {
                     //hold the movie image
                     MotionEvent.ACTION_DOWN -> {
+                        scrollView!!.requestDisallowInterceptTouchEvent(true)
                         lastX = view.x - event.rawX
                     }
 
@@ -286,28 +284,6 @@ class SwipeMoviesActivity : AppCompatActivity() {
                 return@OnTouchListener true
             }
         )
-
-//        layout?.setOnTouchListener(object : OnSwipeTouchListener(this) {
-//            override fun onSwipeLeft() {
-//                super.onSwipeLeft()
-//                nextMovie(imgView)
-//
-//                Toast.makeText(applicationContext, "dislike", Toast.LENGTH_SHORT)
-//                    .show()
-//
-//                temp += 1
-//            }
-//
-//            override fun onSwipeRight() {
-//                super.onSwipeRight()
-//                rateMovie()
-//                nextMovie(imgView)
-//                Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT)
-//                    .show()
-//
-//                temp += 1
-//            }
-//        })
     }
 
     /**
