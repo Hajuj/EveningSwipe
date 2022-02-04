@@ -76,8 +76,8 @@ class FinishedSwipeActivity : AppCompatActivity() {
         this.notificationManager.createNotificationChannel(notificationChannel)
 
         builder = Notification.Builder(applicationContext, channelId)
-            .setContentTitle("Voting is over!")
-            .setContentText("You voted all movies. Click here to see the ranking!")
+            .setContentTitle(resources.getString(R.string.voting_over))
+            .setContentText(resources.getString(R.string.click_noti))
             .setSmallIcon(R.drawable.movie_icon)
             .setLargeIcon(
                 BitmapFactory.decodeResource(

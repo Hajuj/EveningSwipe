@@ -15,6 +15,7 @@ import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
+import kotlin.math.min
 
 /**
  * variable that can be accessed from other activities
@@ -249,7 +250,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                         if (currentX > maxSwipe) {
                             rateMovie()
                             nextMovie(imgView)
-                            Toast.makeText(applicationContext, "like", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, resources.getString(R.string.like), Toast.LENGTH_SHORT).show()
 
                             temp += 1
                         }
@@ -257,7 +258,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                         //swipe all the way to the left
                         if (currentX < minSwipe) {
                             nextMovie(imgView)
-                            Toast.makeText(applicationContext, "dislike", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, resources.getString(R.string.dislike), Toast.LENGTH_SHORT).show()
 
                             temp += 1
                         }

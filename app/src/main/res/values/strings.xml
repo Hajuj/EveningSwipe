@@ -74,4 +74,45 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Strings used for swipe activity -->
+    <string name="select_group">select group</string>
+    <string name="need_filter">This group needs a filter. Please go back to the group settings and add a filter.</string>
+    <string name="voting_over">Voting is over!</string>
+    <string name="click_noti">You voted all movies. Click here to see the ranking!</string>
+    <!-- movie genres -->
+    <string-array name="genre_array">
+        <item>Select genre</item>
+        <item>Action</item>
+        <item>Adult</item>
+        <item>Adventure</item>
+        <item>Biography</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Family</item>
+        <item>Fantasy</item>
+        <item>Film-Noir</item>
+        <item>Game-Show</item>
+        <item>History</item>
+        <item>Horror</item>
+        <item>Music</item>
+        <item>Musical</item>
+        <item>Mystery</item>
+        <item>Reality-TV</item>
+        <item>Romance</item>
+        <item>Short</item>
+        <item>Sport</item>
+        <item>Thriller</item>
+        <item>War</item>
+    </string-array>
+    <!-- Strings used for create filter -->
+    <string name="filter_not_added">Filter could not be added to group.</string>
+    <string name="filter_added">Filter is added to group.</string>
+    <string name="fill_in_field">Please fill in every field.</string>
+    <!-- Strings used for ranking -->
+    <string name="top_three">The top three of %1$s:\n 1. %2$s \n 2. %3$s \n 3. %4$s</string>
+    <string name="group_ranking">%1$s\'s voting:</string>
+    <string name="ranking">%1$s\. %2$s</string>
 </resources>

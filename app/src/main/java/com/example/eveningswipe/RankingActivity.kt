@@ -61,7 +61,7 @@ class RankingActivity : AppCompatActivity() {
 
         // set group name
         val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
-        val textGroupName = groupName + "'s voting:"
+        val textGroupName = resources.getString(R.string.group_ranking, groupName)
         groupNameView.text = textGroupName
 
         var response: Boolean? = null
@@ -100,40 +100,22 @@ class RankingActivity : AppCompatActivity() {
         }
 
         // add movie name to view and initialize the top three
-        if (movieNameList.size > 0) {
-            movieView1.text = "1. " + movieNameList[0]
-            movie1 = movieNameList[0]
-        }
-        if (movieNameList.size > 1) {
-            movieView2.text = "2. " + movieNameList[1]
-            movie2 = movieNameList[1]
-        }
-        if (movieNameList.size > 2) {
-            movieView3.text = "3. " + movieNameList[2]
-            movie3 = movieNameList[2]
-        }
-        if (movieNameList.size > 3) {
-            movieView4.text = "4. " + movieNameList[3]
-        }
-        if (movieNameList.size > 4) {
-            movieView5.text = "5. " + movieNameList[4]
-        }
-        if (movieNameList.size > 5) {
-            movieView6.text = "6. " + movieNameList[5]
-        }
-        if (movieNameList.size > 6) {
-            movieView7.text = "7. " + movieNameList[6]
-        }
-        if (movieNameList.size > 7) {
-            movieView8.text = "8. " + movieNameList[7]
-        }
-        if (movieNameList.size > 8) {
-            movieView9.text = "9. " + movieNameList[8]
-        }
-        if (movieNameList.size > 9) {
-            movieView10.text = "10. " + movieNameList[9]
+        val textList = listOf<TextView>(movieView1, movieView2, movieView3, movieView4, movieView5, movieView6,
+            movieView7, movieView8, movieView9, movieView10)
+
+        for (i in 0..9){
+            println("iiii " + i)
+            if (movieNameList.size > i) {
+                println("test2 " + movieNameList[i] + " i "+ i)
+                val num = i+1
+                textList[i].text = getString(R.string.ranking, num.toString(), movieNameList[i])
+                println("test: "+ movieNameList[i] + " hallo : " + getString(R.string.ranking, i.toString(), movieNameList[i]))
+            }
         }
 
+        movie1 = movieNameList[0]
+        movie2 = movieNameList[1]
+        movie3 = movieNameList[2]
         // update the text in the widget
         if(widgetIds != null){
             for (i in 0..widgetIds!!.size - 1) {

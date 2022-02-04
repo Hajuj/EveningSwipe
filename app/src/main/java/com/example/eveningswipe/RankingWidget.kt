@@ -3,6 +3,7 @@ package com.example.eveningswipe
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.provider.Settings.Global.getString
 import android.widget.RemoteViews
 import com.example.eveningswipe.ui.filmswipe.groupName
 
@@ -37,11 +38,9 @@ internal fun updateAppWidget(
 ) {
     var widgetText: String? = null
     if (groupName == null || movie1 == null || movie2 == null || movie3 == null) {
-        widgetText =
-            "The top three of 'groupname':\n\n1. 'moviename'\n2. 'moviename'\n3. 'moviename'"
+        widgetText = context.getString(R.string.top_three, "'groupname'", "'movie'", "'movie'", "'movie'")
     } else {
-        widgetText =
-            "The top three of " + groupName + ":\n\n1." + movie1 + "\n2." + movie2 + "\n3." + movie3
+        widgetText = context.getString(R.string.top_three, groupName, movie1, movie2, movie3)
     }
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.ranking_widget)

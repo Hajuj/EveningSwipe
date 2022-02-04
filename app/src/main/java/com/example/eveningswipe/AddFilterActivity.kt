@@ -26,7 +26,7 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     private var votes: TextInputLayout? = null
     var genre: String? = null
     val token = HttpRequests.responseToken
-    var genreList: MutableList<String> = mutableListOf("select genre")
+    var genreList: Array<String>? = null
     val BASE_URL_CreateFilter = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/create"
 
     /**
@@ -47,20 +47,13 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         createFilter!!.setOnClickListener(View.OnClickListener { addFilter() })
 
         //use spinner for selection
-        genreList.addAll(
-            mutableListOf(
-                "Action", "Adult", "Adventure", "Biography", "Comedy",
-                "Crime", "Documentary", "Drama", "Family", "Fantasy", "Film-Noir",
-                "Game-Show", "History", "Horror", "Music", "Musical", "Mystery", "Reality-TV",
-                "Romance", "Short", "Sport", "Thriller", "War"
-            )
-        )
+        genreList = resources.getStringArray(R.array.genre_array)
         val spinner: Spinner = findViewById(R.id.genre_spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
-            genreList
+            genreList!!
         )
         // Set layout to use when the list of choices appear
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -85,7 +78,7 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         ) {
             Toast.makeText(
                 this,
-                "Please fill in every field.",
+                resources.getString(R.string.fill_in_field),
                 Toast.LENGTH_LONG
             ).show()
         } else {
@@ -107,13 +100,13 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             if (!response!!) {
                 Toast.makeText(
                     this,
-                    "Filter could not be added to group.",
+                    resources.getString(R.string.filter_not_added),
                     Toast.LENGTH_LONG
                 ).show()
             } else {
                 Toast.makeText(
                     this,
-                    "Filter is added to group.",
+                    resources.getString(R.string.filter_added),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -127,10 +120,12 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
      */
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
-        if (genreList.get(pos) == genreList[0]) {
-            //do nothing first element is just a hint to select group
-        } else {
-            genre = genreList.get(pos)
+        if (genreList != null){
+            if (genreList!!.get(pos) == genreList!![0]) {
+                //do nothing first element is just a hint to select group
+            } else {
+                genre = genreList!!.get(pos)
+            }
         }
     }
 

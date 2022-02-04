@@ -29,7 +29,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var root: View
     val token = HttpRequests.responseToken
     var groupIdList: List<Int>? = null
-    var groupNameList: MutableList<String> = mutableListOf("select group")
+    var groupNameList: MutableList<String> = mutableListOf()
 
     /**
      * create content of fragment
@@ -48,6 +48,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
 
         //get the names of the groups an add them to another list
+        groupNameList.add(getString(R.string.select_group))
         for (i in 0..groupIdList!!.size - 1) {
             val response =
                 HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
@@ -98,7 +99,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (!response!!) {
                     Toast.makeText(
                         context,
-                        "This group needs a filter. Please go back to the group settings and add a filter.",
+                        resources.getString(R.string.need_filter),
                         Toast.LENGTH_LONG
                     )
                         .show()
