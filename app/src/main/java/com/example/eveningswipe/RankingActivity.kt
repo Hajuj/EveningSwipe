@@ -71,26 +71,29 @@ class RankingActivity : AppCompatActivity() {
 
         // get the ids of the movies in ranking order
         val movieIdList: MutableList<String> = mutableListOf()
+        val movieVotingList: MutableList<String> = mutableListOf()
         if (!response!!) {
             // wait for response
         } else {
             for (i in 0..swipeCount!! - 1) {
                 HttpRequests.responseFilterRating?.get(i)?.movie_id?.let { movieIdList.add(i, it) }
+                HttpRequests.responseFilterRating?.get(i)?.rating?.let { movieVotingList.add(i, it) }
             }
         }
-
         // get the original movie names
         var response2: Boolean? = null
         var temp: Int = 0
+        var indexVoting: Int = 0
         var index: Int = 0
         val movieNameList: MutableList<String> = mutableListOf()
-        while (movieNameList.size < swipeCount!!) {
+        while (movieNameList.size < swipeCount!! && movieIdList.size > temp) {
             if (token != null) {
                 response2 =
                     HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, movieIdList[temp])
             }
             if (!response2!!) {
-                //wait
+                movieVotingList.removeAt(temp - indexVoting)
+                indexVoting += 1
                 temp += 1
             } else {
                 movieNameList.add(index, HttpRequests.responseMovieDetails?.original_title.toString())
@@ -98,18 +101,14 @@ class RankingActivity : AppCompatActivity() {
                 index += 1
             }
         }
-
         // add movie name to view and initialize the top three
         val textList = listOf<TextView>(movieView1, movieView2, movieView3, movieView4, movieView5, movieView6,
             movieView7, movieView8, movieView9, movieView10)
 
         for (i in 0..9){
-            println("iiii " + i)
             if (movieNameList.size > i) {
-                println("test2 " + movieNameList[i] + " i "+ i)
                 val num = i+1
-                textList[i].text = getString(R.string.ranking, num.toString(), movieNameList[i])
-                println("test: "+ movieNameList[i] + " hallo : " + getString(R.string.ranking, i.toString(), movieNameList[i]))
+                textList[i].text = getString(R.string.ranking, num.toString(), movieVotingList[i], movieNameList[i])
             }
         }
 

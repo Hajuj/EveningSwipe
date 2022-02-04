@@ -278,6 +278,7 @@ object HttpRequests {
             .response() { req, res, result ->
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
+                println("res: "+ res + result)
             }
     }
 

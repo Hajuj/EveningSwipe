@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/choose_ic"
         android:layout_centerHorizontal="true"
-        android:text="Please select which filter you want to swipe:"
+        android:text="@string/please_select_which_filter_you_want_to_swipe"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="22sp"
         android:textAlignment="center"/>

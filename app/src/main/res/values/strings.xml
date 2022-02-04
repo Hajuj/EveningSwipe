@@ -114,5 +114,42 @@
     <!-- Strings used for ranking -->
     <string name="top_three">The top three of %1$s:\n 1. %2$s \n 2. %3$s \n 3. %4$s</string>
     <string name="group_ranking">%1$s\'s voting:</string>
-    <string name="ranking">%1$s\. %2$s</string>
+    <string name="ranking">%1$s\. %2$s votes: %3$s</string>
+
+    <!-- add filter  -->
+    <string name="select_genre">Select genre:</string>
+    <string name="enter_time_slot">Enter time slot:</string>
+    <string name="_1993">1993</string>
+    <string name="to">to</string>
+    <string name="_2022">2022</string>
+    <string name="enter_max_runtime_in_min">Enter max. runtime (in min.):</string>
+    <string name="_120">120</string>
+    <string name="enter_how_many_films_to_swipe">Enter how many films to swipe:</string>
+    <string name="_50">50</string>
+    <string name="enter_number_of_stars_0_to_10">Enter number of stars (0 to 10):</string>
+    <string name="_8">8</string>
+    <string name="enter_number_of_votes">Enter number of votes:</string>
+    <string name="_500">500</string>
+    <string name="create_filter">create filter</string>
+    <!-- finish activity -->
+    <string name="finished">Finished!</string>
+    <string name="you_have_swiped_all_available_movies_nsee_which_movie_won">You have swiped all available movies. \nSee which movie won!</string>
+    <string name="show_result">Show result</string>
+    <!-- ranking -->
+    <string name="group_s_result">group\'s result:</string>
+    <string name="_1">1.</string>
+    <string name="_2">2.</string>
+    <string name="_3">3.</string>
+    <string name="_4">4.</string>
+    <string name="_5">5.</string>
+    <string name="_6">6.</string>
+    <string name="_7">7.</string>
+    <string name="__8">8.</string>
+    <string name="_9">9.</string>
+    <string name="_10">10.</string>
+    <string name="refresh_result">refresh result</string>
+
+    <string name="evening_swipe">Evening-Swipe</string>
+    <string name="the_top_three_of_groupname_n_n1_moviename_n2_moviename_n3_moviename">The top three of \'groupname\':\n\n1. \'moviename\'\n2. \'moviename\'\n3. \'moviename\'</string>
+    <string name="please_select_which_filter_you_want_to_swipe">Please select which filter you want to swipe:</string>
 </resources>

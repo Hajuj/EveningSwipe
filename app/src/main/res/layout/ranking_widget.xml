@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:paddingTop="10dp"
-        android:contentDescription="The top three of 'groupname':\n\n1. 'moviename'\n2. 'moviename'\n3. 'moviename'"
-        android:text="The top three of 'groupname':\n\n1. 'moviename'\n2. 'moviename'\n3. 'moviename'"
+        android:contentDescription="@string/the_top_three_of_groupname_n_n1_moviename_n2_moviename_n3_moviename"
+        android:text="@string/the_top_three_of_groupname_n_n1_moviename_n2_moviename_n3_moviename"
         android:textColor="@color/white"
         android:textSize="14dp" />
 </RelativeLayout>

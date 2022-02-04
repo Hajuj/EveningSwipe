@@ -70,7 +70,13 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
         // get the ids of all movies in the filter
         movieList = filterIndex?.let { HttpRequests.responseFilterByGroupId?.get(it)?.selection }
-        swipeCount = movieList!!.size
+        val filterSize = filterIndex?.let { HttpRequests.responseFilterByGroupId?.get(it)?.size }
+        //decide how many movies to swipe (count of movies or filter size)
+        if (movieList!!.size < filterSize!!){
+            swipeCount = movieList!!.size
+        } else {
+            swipeCount = filterSize
+        }
 
         // get all views
         val movieTitleView: TextView = findViewById(R.id.movie_title)

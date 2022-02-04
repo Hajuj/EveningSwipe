@@ -18,7 +18,7 @@
         android:id="@+id/finished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finished!"
+        android:text="@string/finished"
         android:textSize="50dp"
         android:textAlignment="center"
         android:layout_marginTop="50dp"
@@ -31,7 +31,7 @@
         android:id="@+id/finishedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have swiped all available movies. \nSee which movie won!"
+        android:text="@string/you_have_swiped_all_available_movies_nsee_which_movie_won"
         android:textSize="30dp"
         android:layout_below="@+id/finished"
         android:textAlignment="center"
@@ -50,7 +50,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:background="@drawable/buttons"
-            android:text="Show result"
+            android:text="@string/show_result"
             app:backgroundTint="@null" />
     </RelativeLayout>
 

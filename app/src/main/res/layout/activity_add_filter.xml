@@ -21,7 +21,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Select genre:"
+        android:text="@string/select_genre"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -43,7 +43,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Enter time slot:"
+        android:text="@string/enter_time_slot"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -54,7 +54,7 @@
         android:layout_below="@+id/select_year"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@id/select_year"
-        android:hint="1993">
+        android:hint="@string/_1993">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
         android:layout_below="@id/select_year"
         android:layout_alignBaseline="@+id/year_begin_input"
         android:layout_centerHorizontal="true"
-        android:text="to"
+        android:text="@string/to"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -79,7 +79,7 @@
         android:layout_below="@+id/select_year"
         android:layout_marginTop="10dp"
         android:layout_alignEnd="@id/select_year"
-        android:hint="2022">
+        android:hint="@string/_2022">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Enter max. runtime (in min.):"
+        android:text="@string/enter_max_runtime_in_min"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -105,7 +105,7 @@
         android:layout_below="@+id/select_runtime"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@id/select_runtime"
-        android:hint="120">
+        android:hint="@string/_120">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -120,7 +120,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Enter how many films to swipe:"
+        android:text="@string/enter_how_many_films_to_swipe"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -131,7 +131,7 @@
         android:layout_below="@+id/select_size"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@id/select_size"
-        android:hint="50">
+        android:hint="@string/_50">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -146,7 +146,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Enter number of stars (0 to 10):"
+        android:text="@string/enter_number_of_stars_0_to_10"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -157,7 +157,7 @@
         android:layout_below="@+id/select_rating"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@id/select_rating"
-        android:hint="8">
+        android:hint="@string/_8">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -172,7 +172,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Enter number of votes:"
+        android:text="@string/enter_number_of_votes"
         android:textColor="@color/Hot_Chocolate"
         android:textSize="18sp"/>
 
@@ -183,7 +183,7 @@
         android:layout_below="@+id/select_votes"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@id/select_votes"
-        android:hint="500">
+        android:hint="@string/_500">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -198,7 +198,7 @@
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/buttons"
-            android:text="create filter"
+            android:text="@string/create_filter"
             app:backgroundTint="@null" />
     </RelativeLayout>
 </ScrollView>

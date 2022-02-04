@@ -28,7 +28,7 @@
             android:id="@+id/banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Evening-Swipe"
+            android:text="@string/evening_swipe"
             android:textSize="44dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
