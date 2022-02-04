@@ -12,6 +12,7 @@ object HttpRequests {
     var responseFindUserInfo: FindUserDto? = null
     var responseMovieDetails: GetMovieDetails? = null
     var responseFilterRating: Array<GetFilterRating2>? = null
+    var responseSwipeState: GetSwipeState? = null
     var groupName: String? = null
     var wrongLoginData: String? = ""
 
@@ -59,6 +60,7 @@ object HttpRequests {
                 err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
                 }
+                println("token: " + res + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -112,6 +114,7 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseUserInfo = info }
                 err?.let { println("ERROR !!") }
+                println("group: " + res + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -266,10 +269,10 @@ object HttpRequests {
     /**
      * function to send request to rate a movie (like)
      */
-    fun postRateMovie(url: String, movId: String, filId: Int, tok: TokenDto) {
+    fun postRateMovie(url: String, movId: String, filId: Int, like: Boolean, tok: TokenDto) {
         val rateMovie = RateMovie(
             token = tok,
-            rating = Rating(filterId = filId, movieId = movId)
+            rating = Rating(filterId = filId, movieId = movId, like = like)
         )
 
         url.httpPost()
@@ -346,18 +349,20 @@ object HttpRequests {
             filterId = filterId
         )
         var success: Boolean? = null
-        //TODO add get data
         url.httpPost()
             .header("Content-Type" to "application/json")
             .body(Gson().toJson(swipeState).toString())
-            .response() { req, res, result ->
-                val (info, err) = result
-                err?.let { println("ERROR !!") }
+            .responseObject(GetSwipeState.Deserializer())
+            { req, res, result ->
                 if (res.statusCode == 400) {
                     success = false
                 } else {
                     success = true
                 }
+
+                val (info, err) = result
+                info?.let { responseSwipeState = info }
+                err?.let { println("ERROR !!" + err) }
             }.join()
         return success
     }

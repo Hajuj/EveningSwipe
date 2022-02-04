@@ -32,10 +32,9 @@ class AddUserActivity : AppCompatActivity() {
         searchFinished!!.visibility = View.INVISIBLE;
 
         // Set cut corner background for API 23+
-        var layout = findViewById(R.id.add_user_layout) as View
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
-        }
+        val layout = findViewById(R.id.add_user_corner) as View
+        layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
+
     }
 
     /**

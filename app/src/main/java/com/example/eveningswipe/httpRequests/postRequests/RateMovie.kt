@@ -9,5 +9,6 @@ data class RateMovie(
 data class Rating (
 
     val filterId : Int,
-    val movieId : String
+    val movieId : String,
+    val like : Boolean
 )

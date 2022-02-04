@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/drawable/test.xml" value="0.26979166666666665" />
         <entry key="app/src/main/res/layout/activity_add_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_add_group.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_add_random_filter.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_after_notification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_finished_swipe.xml" value="0.23802083333333332" />

@@ -14,6 +14,7 @@ class GroupProfile : AppCompatActivity() {
     private var idNumber: TextView? = null
     private var addUserToGroup: Button? = null
     private var addFilterToGroup: Button? = null
+    private var addRandomFilter: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +24,10 @@ class GroupProfile : AppCompatActivity() {
         idNumber = findViewById<View>(R.id.idNumber) as TextView
         addUserToGroup = findViewById<View>(R.id.addUserToGroup) as Button
         addFilterToGroup = findViewById<View>(R.id.addFilterToGroup) as Button
+        addRandomFilter = findViewById<View>(R.id.addRandomFilter) as Button
         addUserToGroup!!.setOnClickListener(View.OnClickListener { startAddUserActivityActivity() })
         addFilterToGroup!!.setOnClickListener(View.OnClickListener { startAddFilterActivity() })
+        addRandomFilter!!.setOnClickListener(View.OnClickListener { startAddRandomFilterActivity() })
 
         val groupProfileName = intent.getStringExtra("groupName")
         val groupID = intent.getStringExtra("groupID")
@@ -33,7 +36,7 @@ class GroupProfile : AppCompatActivity() {
         groupIDforUserAdding = (idNumber!!.text as String?).toString()
 
         // Set cut corner background for API 23+
-        val layout = findViewById(R.id.group_profile_layout) as View
+        val layout = findViewById(R.id.group_profile_corner) as View
         layout.setBackgroundResource(R.drawable.shr_product_grid_background_shape)
     }
 
@@ -58,6 +61,15 @@ class GroupProfile : AppCompatActivity() {
      */
     private fun startAddFilterActivity() {
         val profileIntent = Intent(this@GroupProfile, AddFilterActivity::class.java)
+        startActivity(profileIntent)
+        finish()
+    }
+
+    /**
+     * add random filter for this group
+     */
+    private fun startAddRandomFilterActivity() {
+        val profileIntent = Intent(this@GroupProfile, AddRandomFilterActivity::class.java)
         startActivity(profileIntent)
         finish()
     }

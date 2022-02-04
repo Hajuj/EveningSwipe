@@ -15,6 +15,7 @@ import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
+import javax.net.ssl.HttpsURLConnection
 import kotlin.math.min
 
 /**
@@ -26,7 +27,7 @@ var swipeCount: Int? = null
 /**
  * class to select the movie before swipe
  * @param temp variable to know when the last movie is reached
- * @param index index in the movieList
+ * @param swipeState index in the movieList
  * @param token current token of the user
  * @param hintAccept true if the hint has been seen
  * @param movieId id of the selected movie
@@ -43,7 +44,7 @@ var swipeCount: Int? = null
 class SwipeMoviesActivity : AppCompatActivity() {
 
     private var temp = 0
-    var index: Int = 0
+    var swipeState: Int = 0
     val token = HttpRequests.responseToken
     var hintAccept: Boolean = false
     var movieId: String? = null
@@ -56,6 +57,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
     private lateinit var swipeViewModel: SwipeViewModel
     val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
     val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
+    val BASE_URL_SwipeState = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/swipestate"
 
     /**
      * create context of activity
@@ -68,8 +70,18 @@ class SwipeMoviesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_swipe_movies)
         swipeViewModel = ViewModelProvider(this).get(SwipeViewModel::class.java)
 
+        // get swipe state
+        val responseState = HttpRequests.getSwipeState(BASE_URL_SwipeState, token!!, filterId!!)
+        if(!responseState!!) {
+            //wait
+        } else {
+            swipeState = HttpRequests.responseSwipeState!!.nextMovie
+        }
+        temp = swipeState
+
         // get the ids of all movies in the filter
         movieList = filterIndex?.let { HttpRequests.responseFilterByGroupId?.get(it)?.selection }
+
         val filterSize = filterIndex?.let { HttpRequests.responseFilterByGroupId?.get(it)?.size }
         //decide how many movies to swipe (count of movies or filter size)
         if (movieList!!.size < filterSize!!){
@@ -134,7 +146,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
     @SuppressLint("ObjectAnimatorBinding")
     fun nextMovie(imgView: ImageView) {
         //if all movies are swiped call finished swipe activity
-        if (temp == swipeCount!! - 1) {
+        if (temp >= swipeCount!! - 1) {
             //start Finished Swipe Activity
             val intent = Intent(applicationContext, FinishedSwipeActivity::class.java)
             startActivity(intent)
@@ -143,7 +155,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
             // get movie details of the current shown movie
             var responseDetails: Boolean? = null
-            movieId = movieList!!.get(index)
+            movieId = movieList!!.get(swipeState)
             if (token != null) {
                 responseDetails =
                     HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, movieId!!)
@@ -152,7 +164,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
             //check if response error or success
             if (!responseDetails!!) {
                 // no data for movie - show next one
-                index += 1
+                swipeState += 1
                 swipeCount = swipeCount?.minus(1)
                 nextMovie(imgView)
             } else {
@@ -208,7 +220,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                     }
                     hintAccept = true
                 }
-                index += 1
+                swipeState += 1
             }
         }
     }
@@ -254,7 +266,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         //swipe all the way to the right
                         if (currentX > maxSwipe) {
-                            rateMovie()
+                            rateMovie(true)
                             nextMovie(imgView)
                             Toast.makeText(applicationContext, resources.getString(R.string.like), Toast.LENGTH_SHORT).show()
 
@@ -263,6 +275,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         //swipe all the way to the left
                         if (currentX < minSwipe) {
+                            rateMovie(false)
                             nextMovie(imgView)
                             Toast.makeText(applicationContext, resources.getString(R.string.dislike), Toast.LENGTH_SHORT).show()
 
@@ -301,10 +314,10 @@ class SwipeMoviesActivity : AppCompatActivity() {
      * function is called if movie is a match/like
      * post movie rating
      */
-    fun rateMovie() {
-        val movieId = movieList!!.get(index - 1)
+    fun rateMovie(like: Boolean) {
+        val movieId = movieList!!.get(swipeState - 1)
         if (token != null) {
-            HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId!!, token)
+            HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId!!, like, token)
         }
     }
 }

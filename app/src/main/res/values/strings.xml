@@ -111,6 +111,7 @@
     <string name="filter_not_added">Filter could not be added to group.</string>
     <string name="filter_added">Filter is added to group.</string>
     <string name="fill_in_field">Please fill in every field.</string>
+    <string name="fill_in_size">Please fill in the size.</string>
     <!-- Strings used for ranking -->
     <string name="top_three">The top three of %1$s:\n 1. %2$s \n 2. %3$s \n 3. %4$s</string>
     <string name="group_ranking">%1$s\'s voting:</string>
@@ -135,6 +136,7 @@
     <string name="finished">Finished!</string>
     <string name="you_have_swiped_all_available_movies_nsee_which_movie_won">You have swiped all available movies. \nSee which movie won!</string>
     <string name="show_result">Show result</string>
+    <string name="genre_action">Action</string>
     <!-- ranking -->
     <string name="group_s_result">group\'s result:</string>
     <string name="_1">1.</string>
@@ -152,4 +154,6 @@
     <string name="evening_swipe">Evening-Swipe</string>
     <string name="the_top_three_of_groupname_n_n1_moviename_n2_moviename_n3_moviename">The top three of \'groupname\':\n\n1. \'moviename\'\n2. \'moviename\'\n3. \'moviename\'</string>
     <string name="please_select_which_filter_you_want_to_swipe">Please select which filter you want to swipe:</string>
+    <string name="add_random_filter">add random filter</string>
+    <string name="or">or</string>
 </resources>
