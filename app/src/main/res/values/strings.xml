@@ -30,6 +30,7 @@
     <string name="noName">Please enter a name</string>
     <string name="noEmail">Please enter an email</string>
     <string name="noPassword">Please enter a password</string>
+    <string name="pleaseLogin">Please login</string>
     <string name="textNewGroup">Please enter a name to create a new group</string>
     <string name="hintGroupName">Name of group</string>
     <string name="saveGroupButton">Save</string>

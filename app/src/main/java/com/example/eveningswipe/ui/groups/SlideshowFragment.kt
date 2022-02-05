@@ -60,6 +60,7 @@ class SlideshowFragment : Fragment() {
         val memberNumber: Int = 0
         val groupId: Int = 0
         val groups = mutableListOf(GroupDataRecycle(groupName, memberNumber, groupId))
+        groups.remove(GroupDataRecycle("", 0, 0))
         for (i in 0..groupList.size-1) {
             if (token != null) {
                 val response = HttpRequests.getGroupInformation(BASE_URL_groupInfo, token, groupList[i])

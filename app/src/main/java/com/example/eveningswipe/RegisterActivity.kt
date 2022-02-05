@@ -55,7 +55,8 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.noPassword), Toast.LENGTH_SHORT).show()
         } else {
             HttpRequests.postRegisterUser(url, name, email, password)
-            startHomeActivity()
+            startLoginActivity()
+            Toast.makeText(this, getString(R.string.pleaseLogin), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -64,15 +65,6 @@ class RegisterActivity : AppCompatActivity() {
      */
     private fun startLoginActivity() {
         val profileIntent = Intent(this@RegisterActivity, MainActivity::class.java)
-        startActivity(profileIntent)
-        finish()
-    }
-
-    /**
-     * send user to HomeActivity after successful registration
-     */
-    private fun startHomeActivity() {
-        val profileIntent = Intent(this@RegisterActivity, NavigationDrawer::class.java)
         startActivity(profileIntent)
         finish()
     }
