@@ -55,6 +55,7 @@
     <string name="alreadyAccount">Already have an account?</string>
     <string name="swipeButton">Let\'s Swipe</string>
     <string name="newGroupButton">New Group</string>
+    <string name="selectGenre">Genre</string>
     <string name="recyGroupName">Group Name</string>
     <string name="recyMemberNumber">Member Number</string>
     <string name="recyGroupID">Group ID</string>

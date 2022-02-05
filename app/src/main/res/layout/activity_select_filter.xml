@@ -35,10 +35,20 @@
             android:id="@+id/groups_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/spinner_layout"
             android:layout_below="@id/choose_text"
             android:layout_marginTop="40dp"
             android:textColor="@color/Hot_Chocolate"
             android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/choose_text"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_arrow_down" />
+
     </RelativeLayout>
 
 </RelativeLayout>
