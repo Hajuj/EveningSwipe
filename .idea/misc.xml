@@ -40,12 +40,12 @@
         <entry key="app/src/main/res/drawable/test.xml" value="0.26979166666666665" />
         <entry key="app/src/main/res/layout/activity_add_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_add_group.xml" value="0.23802083333333332" />
-        <entry key="app/src/main/res/layout/activity_add_random_filter.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_add_random_filter.xml" value="0.25861195542046606" />
         <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_after_notification.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_finished_swipe.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_group_profile.xml" value="0.42934782608695654" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_navigation_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ranking.xml" value="0.33695652173913043" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.31431159420289856" />
@@ -61,6 +61,7 @@
         <entry key="app/src/main/res/layout/fragment_rating_result.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/image_test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_grouprecycler.xml" value="0.25785207700101315" />
         <entry key="app/src/main/res/layout/layout_target.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2957427536231884" />
         <entry key="app/src/main/res/layout/ranking_widget.xml" value="0.2907608695652174" />

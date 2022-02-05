@@ -15,8 +15,7 @@ import com.example.eveningswipe.FinishedSwipeActivity
 import com.example.eveningswipe.R
 import com.example.eveningswipe.httpRequests.HttpRequests
 import com.squareup.picasso.Picasso
-import javax.net.ssl.HttpsURLConnection
-import kotlin.math.min
+
 
 /**
  * variable that can be accessed from other activities
@@ -72,7 +71,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
         // get swipe state
         val responseState = HttpRequests.getSwipeState(BASE_URL_SwipeState, token!!, filterId!!)
-        if(!responseState!!) {
+        if (!responseState!!) {
             //wait
         } else {
             swipeState = HttpRequests.responseSwipeState!!.nextMovie
@@ -84,7 +83,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
         val filterSize = filterIndex?.let { HttpRequests.responseFilterByGroupId?.get(it)?.size }
         //decide how many movies to swipe (count of movies or filter size)
-        if (movieList!!.size < filterSize!!){
+        if (movieList!!.size < filterSize!!) {
             swipeCount = movieList!!.size
         } else {
             swipeCount = filterSize
@@ -232,8 +231,9 @@ class SwipeMoviesActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     fun touchListener(imgView: ImageView) {
 
-        val maxSwipe = 800
-        val minSwipe = 200
+        val displayMetrics = resources.displayMetrics
+        val displayEnd = (displayMetrics.widthPixels.toFloat() / 2) + 250
+        val displayStart = (displayMetrics.widthPixels.toFloat() / 2) - 250
         var lastX = 0f
         var newX = 0f
 
@@ -260,24 +260,36 @@ class SwipeMoviesActivity : AppCompatActivity() {
                         val currentX = newX
 
                         //center the image when swiped or finger released
-                        layoutSwipe!!.animate().translationX(0f).setDuration(0).start()
+                        layoutSwipe!!.animate().translationX(0f).setDuration(150).start()
 
-                        //swipe all the way to the right
-                        if (currentX > maxSwipe) {
-                            rateMovie(true)
-                            nextMovie(imgView)
-                            Toast.makeText(applicationContext, resources.getString(R.string.like), Toast.LENGTH_SHORT).show()
+                        if (currentX != 0f) {
+                            //swipe all the way to the right
+                            if (currentX > displayEnd) {
+                                newX = 0f
+                                rateMovie(true)
+                                nextMovie(imgView)
+                                Toast.makeText(
+                                    applicationContext,
+                                    resources.getString(R.string.like),
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                            temp += 1
-                        }
+                                temp += 1
+                            }
 
-                        //swipe all the way to the left
-                        if (currentX < minSwipe) {
-                            rateMovie(false)
-                            nextMovie(imgView)
-                            Toast.makeText(applicationContext, resources.getString(R.string.dislike), Toast.LENGTH_SHORT).show()
+                            //swipe all the way to the lef
+                            if (currentX < displayStart) {
+                                newX = 0f
+                                rateMovie(false)
+                                nextMovie(imgView)
+                                Toast.makeText(
+                                    applicationContext,
+                                    resources.getString(R.string.dislike),
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                            temp += 1
+                                temp += 1
+                            }
                         }
                     }
                 }
