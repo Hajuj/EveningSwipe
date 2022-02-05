@@ -30,8 +30,7 @@
             android:layout_below="@+id/filter_name_random"
             android:layout_marginTop="10dp"
             android:layout_alignStart="@id/filter_name_random"
-            android:layout_alignEnd="@id/filter_name_random"
-            android:hint="@string/filtername">
+            android:layout_alignEnd="@id/filter_name_random">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -56,8 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/select_size_random"
             android:layout_marginTop="10dp"
-            android:layout_alignStart="@id/select_size_random"
-            android:hint="@string/_50">
+            android:layout_alignStart="@id/select_size_random">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

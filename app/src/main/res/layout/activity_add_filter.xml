@@ -32,8 +32,7 @@
             android:layout_below="@+id/filter_name"
             android:layout_marginTop="10dp"
             android:layout_alignStart="@id/filter_name"
-            android:layout_alignEnd="@id/filter_name"
-            android:hint="@string/filtername">
+            android:layout_alignEnd="@id/filter_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -80,8 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_year"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@id/select_year"
-        android:hint="@string/_1993">
+        android:layout_alignStart="@id/select_year">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -105,8 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_year"
         android:layout_marginTop="10dp"
-        android:layout_alignEnd="@id/select_year"
-        android:hint="@string/_2022">
+        android:layout_alignEnd="@id/select_year">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -131,8 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_runtime"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@id/select_runtime"
-        android:hint="@string/_120">
+        android:layout_alignStart="@id/select_runtime">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -157,8 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_size"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@id/select_size"
-        android:hint="@string/_50">
+        android:layout_alignStart="@id/select_size">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -183,8 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_rating"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@id/select_rating"
-        android:hint="@string/_8">
+        android:layout_alignStart="@id/select_rating">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -209,8 +203,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_votes"
         android:layout_marginTop="10dp"
-        android:layout_alignStart="@id/select_votes"
-        android:hint="@string/_500">
+        android:layout_alignStart="@id/select_votes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

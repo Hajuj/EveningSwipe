@@ -55,6 +55,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
     private var scrollView: ScrollView? = null
     private lateinit var swipeViewModel: SwipeViewModel
     val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
+    val BASE_URL_MovieInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/info/"
     val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
     val BASE_URL_SwipeState = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/swipestate"
 
@@ -154,6 +155,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
             // get movie details of the current shown movie
             var responseDetails: Boolean? = null
+            var responseOtherDetails: Boolean? = null
             movieId = movieList!!.get(swipeState)
             if (token != null) {
                 responseDetails =
@@ -163,9 +165,77 @@ class SwipeMoviesActivity : AppCompatActivity() {
             //check if response error or success
             if (!responseDetails!!) {
                 // no data for movie - show next one
-                swipeState += 1
-                swipeCount = swipeCount?.minus(1)
-                nextMovie(imgView)
+                if (token != null) {
+                    responseOtherDetails =
+                        HttpRequests.getOtherMovieDetails(BASE_URL_MovieInfo, token, movieId!!)
+                }
+
+                if(!responseOtherDetails!!){
+                    swipeState += 1
+                    swipeCount = swipeCount?.minus(1)
+                    temp +=1
+                    nextMovie(imgView)
+                } else{
+                    // fill views with movie details
+                    // fancy original title? -> add title in brackets
+                    if(HttpRequests.responseOtherMovieDetails!!.title.contains(HttpRequests.responseOtherMovieDetails!!.original_title)){
+                        swipeViewModel.movieTitle.value =
+                            HttpRequests.responseOtherMovieDetails!!.original_title
+                    } else {
+                        swipeViewModel.movieTitle.value =
+                            HttpRequests.responseOtherMovieDetails!!.original_title + "\n(" +
+                                    HttpRequests.responseOtherMovieDetails!!.title + ")"
+                    }
+                    swipeViewModel.movieText.value = HttpRequests.responseOtherMovieDetails!!.overview
+                    swipeViewModel.movieDate.value = HttpRequests.responseOtherMovieDetails!!.release_date
+                    swipeViewModel.movieVote.value = HttpRequests.responseOtherMovieDetails!!.vote_average
+                    swipeViewModel.movieVoteCount.value =
+                        "(" + HttpRequests.responseOtherMovieDetails!!.vote_count.toString() + ")"
+
+                    // get image, show loading spinner while loading
+                    imgURL = HttpRequests.responseOtherMovieDetails!!.poster_path
+                    pgsBar?.setVisibility(View.VISIBLE)
+                    if(imgURL == ""){
+                        imgView.setImageResource(R.drawable.cinema_background)
+                        pgsBar?.setVisibility(View.GONE)
+                    }else{
+                        Picasso.get()
+                            .load(imgURL)
+                            .into(imgView, object : com.squareup.picasso.Callback {
+                                override fun onSuccess() {
+                                    pgsBar?.setVisibility(View.GONE)
+                                }
+                                override fun onError(e: java.lang.Exception?) {
+                                    imgView.setImageResource(R.drawable.cinema_background)
+                                    pgsBar?.setVisibility(View.GONE)
+                                }
+                            })
+                    }
+
+
+                    // show swipe animation hint - just one time
+                    if (!hintAccept) {
+                        val animator1 =
+                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", 100f).apply {
+                                duration = 750
+                            }
+                        val animator2 =
+                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
+                                duration = 1500
+                            }
+                        val animator3 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
+                            duration = 750
+                        }
+                        AnimatorSet().apply {
+                            play(animator1).before(animator2)
+                            play(animator3).after(animator2)
+                            start()
+                        }
+                        hintAccept = true
+                    }
+                    swipeState += 1
+                }
+
             } else {
                 // fill views with movie details
                 // fancy original title? -> add title in brackets
@@ -185,19 +255,23 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                 // get image, show loading spinner while loading
                 imgURL = HttpRequests.responseMovieDetails!!.poster_path
-                pgsBar?.setVisibility(View.VISIBLE)
-                Picasso.get()
-                    .load(imgURL)
-                    .into(imgView, object : com.squareup.picasso.Callback {
-                        override fun onSuccess() {
-                            pgsBar?.setVisibility(View.GONE)
+                if(imgURL == ""){
+                    imgView.setImageResource(R.drawable.cinema_background)
+                    pgsBar?.setVisibility(View.GONE)
+                }else{
+                    Picasso.get()
+                        .load(imgURL)
+                        .into(imgView, object : com.squareup.picasso.Callback {
+                            override fun onSuccess() {
+                                pgsBar?.setVisibility(View.GONE)
+                            }
+                            override fun onError(e: java.lang.Exception?) {
+                                imgView.setImageResource(R.drawable.cinema_background)
+                                pgsBar?.setVisibility(View.GONE)
+                            }
+                        })
+                }
 
-                        }
-
-                        override fun onError(e: java.lang.Exception?) {
-                            imgView.setImageResource(R.drawable.cinema_background)
-                        }
-                    })
 
                 // show swipe animation hint - just one time
                 if (!hintAccept) {

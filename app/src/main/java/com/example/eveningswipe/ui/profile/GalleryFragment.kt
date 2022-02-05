@@ -23,15 +23,14 @@ class GalleryFragment : Fragment() {
         galleryViewModel =
             ViewModelProvider(this).get(GalleryViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
+
+       /* galleryViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })
+        })*/
 
         // Set cut corner background for API 23+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
-        }
+        val layout = root.findViewById<View>(R.id.gallery_corner)
+        layout.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
         return root
     }
 }
