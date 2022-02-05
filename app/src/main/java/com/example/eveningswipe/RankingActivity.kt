@@ -2,6 +2,7 @@ package com.example.eveningswipe
 
 import android.annotation.SuppressLint
 import android.appwidget.AppWidgetManager
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -32,7 +33,8 @@ class RankingActivity : AppCompatActivity() {
 
         val btn = findViewById<View>(R.id.refresh_ranking) as Button
         btn.setOnClickListener(View.OnClickListener { showRanking() })
-
+        val backBtn = findViewById<View>(R.id.back_btn) as Button
+        backBtn.setOnClickListener(View.OnClickListener { back() })
         showRanking()
 
         // Set cut corner background
@@ -140,5 +142,11 @@ class RankingActivity : AppCompatActivity() {
                 updateAppWidget(this, AppWidgetManager.getInstance(this), widgetIds!![i])
             }
         }
+    }
+
+    private fun back() {
+        val profileIntent = Intent(this@RankingActivity, NavigationDrawer::class.java)
+        startActivity(profileIntent)
+        finish()
     }
 }
