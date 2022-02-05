@@ -112,9 +112,16 @@ class RankingActivity : AppCompatActivity() {
             }
         }
 
-        movie1 = movieNameList[0]
-        movie2 = movieNameList[1]
-        movie3 = movieNameList[2]
+        if(movieNameList.size >0){
+            movie1 = movieNameList[0]
+        }
+        if (movieNameList.size > 1){
+            movie2 = movieNameList[1]
+        }
+        if(movieNameList.size > 2){
+            movie3 = movieNameList[2]
+        }
+
         // update the text in the widget
         if(widgetIds != null){
             for (i in 0..widgetIds!!.size - 1) {

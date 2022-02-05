@@ -166,6 +166,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                 // no data for movie - show next one
                 swipeState += 1
                 swipeCount = swipeCount?.minus(1)
+                temp +=1
                 nextMovie(imgView)
             } else {
                 // fill views with movie details

@@ -26,6 +26,7 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     val BASE_URL_ById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid/"
     val URL_GroupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
+    private val BASE_URL_User = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
     private lateinit var root: View
     val token = HttpRequests.responseToken
     var groupIdList: List<Int>? = null
@@ -45,13 +46,18 @@ class SwipeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         root = inflater.inflate(R.layout.swipe_fragment, container, false)
 
         // list with the ids  of all the groups where the user is member
-        groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
+        val responseUser = HttpRequests.getUserInformation(BASE_URL_User, token!!)
+        if (!responseUser!!) {
+            //wait
+        } else {
+            groupIdList = HttpRequests.responseUserInfo.groupId.distinct()
+        }
 
         //get the names of the groups an add them to another list
         groupNameList.add(getString(R.string.select_group))
         for (i in 0..groupIdList!!.size - 1) {
             val response =
-                HttpRequests.getGroupInformation(URL_GroupInfo, token!!, groupIdList!![i])
+                HttpRequests.getGroupInformation(URL_GroupInfo, token, groupIdList!![i])
             if (!response!!) {
                 // error
             } else {
