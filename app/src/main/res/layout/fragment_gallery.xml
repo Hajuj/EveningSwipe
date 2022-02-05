@@ -4,19 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgc"
     tools:context=".ui.profile.GalleryFragment">
 
-    <TextView
-        android:id="@+id/text_gallery"
+    <RelativeLayout
+        android:id="@+id/gallery_corner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:background="?attr/bgc"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/ic_how_to"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@mipmap/ic_widget"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/how_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evening_swipe"
+            android:textSize="34dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:textColor="?attr/tc"
+            android:layout_below="@id/ic_how_to"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/how_to2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/how_to"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"
+            android:text="@string/how_to"
+            android:textColor="?attr/tc"
+            android:textSize="28dp" />
+
+        <TextView
+            android:id="@+id/text_gallery1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:text="@string/after_you_have_successfully_registered_and_logged_in_you_can_almost_get_started"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/how_to2"/>
+
+        <TextView
+            android:id="@+id/text_gallery2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:text="@string/_1_create_a_new_group_and_invite_your_friends_or_get_yourself_added_to_a_group"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/text_gallery1"/>
+
+        <TextView
+            android:id="@+id/text_gallery3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:text="@string/_2_create_filters_that_match_your_film_preferences_or_if_you_re_undecided_create_a_random_filter_and_let_it_surprise_you"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/text_gallery2"/>
+
+        <TextView
+            android:id="@+id/text_gallery4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:text="@string/_3_once_you_ve_selected_your_group_and_filter_you_re_ready_to_swipe_the_results_will_be_displayed_as_soon_as_you_have_swiped_all_movies"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/text_gallery3"/>
+
+        <TextView
+            android:id="@+id/text_gallery5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/Hot_Chocolate"
+            android:text="@string/have_fun_and_let_the_best_movie_win"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/text_gallery4"/>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

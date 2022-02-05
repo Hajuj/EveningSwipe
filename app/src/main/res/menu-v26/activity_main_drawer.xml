@@ -10,8 +10,8 @@
             android:title="@string/menu_home"/>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_profil"
-            android:title="@string/menu_profile"/>
+            android:icon="@drawable/movie_icon"
+            android:title="@string/how_to"/>
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_groups"
