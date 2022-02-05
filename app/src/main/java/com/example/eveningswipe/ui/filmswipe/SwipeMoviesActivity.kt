@@ -186,7 +186,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                             HttpRequests.responseOtherMovieDetails!!.original_title + "\n(" +
                                     HttpRequests.responseOtherMovieDetails!!.title + ")"
                     }
-                    swipeViewModel.movieText.value = HttpRequests.responseOtherMovieDetails!!.overview
+                    swipeViewModel.movieText.value = getString(R.string.google)
                     swipeViewModel.movieDate.value = HttpRequests.responseOtherMovieDetails!!.release_date
                     swipeViewModel.movieVote.value = HttpRequests.responseOtherMovieDetails!!.vote_average
                     swipeViewModel.movieVoteCount.value =

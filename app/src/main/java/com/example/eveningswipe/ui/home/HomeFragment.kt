@@ -55,14 +55,6 @@ class HomeFragment : Fragment() {
      */
     @SuppressLint("ResourceAsColor")
     private fun startSwiping(root: View) {
-        //TODO: wenn keine gruppe existiert --> add group first
-    /*
-        println("here: " + HttpRequests.responseUserInfo.groupId + " true? "+ HttpRequests.responseUserInfo.groupId.isEmpty())
-        if (HttpRequests.responseUserInfo.groupId == null ){
-            println("test")
-        }else{
-            println("test2")
-        }*/
         //use fragment manager to replace fragment
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.replace(R.id.nav_host_fragment, SwipeFragment())

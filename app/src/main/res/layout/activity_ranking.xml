@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".RankingActivity"
     android:background="@color/Canteloupe">
 
@@ -160,6 +160,18 @@
             android:background="@drawable/buttons"
             android:text="@string/refresh_result"
             app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/refresh_ranking"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/buttons"
+            android:text="@string/back_to_start"
+            app:backgroundTint="@null" />
+
     </RelativeLayout>
 
 

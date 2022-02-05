@@ -1,5 +1,6 @@
 package com.example.eveningswipe
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -112,6 +113,8 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
                     resources.getString(R.string.filter_added),
                     Toast.LENGTH_LONG
                 ).show()
+
+                finish()
             }
         }
 
