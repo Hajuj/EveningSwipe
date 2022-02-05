@@ -232,8 +232,9 @@ class SwipeMoviesActivity : AppCompatActivity() {
     fun touchListener(imgView: ImageView) {
 
         val displayMetrics = resources.displayMetrics
-        val displayEnd = (displayMetrics.widthPixels.toFloat() / 2) + 250
-        val displayStart = (displayMetrics.widthPixels.toFloat() / 2) - 250
+        val halfDisplayWidth = displayMetrics.widthPixels.toFloat() / 2
+        val maxSwipe = halfDisplayWidth + 250
+        val minSwipe = halfDisplayWidth - 250
         var lastX = 0f
         var newX = 0f
 
@@ -264,7 +265,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         if (currentX != 0f) {
                             //swipe all the way to the right
-                            if (currentX > displayEnd) {
+                            if (currentX > maxSwipe) {
                                 newX = 0f
                                 rateMovie(true)
                                 nextMovie(imgView)
@@ -278,7 +279,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                             }
 
                             //swipe all the way to the lef
-                            if (currentX < displayStart) {
+                            if (currentX < minSwipe) {
                                 newX = 0f
                                 rateMovie(false)
                                 nextMovie(imgView)
