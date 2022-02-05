@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.eveningswipe.R
+import com.example.eveningswipe.httpRequests.HttpRequests
 import com.example.eveningswipe.ui.filmswipe.SwipeFragment
 
 
@@ -54,6 +55,14 @@ class HomeFragment : Fragment() {
      */
     @SuppressLint("ResourceAsColor")
     private fun startSwiping(root: View) {
+        //TODO: wenn keine gruppe existiert --> add group first
+    /*
+        println("here: " + HttpRequests.responseUserInfo.groupId + " true? "+ HttpRequests.responseUserInfo.groupId.isEmpty())
+        if (HttpRequests.responseUserInfo.groupId == null ){
+            println("test")
+        }else{
+            println("test2")
+        }*/
         //use fragment manager to replace fragment
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.replace(R.id.nav_host_fragment, SwipeFragment())

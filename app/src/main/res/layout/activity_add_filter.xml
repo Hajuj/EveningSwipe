@@ -7,7 +7,7 @@
     tools:context=".AddFilterActivity"
     android:orientation="horizontal"
     android:background="?attr/bgcInApp"
-    tools:ignore="ScrollViewCount">
+    android:id="@+id/scroll_add_filter">
 
     <RelativeLayout
         android:layout_width="match_parent"
