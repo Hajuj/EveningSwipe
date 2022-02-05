@@ -20,6 +20,7 @@ import java.util.logging.Logger
 
 class SlideshowFragment : Fragment() {
     private val BASE_URL_groupInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/group/info"
+    private val BASE_URL_userInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/user"
     private lateinit var slideshowViewModel: SlideshowViewModel
     private var newGroup: Button? = null
     private var grReView: RecyclerView? = null
@@ -37,8 +38,6 @@ class SlideshowFragment : Fragment() {
 
         grReView = root.findViewById(R.id.groupRecyclerView) as RecyclerView
 
-        showGroups()
-
         newGroup = root.findViewById(R.id.newGroup) as Button
         newGroup!!.setOnClickListener(View.OnClickListener { createNewGroup() })
 
@@ -46,6 +45,16 @@ class SlideshowFragment : Fragment() {
         root.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
 
         return root
+    }
+
+    @Override
+    override fun onStart() {
+        super.onStart()
+        //update recyclerview
+        if (token != null) {
+            HttpRequests.getUserInformation(BASE_URL_userInfo, token)
+            showGroups()
+        }
 
     }
 
