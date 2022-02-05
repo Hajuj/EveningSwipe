@@ -11,6 +11,7 @@ object HttpRequests {
     var responseGroupInfo: PostGroupInfo? = null
     var responseFindUserInfo: FindUserDto? = null
     var responseMovieDetails: GetMovieDetails? = null
+    var responseOtherMovieDetails: GetOtherMovieDetails? = null
     var responseFilterRating: Array<GetFilterRating2>? = null
     var responseSwipeState: GetSwipeState? = null
     var groupName: String? = null
@@ -254,6 +255,33 @@ object HttpRequests {
 
                 val (info, err) = result
                 info?.let { responseMovieDetails = info }
+                err?.let { println("ERROR !!") }
+                if (res.statusCode == 400) {
+                    success = false
+                } else {
+                    success = true
+                }
+            }.join()
+        return success
+    }
+
+    /**
+     * function to send request to get the details from movie - other database
+     */
+    fun getOtherMovieDetails(url: String, token: TokenDto, movieId: String): Boolean? {
+        val movieInfo = PostMovieDetailsById(
+            token = token,
+            movieId = movieId
+        )
+        var success: Boolean? = null
+        url.httpPost()
+            .header("Content-Type" to "application/json")
+            .body(Gson().toJson(movieInfo).toString())
+            .responseObject(GetOtherMovieDetails.Deserializer())
+            { req, res, result ->
+
+                val (info, err) = result
+                info?.let { responseOtherMovieDetails = info }
                 err?.let { println("ERROR !!") }
                 if (res.statusCode == 400) {
                     success = false

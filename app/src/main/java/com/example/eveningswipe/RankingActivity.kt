@@ -24,6 +24,7 @@ var movie3: String? = null
 class RankingActivity : AppCompatActivity() {
     val BASE_URL_MovieDetails = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/details/"
     val BASE_URL_FilterRating = "http://msp-WS2122-6.mobile.ifi.lmu.de:80/api/filter/rating"
+    val BASE_URL_MovieInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/info/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +83,7 @@ class RankingActivity : AppCompatActivity() {
         }
         // get the original movie names
         var response2: Boolean? = null
+        var response3: Boolean? = null
         var temp: Int = 0
         var indexVoting: Int = 0
         var index: Int = 0
@@ -92,9 +94,19 @@ class RankingActivity : AppCompatActivity() {
                     HttpRequests.getMovieDetails(BASE_URL_MovieDetails, token, movieIdList[temp])
             }
             if (!response2!!) {
-                movieVotingList.removeAt(temp - indexVoting)
-                indexVoting += 1
-                temp += 1
+                if (token != null) {
+                    response3 =
+                        HttpRequests.getOtherMovieDetails(BASE_URL_MovieInfo, token, movieIdList[temp])
+                }
+                if(!response3!!){
+                    movieVotingList.removeAt(temp - indexVoting)
+                    indexVoting += 1
+                    temp += 1
+                } else{
+                    movieNameList.add(index, HttpRequests.responseOtherMovieDetails?.original_title.toString())
+                    temp += 1
+                    index += 1
+                }
             } else {
                 movieNameList.add(index, HttpRequests.responseMovieDetails?.original_title.toString())
                 temp += 1
