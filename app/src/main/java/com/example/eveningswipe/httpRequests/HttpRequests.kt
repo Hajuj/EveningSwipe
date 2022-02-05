@@ -60,7 +60,6 @@ object HttpRequests {
                 err?.let {
                     wrongLoginData = "Your login data are wrong. Please try again!"
                 }
-                println("token: " + res + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -114,7 +113,6 @@ object HttpRequests {
                 val (info, err) = result
                 info?.let { responseUserInfo = info }
                 err?.let { println("ERROR !!") }
-                println("group: " + res + result)
                 if (res.statusCode == 400) {
                     success = false
                 } else {
@@ -281,7 +279,6 @@ object HttpRequests {
             .response() { req, res, result ->
                 val (info, err) = result
                 err?.let { println("ERROR !!") }
-                println("res: "+ res + result)
             }
     }
 
@@ -330,7 +327,7 @@ object HttpRequests {
             .body(Gson().toJson(createFilter).toString())
             .response() { req, res, result ->
                 val (info, err) = result
-                err?.let { println("ERROR !!") }
+                err?.let { println("ERROR !!" + err) }
                 if (res.statusCode == 400) {
                     success = false
                 } else {

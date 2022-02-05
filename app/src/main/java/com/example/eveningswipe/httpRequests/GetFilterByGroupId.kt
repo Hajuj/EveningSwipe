@@ -15,6 +15,7 @@ class GetFilterByGroupId : ArrayList<GetFilterByGroupId2>(
 data class GetFilterByGroupId2 (
 
     val id: Int,
+    val name: String,
     val genre_1: String,
     val genre_2: String,
     val genre_3: String,

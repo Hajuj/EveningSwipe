@@ -8,6 +8,7 @@ data class CreateFilter (
 )
 
 data class FilterDto(
+    var name: String,
     var genre_1: String,
     var genre_2: String,
     var genre_3: String,

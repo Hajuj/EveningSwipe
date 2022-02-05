@@ -24,6 +24,7 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     private var createFilter: Button? = null
     private var rating: TextInputLayout? = null
     private var votes: TextInputLayout? = null
+    private var nameFilter: TextInputLayout? = null
     var genre: String? = null
     val token = HttpRequests.responseToken
     var genreList: Array<String>? = null
@@ -36,13 +37,14 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_filter)
-        //TODO: add name of filter
+
         minYear = findViewById<View>(R.id.year_begin_input) as TextInputLayout
         maxYear = findViewById<View>(R.id.year_end_input) as TextInputLayout
         runtime = findViewById<View>(R.id.runtime_input) as TextInputLayout
         size = findViewById<View>(R.id.size_input) as TextInputLayout
         rating = findViewById<View>(R.id.rating_input) as TextInputLayout
         votes = findViewById<View>(R.id.votes_input) as TextInputLayout
+        nameFilter = findViewById<View>(R.id.filter_name_input) as TextInputLayout
         createFilter = findViewById(R.id.create_filter) as Button
         createFilter!!.setOnClickListener(View.OnClickListener { addFilter() })
 
@@ -74,7 +76,7 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     fun addFilter() {
         if (genre == null || minYear?.editText?.text!!.isEmpty() || maxYear?.editText?.text!!.isEmpty() ||
             runtime?.editText?.text!!.isEmpty() || size?.editText?.text!!.isEmpty() ||
-            rating?.editText?.text!!.isEmpty() || votes?.editText?.text!!.isEmpty()
+            rating?.editText?.text!!.isEmpty() || votes?.editText?.text!!.isEmpty() || nameFilter?.editText?.text!!.isEmpty()
         ) {
             Toast.makeText(
                 this,
@@ -88,9 +90,10 @@ class AddFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             val sizeInput = size?.editText?.text.toString().trim().toInt()
             val ratingInput = rating?.editText?.text.toString().trim().toInt()
             val votesInput = votes?.editText?.text.toString().trim().toInt()
+            val nameInput = nameFilter?.editText?.text.toString().trim()
 
             val filter = FilterDto(
-                genre.toString(), "", "",
+                nameInput, genre.toString(), "", "",
                 minYearInput, maxYearInput, ratingInput, votesInput,
                 runtimeInput, sizeInput, GroupProfile.getValue()?.toInt()!!
             )

@@ -12,14 +12,16 @@ import com.google.android.material.textfield.TextInputLayout
 class AddRandomFilterActivity : AppCompatActivity() {
     val token = HttpRequests.responseToken
     private var size: TextInputLayout? = null
+    private var nameFilter: TextInputLayout? = null
     private var createFilter: Button? = null
     val BASE_URL_CreateFilter = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/create/random"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_random_filter)
-        //TODO: add name of filter
+
         size = findViewById<View>(R.id.size_input_random) as TextInputLayout
+        nameFilter = findViewById<View>(R.id.name_random_input) as TextInputLayout
         createFilter = findViewById(R.id.create_filter_random) as Button
         createFilter!!.setOnClickListener(View.OnClickListener { addFilter() })
 
@@ -29,11 +31,11 @@ class AddRandomFilterActivity : AppCompatActivity() {
     }
 
     fun addFilter(){
-        if ( size?.editText?.text!!.isEmpty()
+        if ( size?.editText?.text!!.isEmpty() || nameFilter?.editText?.text!!.isEmpty()
         ) {
             Toast.makeText(
                 this,
-                resources.getString(R.string.fill_in_size),
+                resources.getString(R.string.fill_in_field),
                 Toast.LENGTH_LONG
             ).show()
         } else {
@@ -44,9 +46,10 @@ class AddRandomFilterActivity : AppCompatActivity() {
             val sizeInput = size?.editText?.text.toString().trim().toInt()
             val ratingInput = getString(R.string._8).toInt()
             val votesInput = getString(R.string._500).toInt()
+            val nameInput = nameFilter?.editText?.text.toString().trim()
 
             val filter = FilterDto(
-                genre, "", "",
+                nameInput, genre, "", "",
                 minYearInput, maxYearInput, ratingInput, votesInput,
                 runtimeInput, sizeInput, GroupProfile.getValue()?.toInt()!!
             )

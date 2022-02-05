@@ -34,7 +34,8 @@ class SelectFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
     var BASE_URL_GetFilterById = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/byid"
     val token = HttpRequests.responseToken
     var filterList: Array<GetFilterByGroupId2>? = null
-    val filterNameList = mutableListOf(0)
+    val filterNameList: MutableList<String> = mutableListOf()
+    val filterIdList = mutableListOf(0)
 
     /**
      * create context of activity
@@ -57,9 +58,11 @@ class SelectFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
 
         // add all filter names in a list
+        filterNameList.add(getString(R.string.select_filter))
         if (filterList != null) {
             for (i in 0..filterList!!.size - 1) {
-                filterNameList.add(filterList!![i].id)
+                filterNameList.add(filterList!![i].name)
+                filterIdList.add(filterList!![i].id)
             }
         }
 
@@ -107,7 +110,7 @@ class SelectFilterActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
             //do nothing first element is just a hint to select group
         } else {
             //SwipeMoviesActivity.setGroupId(filterNameList!!.get(position-1))
-            filterId = filterNameList.get(position)
+            filterId = filterIdList.get(position)
             filterIndex = position - 1
             val intent = Intent(this, SwipeMoviesActivity::class.java)
             this.startActivity(intent)

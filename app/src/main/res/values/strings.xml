@@ -77,6 +77,7 @@
 
     <!-- Strings used for swipe activity -->
     <string name="select_group">select group</string>
+    <string name="select_filter">select filter</string>
     <string name="need_filter">This group needs a filter. Please go back to the group settings and add a filter.</string>
     <string name="voting_over">Voting is over!</string>
     <string name="click_noti">You voted all movies. Click here to see the ranking!</string>
@@ -156,4 +157,6 @@
     <string name="please_select_which_filter_you_want_to_swipe">Please select which filter you want to swipe:</string>
     <string name="add_random_filter">add random filter</string>
     <string name="or">or</string>
+    <string name="enter_a_name_for_the_filter">Enter a name for the filter</string>
+    <string name="filtername">filtername</string>
 </resources>

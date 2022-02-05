@@ -13,6 +13,32 @@
         android:id="@+id/random_layout">
 
         <TextView
+            android:id="@+id/filter_name_random"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/enter_a_name_for_the_filter"
+            android:textColor="@color/Hot_Chocolate"
+            android:textSize="18sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_random_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filter_name_random"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@id/filter_name_random"
+            android:layout_alignEnd="@id/filter_name_random"
+            android:hint="@string/filtername">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
             android:id="@+id/select_size_random"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +47,8 @@
             android:layout_marginEnd="20dp"
             android:text="@string/enter_how_many_films_to_swipe"
             android:textColor="@color/Hot_Chocolate"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:layout_below="@id/name_random_input"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/size_input_random"
