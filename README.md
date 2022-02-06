@@ -32,7 +32,7 @@ passeord = 64uq8wwmn2uN66iZyaZH
 
 Systemd:
 
-Sytemd file is named eveningswipe.service
+Sytemd file : tools/eveningswipe.service
 cp to /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable eveningswipe.service
