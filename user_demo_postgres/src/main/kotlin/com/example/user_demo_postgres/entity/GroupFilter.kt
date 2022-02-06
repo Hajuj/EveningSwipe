@@ -8,6 +8,7 @@ data class GroupFilter(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int ,
+    var name: String,
     var genre_1: String,
     val genre_2: String,
     val genre_3: String,

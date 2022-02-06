@@ -58,6 +58,24 @@ class MovieEndpoints (
 
     }
 
+    @PostMapping("/api/movie/info")
+    fun getMovieInfo(@RequestBody body: AuthMovieDetailsDto): ResponseEntity<RetMovieDetailsDto> {
+        if (jwtService.validateToken(body.token.token)) {
+            val info = movieService.getBasicMovie(body.movieId)
+
+            info?.let {
+                var title = it.prime_title
+                if (it.prime_title.length >= 19){
+                     title = it.prime_title+ "..."
+
+                }
+                return ResponseEntity.ok(RetMovieDetailsDto(it.orig_title,"",0.0,"",it.rel_date.toString(),title, it.rating,it.votes))}
+
+        }
+        throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+
+    }
+
     @PostMapping("/api/group/create/")
     fun createGroup(@RequestBody groupDTO: AuthGroupDto) :ResponseEntity<String> {
         if (jwtService.validateToken(groupDTO.token.token)){
@@ -69,13 +87,15 @@ class MovieEndpoints (
         throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
     }
 
+
+
     @PostMapping("/api/filter/create")
     fun createFilter(@RequestBody dto: AuthFilterDto): ResponseEntity<GroupFilterDTO> {
         if (jwtService.validateToken(dto.token.token)) {
             val id = jwtService.getIdFromToken(dto.token.token)
 
             id?.let {
-                if (id == groupService.getGroup(dto.filter.group_id).owner) {
+                if (groupUserService.isUserInGroup(dto.filter.group_id, id)) {
                     val result = groupFilterService.createFilter(dto.filter)
                     val users = groupUserService.getUsersByGroup(dto.filter.group_id)
                     users?.map{
@@ -94,7 +114,7 @@ class MovieEndpoints (
             val id = jwtService.getIdFromToken(dto.token.token)
 
             id?.let {
-                if (id == groupService.getGroup(dto.filter.group_id).owner) {
+                if (groupUserService.isUserInGroup(dto.filter.group_id, id)) {
                     val result = groupFilterService.createRandomFilter(dto.filter)
                     val users = groupUserService.getUsersByGroup(dto.filter.group_id)
                     users?.map{
@@ -137,6 +157,11 @@ class MovieEndpoints (
                      val user = userService.findByEmail(dto.add.toAdd)
                     user?.let{
                         groupUserService.adUserToGroup(user.id ,dto.add.groupId)
+                        val filtersInGroup = groupFilterService.getFilterByGroupId(dto.add.groupId)
+                        filtersInGroup?.map{
+                            ratingUserService.createRatinUser(it.id, user.id)
+
+                        }
                         return ResponseEntity.ok("User added to Group")
                     }
 

@@ -3,6 +3,7 @@ package com.example.user_demo_postgres.dto
 data class GroupFilterDTO(
 
     var id: Int ,
+    var name: String,
     var genre_1: String,
     val genre_2: String,
     val genre_3: String,

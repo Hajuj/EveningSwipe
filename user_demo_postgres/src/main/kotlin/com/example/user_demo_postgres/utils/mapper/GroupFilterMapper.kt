@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 class GroupFilterMapper: Mapper<GroupFilterDTO, GroupFilter> {
     override fun fromEntity(entety: GroupFilter): GroupFilterDTO = GroupFilterDTO(
         entety.id,
+        entety.name,
         entety.genre_1,
         entety.genre_2,
         entety.genre_3,
@@ -23,6 +24,7 @@ class GroupFilterMapper: Mapper<GroupFilterDTO, GroupFilter> {
 
     override fun toEntity(domain: GroupFilterDTO): GroupFilter = GroupFilter(
         domain.id,
+        domain.name,
         domain.genre_1,
         domain.genre_2,
         domain.genre_3,

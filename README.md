@@ -25,6 +25,15 @@ password: Win#nix#fer?
 Backend URL : http://msp-ws2122-6.mobile.ifi.lmu.de:80/
 
 
+Systemd:
+
+Sytemd file is named eveningswipe.service
+cp to /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable eveningswipe.service
+sudo systemctl start eveningswipe.service
+
+
 
 
 
