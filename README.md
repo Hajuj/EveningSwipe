@@ -7,4 +7,4 @@ Vielen Dank.
 
 ## Disclaimer
 
-Das Backend und manche Funktinen wurden nicht bis zum Ende implementiert, deswegen kann es sein, dass bestimmte sachen nicht einwandfrei funktionieren.
+Das Backend und manche Funktionen wurden nicht bis zum Ende implementiert, deswegen kann es sein, dass bestimmte sachen nicht einwandfrei funktionieren.
