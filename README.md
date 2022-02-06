@@ -10,7 +10,6 @@ Es wird eine postgresql datenbank benötigt welche in application.properites kon
 
 	spring.datasource.username=<Username>
 
-In der directory tools/ befinden sich Hilfsscripte zur Datenbankerstellung.
 
 
 
@@ -24,6 +23,12 @@ password: Win#nix#fer?
 
 Backend URL : http://msp-ws2122-6.mobile.ifi.lmu.de:80/
 
+Postgresdb server login:
+
+user = eveningswipe_server
+passeord = 64uq8wwmn2uN66iZyaZH
+
+
 
 Systemd:
 
@@ -32,6 +37,15 @@ cp to /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable eveningswipe.service
 sudo systemctl start eveningswipe.service
+
+In der directory tools/ befinden sich Hilfsscripte zur Datenbankerstellung.
+Folgende daten wurden genutzt um die datenbank mit Hilfe der scripte zu erstellen:
+https://datasets.imdbws.com/
+
+title.basics.tsv.gz
+
+title.ratings.tsv.gz
+
 
 
 
