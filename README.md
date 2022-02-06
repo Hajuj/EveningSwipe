@@ -1,4 +1,4 @@
-Backend:
+**Backend:**
 
 Das backend befindet sich in der directory user_demo_postgres/.
 
@@ -35,7 +35,7 @@ sudo systemctl start eveningswipe.service
 
 
 
-
+**Frontend:**
 
 Quellen App Images:
 
@@ -47,4 +47,22 @@ Quellen App Images:
 
 - Kino-Hintergrund: **https://www.vectorstock.com/royalty-free-vector/scene-cinema-background-art-performance-on-stage-vector-17525451**
 
+- Icons Quelle: https://fonts.google.com/icons
   
+
+
+**Miro Boards:** 
+
+Zum Festhalten unserer Ideen, Mockups und einem groben UML Diagramm haben wir Miro-Boards verwendet.
+
+https://miro.com/app/board/uXjVOeQTfjc=/?invite_link_id=873818390385
+
+https://miro.com/app/board/uXjVOcY8pd0=/?invite_link_id=721837655055 
+
+
+
+**Präsentationen:**
+
+Die Slides für die Präsentationen haben wir gesammelt in einem Dokument.
+
+https://docs.google.com/presentation/d/15yviF-W00TidZTgIQfaWvFKaABUJzAmKI1kOGJYj8e0/edit?usp=sharing 
