@@ -10,6 +10,7 @@ Es wird eine postgresql datenbank benötigt welche in application.properites kon
 
 	spring.datasource.username=<Username>
 
+Das Datenbankschema befindet sich im tools Ordner mit dem Namen db_schema.jpg.
 
 
 
@@ -45,6 +46,19 @@ https://datasets.imdbws.com/
 title.basics.tsv.gz
 
 title.ratings.tsv.gz
+
+Zum builden des Backends in /user_demo_postgres:
+
+mvn clean package
+
+user_demo_postgres/target/user_demo_postgres-0.0.1-SNAPSHOT.jar auf den server kopieren 
+
+
+cp ~/user/demo/eveningswipe /opt/eveningswipe
+
+oder 
+
+/bin/java  -jar user_demo_postgres-0.0.1-SNAPSHOT.jar
 
 
 
