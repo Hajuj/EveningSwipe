@@ -80,6 +80,17 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/passwortHints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_requirements_nupper_and_lower_case_at_least_one_number_and_one_special_character"
+            android:textSize="12dp"
+            android:layout_margin="4dp"
+            android:textColor="?attr/tc" />
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

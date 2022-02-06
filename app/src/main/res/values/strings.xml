@@ -170,4 +170,5 @@
     <string name="_3_once_you_ve_selected_your_group_and_filter_you_re_ready_to_swipe_the_results_will_be_displayed_as_soon_as_you_have_swiped_all_movies">3. Once you\'ve selected your group and filter, you\'re ready to swipe. The results will be displayed as soon as you have swiped all movies.</string>
     <string name="have_fun_and_let_the_best_movie_win">Have fun and let the best movie win!</string>
     <string name="back_to_start">Back to start</string>
+    <string name="password_requirements_nupper_and_lower_case_at_least_one_number_and_one_special_character"><![CDATA[Password requirements:\nUpper and lower case, at least one number and one special character @#${\'$\'}%^&+=]]></string>
 </resources>

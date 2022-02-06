@@ -62,7 +62,6 @@ class GroupProfile : AppCompatActivity() {
     private fun startAddFilterActivity() {
         val profileIntent = Intent(this@GroupProfile, AddFilterActivity::class.java)
         startActivity(profileIntent)
-        finish()
     }
 
     /**
@@ -71,6 +70,5 @@ class GroupProfile : AppCompatActivity() {
     private fun startAddRandomFilterActivity() {
         val profileIntent = Intent(this@GroupProfile, AddRandomFilterActivity::class.java)
         startActivity(profileIntent)
-        finish()
     }
 }

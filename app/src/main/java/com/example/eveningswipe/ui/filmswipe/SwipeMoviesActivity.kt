@@ -196,7 +196,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                     imgURL = HttpRequests.responseOtherMovieDetails!!.poster_path
                     pgsBar?.setVisibility(View.VISIBLE)
                     if(imgURL == ""){
-                        imgView.setImageResource(R.drawable.cinema_background)
+                        imgView.setImageResource(R.drawable.cinema_small)
                         pgsBar?.setVisibility(View.GONE)
                     }else{
                         Picasso.get()
@@ -206,7 +206,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                                     pgsBar?.setVisibility(View.GONE)
                                 }
                                 override fun onError(e: java.lang.Exception?) {
-                                    imgView.setImageResource(R.drawable.cinema_background)
+                                    imgView.setImageResource(R.drawable.cinema_small)
                                     pgsBar?.setVisibility(View.GONE)
                                 }
                             })
@@ -256,7 +256,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                 // get image, show loading spinner while loading
                 imgURL = HttpRequests.responseMovieDetails!!.poster_path
                 if(imgURL == ""){
-                    imgView.setImageResource(R.drawable.cinema_background)
+                    imgView.setImageResource(R.drawable.cinema_small)
                     pgsBar?.setVisibility(View.GONE)
                 }else{
                     Picasso.get()
@@ -266,7 +266,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
                                 pgsBar?.setVisibility(View.GONE)
                             }
                             override fun onError(e: java.lang.Exception?) {
-                                imgView.setImageResource(R.drawable.cinema_background)
+                                imgView.setImageResource(R.drawable.cinema_small)
                                 pgsBar?.setVisibility(View.GONE)
                             }
                         })
