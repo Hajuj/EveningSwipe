@@ -58,6 +58,9 @@ class SwipeMoviesActivity : AppCompatActivity() {
     val BASE_URL_MovieInfo = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/movie/info/"
     val BASE_URL_RateMovie = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/filter/rate/"
     val BASE_URL_SwipeState = "http://msp-ws2122-6.mobile.ifi.lmu.de:80/api/swipestate"
+    private var like: ImageView? = null
+    private var dislike: ImageView? = null
+
 
     /**
      * create context of activity
@@ -100,6 +103,8 @@ class SwipeMoviesActivity : AppCompatActivity() {
         layoutSwipe = findViewById(R.id.img_swipe)
         scrollView = findViewById(R.id.swipe_movie_layout)
         pgsBar = findViewById(R.id.pBar1)
+        like = findViewById(R.id.like)
+        dislike = findViewById(R.id.dislike)
 
         //layout for swipe hint -- old
         //https://www.spaceotechnologies.com/android-overlay-app-tutorial/
@@ -170,15 +175,15 @@ class SwipeMoviesActivity : AppCompatActivity() {
                         HttpRequests.getOtherMovieDetails(BASE_URL_MovieInfo, token, movieId!!)
                 }
 
-                if(!responseOtherDetails!!){
+                if (!responseOtherDetails!!) {
                     swipeState += 1
                     swipeCount = swipeCount?.minus(1)
-                    temp +=1
+                    temp += 1
                     nextMovie(imgView)
-                } else{
+                } else {
                     // fill views with movie details
                     // fancy original title? -> add title in brackets
-                    if(HttpRequests.responseOtherMovieDetails!!.title.contains(HttpRequests.responseOtherMovieDetails!!.original_title)){
+                    if (HttpRequests.responseOtherMovieDetails!!.title.contains(HttpRequests.responseOtherMovieDetails!!.original_title)) {
                         swipeViewModel.movieTitle.value =
                             HttpRequests.responseOtherMovieDetails!!.original_title
                     } else {
@@ -187,24 +192,27 @@ class SwipeMoviesActivity : AppCompatActivity() {
                                     HttpRequests.responseOtherMovieDetails!!.title + ")"
                     }
                     swipeViewModel.movieText.value = getString(R.string.google)
-                    swipeViewModel.movieDate.value = HttpRequests.responseOtherMovieDetails!!.release_date
-                    swipeViewModel.movieVote.value = HttpRequests.responseOtherMovieDetails!!.vote_average
+                    swipeViewModel.movieDate.value =
+                        HttpRequests.responseOtherMovieDetails!!.release_date
+                    swipeViewModel.movieVote.value =
+                        HttpRequests.responseOtherMovieDetails!!.vote_average
                     swipeViewModel.movieVoteCount.value =
                         "(" + HttpRequests.responseOtherMovieDetails!!.vote_count.toString() + ")"
 
                     // get image, show loading spinner while loading
                     imgURL = HttpRequests.responseOtherMovieDetails!!.poster_path
                     pgsBar?.setVisibility(View.VISIBLE)
-                    if(imgURL == ""){
+                    if (imgURL == "") {
                         imgView.setImageResource(R.drawable.cinema_small)
                         pgsBar?.setVisibility(View.GONE)
-                    }else{
+                    } else {
                         Picasso.get()
                             .load(imgURL)
                             .into(imgView, object : com.squareup.picasso.Callback {
                                 override fun onSuccess() {
                                     pgsBar?.setVisibility(View.GONE)
                                 }
+
                                 override fun onError(e: java.lang.Exception?) {
                                     imgView.setImageResource(R.drawable.cinema_small)
                                     pgsBar?.setVisibility(View.GONE)
@@ -220,15 +228,50 @@ class SwipeMoviesActivity : AppCompatActivity() {
                                 duration = 750
                             }
                         val animator2 =
-                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
-                                duration = 1500
+                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", -100f).apply {
+                                duration = 750
                             }
-                        val animator3 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
-                            duration = 750
+                        val animator2_1 =
+                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
+                                duration = 750
+                            }
+                        val animator3 =
+                            ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
+                                duration = 750
+                            }
+                        val animator4 =
+                            ObjectAnimator.ofFloat(like, View.ALPHA, 1f).apply {
+                                duration = 750
+                            }
+                        val animator5 =
+                            ObjectAnimator.ofFloat(like, View.ALPHA, 0f).apply {
+                                duration = 750
+                            }
+                        val animator6 =
+                            ObjectAnimator.ofFloat(dislike, View.ALPHA, 1f).apply {
+                                duration = 750
+                            }
+                        val animator7 =
+                            ObjectAnimator.ofFloat(dislike, View.ALPHA, 0f).apply {
+                                duration = 750
+                            }
+                        val liking = AnimatorSet().apply {
+                            play(animator1).with(animator4)
                         }
+                        val back1 = AnimatorSet().apply {
+                            play(animator2).with(animator5)
+                        }
+                        val disliking = AnimatorSet().apply {
+                            play(animator2_1).with(animator6)
+                        }
+                        val back2 = AnimatorSet().apply {
+                            play(animator3).with(animator7)
+                        }
+
                         AnimatorSet().apply {
-                            play(animator1).before(animator2)
-                            play(animator3).after(animator2)
+                            play(liking).before(back1)
+                            play(disliking).after(back1)
+                            play(back2).after(disliking)
                             start()
                         }
                         hintAccept = true
@@ -255,16 +298,17 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                 // get image, show loading spinner while loading
                 imgURL = HttpRequests.responseMovieDetails!!.poster_path
-                if(imgURL == ""){
+                if (imgURL == "") {
                     imgView.setImageResource(R.drawable.cinema_small)
                     pgsBar?.setVisibility(View.GONE)
-                }else{
+                } else {
                     Picasso.get()
                         .load(imgURL)
                         .into(imgView, object : com.squareup.picasso.Callback {
                             override fun onSuccess() {
                                 pgsBar?.setVisibility(View.GONE)
                             }
+
                             override fun onError(e: java.lang.Exception?) {
                                 imgView.setImageResource(R.drawable.cinema_small)
                                 pgsBar?.setVisibility(View.GONE)
@@ -280,15 +324,50 @@ class SwipeMoviesActivity : AppCompatActivity() {
                             duration = 750
                         }
                     val animator2 =
-                        ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
-                            duration = 1500
+                        ObjectAnimator.ofFloat(layoutSwipe, "translationX", -100f).apply {
+                            duration = 750
                         }
-                    val animator3 = ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
-                        duration = 750
+                    val animator2_1 =
+                        ObjectAnimator.ofFloat(layoutSwipe, "translationX", -200f).apply {
+                            duration = 750
+                        }
+                    val animator3 =
+                        ObjectAnimator.ofFloat(layoutSwipe, "translationX", 0f).apply {
+                            duration = 750
+                        }
+                    val animator4 =
+                        ObjectAnimator.ofFloat(like, View.ALPHA, 1f).apply {
+                            duration = 750
+                        }
+                    val animator5 =
+                        ObjectAnimator.ofFloat(like, View.ALPHA, 0f).apply {
+                            duration = 750
+                        }
+                    val animator6 =
+                        ObjectAnimator.ofFloat(dislike, View.ALPHA, 1f).apply {
+                            duration = 750
+                        }
+                    val animator7 =
+                        ObjectAnimator.ofFloat(dislike, View.ALPHA, 0f).apply {
+                            duration = 750
+                        }
+                    val liking = AnimatorSet().apply {
+                        play(animator1).with(animator4)
                     }
+                    val back1 = AnimatorSet().apply {
+                        play(animator2).with(animator5)
+                    }
+                    val disliking = AnimatorSet().apply {
+                        play(animator2_1).with(animator6)
+                    }
+                    val back2 = AnimatorSet().apply {
+                        play(animator3).with(animator7)
+                    }
+
                     AnimatorSet().apply {
-                        play(animator1).before(animator2)
-                        play(animator3).after(animator2)
+                        play(liking).before(back1)
+                        play(disliking).after(back1)
+                        play(back2).after(disliking)
                         start()
                     }
                     hintAccept = true
@@ -328,6 +407,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         //move the image to the right or left
                         view.animate().x(newX + lastX).setDuration(0).start()
+                        updateAlphaOfBadges(newX);
                     }
 
                     //release the movie image
@@ -336,6 +416,7 @@ class SwipeMoviesActivity : AppCompatActivity() {
 
                         //center the image when swiped or finger released
                         layoutSwipe!!.animate().translationX(0f).setDuration(150).start()
+                        updateAlphaOfBadges(halfDisplayWidth);
 
                         if (currentX != 0f) {
                             //swipe all the way to the right
@@ -381,6 +462,25 @@ class SwipeMoviesActivity : AppCompatActivity() {
         val movieId = movieList!!.get(swipeState - 1)
         if (token != null) {
             HttpRequests.postRateMovie(BASE_URL_RateMovie, movieId, filterId!!, like, token)
+        }
+    }
+
+    // set alpha of like and dislike badges
+    private fun updateAlphaOfBadges(posX: Float) {
+        val screenWidth: Float = resources.displayMetrics.widthPixels.toFloat()
+
+        var alpha = 0f
+        if (posX > screenWidth / 2) {
+            alpha = posX / (screenWidth)
+            like!!.alpha = alpha
+            dislike!!.alpha = -alpha
+        } else if (posX == screenWidth / 2) {
+            dislike!!.alpha = alpha
+            like!!.alpha = alpha
+        } else {
+            alpha = posX / (screenWidth / 2)
+            dislike!!.alpha = 1 - alpha
+            like!!.alpha = -alpha
         }
     }
 }
