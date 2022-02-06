@@ -69,4 +69,5 @@ https://docs.google.com/presentation/d/15yviF-W00TidZTgIQfaWvFKaABUJzAmKI1kOGJYj
 
 **Steckbrief**
 Hier ist der Steckbrief von unserer App
+
 https://docs.google.com/document/d/1Gg-aHUQ4EVSpwxtyx_hISb-EpyNUSoKwGV9Q81apxnA/edit
