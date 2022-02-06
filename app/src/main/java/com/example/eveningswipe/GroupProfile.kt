@@ -31,6 +31,7 @@ class GroupProfile : AppCompatActivity() {
 
         val groupProfileName = intent.getStringExtra("groupName")
         val groupID = intent.getStringExtra("groupID")
+        idNumber!!.setVisibility(View.VISIBLE)
         groupName!!.text = groupProfileName
         idNumber!!.text = groupID
         groupIDforUserAdding = (idNumber!!.text as String?).toString()
