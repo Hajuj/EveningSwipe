@@ -173,4 +173,6 @@
     <string name="back_to_start">Back to start</string>
     <string name="password_requirements_nupper_and_lower_case_at_least_one_number_and_one_special_character"><![CDATA[Password requirements:\nUpper and lower case, at least one number and one special character @#${\'$\'}%^&+=]]></string>
     <string name="votes">( votes)</string>
+    <string name="group_name">Group:</string>
+    <string name="number_of_members">Members:</string>
 </resources>
