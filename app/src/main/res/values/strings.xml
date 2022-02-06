@@ -164,7 +164,6 @@
     <string name="or">or</string>
     <string name="enter_a_name_for_the_filter">Enter a filter name:</string>
     <string name="filtername">filtername</string>
-    <string name="how_to">How-to</string>
     <string name="after_you_have_successfully_registered_and_logged_in_you_can_almost_get_started">After you have successfully registered and logged in, you can almost get started.</string>
     <string name="_1_create_a_new_group_and_invite_your_friends_or_get_yourself_added_to_a_group">1. Create a new group and invite your friends. Or get yourself added to a group.</string>
     <string name="_2_create_filters_that_match_your_film_preferences_or_if_you_re_undecided_create_a_random_filter_and_let_it_surprise_you">2. Create filters that match your film preferences. Or if you\'re undecided, create a random filter and let it surprise you.</string>
@@ -175,4 +174,6 @@
     <string name="votes">( votes)</string>
     <string name="group_name">Group:</string>
     <string name="number_of_members">Members:</string>
+    <string name="profil">Profil</string>
+    <string name="how_to">How-to</string>
 </resources>

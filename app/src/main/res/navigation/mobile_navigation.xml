@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.eveningswipe.ui.profile.GalleryFragment"
-        android:label="@string/menu_profile"
+        android:label="@string/how_to"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
