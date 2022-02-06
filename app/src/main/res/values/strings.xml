@@ -119,21 +119,22 @@
     <!-- Strings used for ranking -->
     <string name="top_three">The top three of %1$s:\n 1. %2$s \n 2. %3$s \n 3. %4$s</string>
     <string name="group_ranking">%1$s\'s voting:</string>
-    <string name="ranking">%1$sst place:\n%3$s (%2$s votes)</string>
+    <string name="ranking">%1$s. %2$s</string>
+    <string name="ranking_votes">(%1$s votes)</string>
 
     <!-- add filter  -->
-    <string name="select_genre">Select genre:</string>
-    <string name="enter_time_slot">Enter range of release date:</string>
+    <string name="select_genre">Select a genre:</string>
+    <string name="enter_time_slot">Enter the range for the release date (in years):</string>
     <string name="_1993">1993</string>
     <string name="to">to</string>
     <string name="_2022">2022</string>
-    <string name="enter_max_runtime_in_min">Enter max. runtime (in min.):</string>
+    <string name="enter_max_runtime_in_min">Enter the maximum runtime (in min.):</string>
     <string name="_120">120</string>
-    <string name="enter_how_many_films_to_swipe">Enter how many films to swipe (max):</string>
+    <string name="enter_how_many_films_to_swipe">Enter the maximum number of films you want to swipe:</string>
     <string name="_50">50</string>
-    <string name="enter_number_of_stars_0_to_10">Enter number of stars (0 to 10):</string>
+    <string name="enter_number_of_stars_0_to_10">Enter the minimum star rating (0 to 10):</string>
     <string name="_8">8</string>
-    <string name="enter_number_of_votes">Enter how many votes the film should have:</string>
+    <string name="enter_number_of_votes">Enter the minimum number of ratings:</string>
     <string name="_500">500</string>
     <string name="create_filter">create filter</string>
     <!-- finish activity -->
@@ -143,16 +144,16 @@
     <string name="genre_action">Action</string>
     <!-- ranking -->
     <string name="group_s_result">group\'s result:</string>
-    <string name="_1">1st place:\n</string>
-    <string name="_2">2st place:\n</string>
-    <string name="_3">3st place:</string>
-    <string name="_4">4st place:</string>
-    <string name="_5">5st place:</string>
-    <string name="_6">6st place:</string>
-    <string name="_7">7st place:</string>
-    <string name="__8">8st place:</string>
-    <string name="_9">9st place:</string>
-    <string name="_10">10st place:</string>
+    <string name="_1">1.</string>
+    <string name="_2">2.</string>
+    <string name="_3">3.</string>
+    <string name="_4">4.</string>
+    <string name="_5">5.</string>
+    <string name="_6">6.</string>
+    <string name="_7">7.</string>
+    <string name="__8">8.</string>
+    <string name="_9">9.</string>
+    <string name="_10">10.</string>
 
     <string name="refresh_result">refresh result</string>
     <string name="google">Google it!</string>
@@ -161,7 +162,7 @@
     <string name="please_select_which_filter_you_want_to_swipe">Please select which filter you want to swipe:</string>
     <string name="add_random_filter">add random filter</string>
     <string name="or">or</string>
-    <string name="enter_a_name_for_the_filter">Enter a name for the filter</string>
+    <string name="enter_a_name_for_the_filter">Enter a filter name:</string>
     <string name="filtername">filtername</string>
     <string name="how_to">How-to</string>
     <string name="after_you_have_successfully_registered_and_logged_in_you_can_almost_get_started">After you have successfully registered and logged in, you can almost get started.</string>
@@ -171,4 +172,5 @@
     <string name="have_fun_and_let_the_best_movie_win">Have fun and let the best movie win!</string>
     <string name="back_to_start">Back to start</string>
     <string name="password_requirements_nupper_and_lower_case_at_least_one_number_and_one_special_character"><![CDATA[Password requirements:\nUpper and lower case, at least one number and one special character @#${\'$\'}%^&+=]]></string>
+    <string name="votes">( votes)</string>
 </resources>

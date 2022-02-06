@@ -61,6 +61,16 @@ class RankingActivity : AppCompatActivity() {
         val movieView8 = findViewById<View>(R.id.movie8) as TextView
         val movieView9 = findViewById<View>(R.id.movie9) as TextView
         val movieView10 = findViewById<View>(R.id.movie10) as TextView
+        val rateView1 = findViewById<View>(R.id.rate1) as TextView
+        val rateView2 = findViewById<View>(R.id.rate2) as TextView
+        val rateView3 = findViewById<View>(R.id.rate3) as TextView
+        val rateView4 = findViewById<View>(R.id.rate4) as TextView
+        val rateView5 = findViewById<View>(R.id.rate5) as TextView
+        val rateView6 = findViewById<View>(R.id.rate6) as TextView
+        val rateView7 = findViewById<View>(R.id.rate7) as TextView
+        val rateView8 = findViewById<View>(R.id.rate8) as TextView
+        val rateView9 = findViewById<View>(R.id.rate9) as TextView
+        val rateView10 = findViewById<View>(R.id.rate10) as TextView
 
         // set group name
         val groupNameView = findViewById<View>(R.id.ranking_group_name) as TextView
@@ -118,11 +128,14 @@ class RankingActivity : AppCompatActivity() {
         // add movie name to view and initialize the top three
         val textList = listOf<TextView>(movieView1, movieView2, movieView3, movieView4, movieView5, movieView6,
             movieView7, movieView8, movieView9, movieView10)
+        val rateList = listOf<TextView>(rateView1, rateView2, rateView3, rateView4, rateView5, rateView6,
+            rateView7, rateView8, rateView9, rateView10)
 
         for (i in 0..9){
             if (movieNameList.size > i) {
                 val num = i+1
-                textList[i].text = getString(R.string.ranking, num.toString(), movieVotingList[i], movieNameList[i])
+                textList[i].text = getString(R.string.ranking, num.toString(), movieNameList[i])
+                rateList[i].text = getString(R.string.ranking_votes, movieVotingList[i])
             }
         }
 
