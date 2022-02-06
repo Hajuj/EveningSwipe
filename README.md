@@ -66,3 +66,7 @@ https://miro.com/app/board/uXjVOcY8pd0=/?invite_link_id=721837655055
 Die Slides für die Präsentationen haben wir gesammelt in einem Dokument.
 
 https://docs.google.com/presentation/d/15yviF-W00TidZTgIQfaWvFKaABUJzAmKI1kOGJYj8e0/edit?usp=sharing 
+
+**Steckbrief**
+Hier ist der Steckbrief von unserer App
+https://docs.google.com/document/d/1Gg-aHUQ4EVSpwxtyx_hISb-EpyNUSoKwGV9Q81apxnA/edit
