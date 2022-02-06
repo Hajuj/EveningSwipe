@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.EveningSwipe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/Canteloupe</item>
+        <item name="colorPrimaryVariant">@color/Pumpkin</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/Canteloupe</item>
+        <item name="colorSecondaryVariant">@color/Pumpkin</item>
+        <item name="colorOnSecondary">@color/Hot_Chocolate</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="bgc">@color/Canteloupe</item>
+        <item name="tc">@color/Hot_Chocolate</item>
+        <item name="bgcInApp">@color/Canteloupe</item>
+        <item name="tcEdit">@color/Hot_Chocolate</item>
+    </style>
+
+    <style name="Theme.EveningSwipe.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.EveningSwipe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/Hot_Chocolate</item>
+    </style>
+
+    <style name="Theme.EveningSwipe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.EveningSwipe.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <item name="appWidgetRadius">8dp</item>
+        <item name="appWidgetPadding">4dp</item>
+        <item name="appWidgetInnerRadius">4dp</item>
+    </style>
+
+    <style name="Theme.EveningSwipe.AppWidgetContainer" parent="Theme.EveningSwipe.AppWidgetContainerParent" />
+</resources>

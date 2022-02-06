@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">Evening-Swipe</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_groups">Gruppen</string>
+    <string name="menu_swipe">Swipe</string>
+    <string name="menu_logout">Logout</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">See your last group voting</string>
+    <string name="vote_of_movie">vote of movie</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="description">Description</string>
+
+    <string name="noGroupName">Please enter a group name</string>
+    <string name="noUserName">Please enter an user name</string>
+    <string name="wrongUserName">Wrong username or user does not exist</string>
+    <string name="add">" ADD"</string>
+    <string name="alreadyInGroup">The user %1$s is already part of this group</string>
+    <string name="userAdded">User added successfully</string>
+    <string name="wrongUserNamePassword">Wrong username or password</string>
+    <string name="noLogin">Something went wrong - please try to login again</string>
+    <string name="noName">Please enter a name</string>
+    <string name="noEmail">Please enter an email</string>
+    <string name="noPassword">Please enter a password</string>
+    <string name="pleaseLogin">Please login</string>
+    <string name="textNewGroup">Please enter a name to create a new group</string>
+    <string name="hintGroupName">Name of group</string>
+    <string name="saveGroupButton">Save</string>
+    <string name="addGroupFinished">GROUP ADDED SUCCESSFULLY</string>
+    <string name="hintSearchUser">Search User</string>
+
+    <!-- XML files -->
+    <string name="textSearchUser">Please search for a user</string>
+    <string name="addButton">add button</string>
+    <string name="searchFinishedButton">search finished</string>
+    <string name="textGroupID">Group ID:</string>
+    <string name="groupID">Group ID</string>
+    <string name="textGroupName">Group Name:</string>
+    <string name="groupName">Group Name</string>
+    <string name="addGroupMember">Add Group Member</string>
+    <string name="addFilter">Add Filter</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintPassword">Password</string>
+    <string name="loginButton">Login</string>
+    <string name="registerButton">Register</string>
+    <string name="hintFullName">Full Name</string>
+    <string name="alreadyAccount">Already have an account?</string>
+    <string name="swipeButton">Let\'s Swipe</string>
+    <string name="newGroupButton">New Group</string>
+    <string name="selectGenre">Genre</string>
+    <string name="recyGroupName">Group Name</string>
+    <string name="recyMemberNumber">Member Number</string>
+    <string name="recyGroupID">Group ID</string>
+    <string name="selectGroup">Please select your current group:</string>
+
+    <!-- swipe hint -->
+    <string name="hint_background">hint background</string>
+    <string name="got_it">Got it!</string>
+    <string name="like">like</string>
+    <string name="left_hint">left hint</string>
+    <string name="dislike">dislike</string>
+    <string name="right_hint">right hint</string>
+    <string name="title_activity_select_group">SelectGroupActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Strings used for swipe activity -->
+    <string name="select_group">select group</string>
+    <string name="select_filter">select filter</string>
+    <string name="need_filter">This group needs a filter. Please go back to the group settings and add a filter.</string>
+    <string name="voting_over">Voting is over!</string>
+    <string name="click_noti">You voted all movies. Click here to see the ranking!</string>
+    <!-- movie genres -->
+    <string-array name="genre_array">
+        <item>Select genre</item>
+        <item>Action</item>
+        <item>Adult</item>
+        <item>Adventure</item>
+        <item>Biography</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Family</item>
+        <item>Fantasy</item>
+        <item>Film-Noir</item>
+        <item>Game-Show</item>
+        <item>History</item>
+        <item>Horror</item>
+        <item>Music</item>
+        <item>Musical</item>
+        <item>Mystery</item>
+        <item>Reality-TV</item>
+        <item>Romance</item>
+        <item>Short</item>
+        <item>Sport</item>
+        <item>Thriller</item>
+        <item>War</item>
+    </string-array>
+    <!-- Strings used for create filter -->
+    <string name="filter_not_added">Filter could not be added to group.</string>
+    <string name="filter_added">Filter is added to group.</string>
+    <string name="fill_in_field">Please fill in every field.</string>
+    <string name="fill_in_size">Please fill in the size.</string>
+    <!-- Strings used for ranking -->
+    <string name="top_three">The top three of %1$s:\n 1. %2$s \n 2. %3$s \n 3. %4$s</string>
+    <string name="group_ranking">%1$s\'s voting:</string>
+    <string name="ranking">%1$s. %2$s</string>
+    <string name="ranking_votes">(%1$s votes)</string>
+
+    <!-- add filter  -->
+    <string name="select_genre">Select a genre:</string>
+    <string name="enter_time_slot">Enter the range for the release date (in years):</string>
+    <string name="_1993">1993</string>
+    <string name="to">to</string>
+    <string name="_2022">2022</string>
+    <string name="enter_max_runtime_in_min">Enter the maximum runtime (in min.):</string>
+    <string name="_120">120</string>
+    <string name="enter_how_many_films_to_swipe">Enter the maximum number of films you want to swipe:</string>
+    <string name="_50">50</string>
+    <string name="enter_number_of_stars_0_to_10">Enter the minimum star rating (0 to 10):</string>
+    <string name="_8">8</string>
+    <string name="enter_number_of_votes">Enter the minimum number of ratings:</string>
+    <string name="_500">500</string>
+    <string name="create_filter">create filter</string>
+    <!-- finish activity -->
+    <string name="finished">Finished!</string>
+    <string name="you_have_swiped_all_available_movies_nsee_which_movie_won">You have swiped all available movies. \nSee which movie won!</string>
+    <string name="show_result">Show result</string>
+    <string name="genre_action">Action</string>
+    <!-- ranking -->
+    <string name="group_s_result">group\'s result:</string>
+    <string name="_1">1.</string>
+    <string name="_2">2.</string>
+    <string name="_3">3.</string>
+    <string name="_4">4.</string>
+    <string name="_5">5.</string>
+    <string name="_6">6.</string>
+    <string name="_7">7.</string>
+    <string name="__8">8.</string>
+    <string name="_9">9.</string>
+    <string name="_10">10.</string>
+
+    <string name="refresh_result">refresh result</string>
+    <string name="google">Google it!</string>
+    <string name="evening_swipe">Evening-Swipe</string>
+    <string name="the_top_three_of_groupname_n_n1_moviename_n2_moviename_n3_moviename">The top three of \'groupname\':\n\n1. \'moviename\'\n2. \'moviename\'\n3. \'moviename\'</string>
+    <string name="please_select_which_filter_you_want_to_swipe">Please select which filter you want to swipe:</string>
+    <string name="add_random_filter">add random filter</string>
+    <string name="or">or</string>
+    <string name="enter_a_name_for_the_filter">Enter a filter name:</string>
+    <string name="filtername">filtername</string>
+    <string name="after_you_have_successfully_registered_and_logged_in_you_can_almost_get_started">After you have successfully registered and logged in, you can almost get started.</string>
+    <string name="_1_create_a_new_group_and_invite_your_friends_or_get_yourself_added_to_a_group">1. Create a new group and invite your friends. Or get yourself added to a group.</string>
+    <string name="_2_create_filters_that_match_your_film_preferences_or_if_you_re_undecided_create_a_random_filter_and_let_it_surprise_you">2. Create filters that match your film preferences. Or if you\'re undecided, create a random filter and let it surprise you.</string>
+    <string name="_3_once_you_ve_selected_your_group_and_filter_you_re_ready_to_swipe_the_results_will_be_displayed_as_soon_as_you_have_swiped_all_movies">3. Once you\'ve selected your group and filter, you\'re ready to swipe. The results will be displayed as soon as you have swiped all movies.</string>
+    <string name="have_fun_and_let_the_best_movie_win">Have fun and let the best movie win!</string>
+    <string name="back_to_start">Back to start</string>
+    <string name="password_requirements_nupper_and_lower_case_at_least_one_number_and_one_special_character"><![CDATA[Password requirements:\nUpper and lower case, at least one number and one special character @#${\'$\'}%^&+=]]></string>
+    <string name="votes">( votes)</string>
+    <string name="group_name">Group:</string>
+    <string name="number_of_members">Members:</string>
+    <string name="profil">Profil</string>
+    <string name="how_to">How-to</string>
+</resources>
